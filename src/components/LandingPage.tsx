@@ -8,6 +8,7 @@ import type { Business } from '../types/business';
 import Header from './Landing/Header';
 import Stats from './Landing/Stats';
 import Footer from './Landing/Footer';
+import ChatInterface from './ChatInterface';
 
 
 const businesses: Business[] = [
@@ -76,8 +77,11 @@ const businesses: Business[] = [
   },
 ];
 
-function BusinessList() {
+
+
+function LandingPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [selectedBusiness, setSelectedBusiness] = useState<Business | null>(null);
   const { searchQuery } = useSearch();
 
   const filteredBusinesses = useMemo(() => {
@@ -88,6 +92,16 @@ function BusinessList() {
       return 0;
     });
   }, [selectedCategory, searchQuery]);
+
+  const handleBusinessSelect = (business: Business) => {
+    console.log("Selected Business in App:", business);
+    
+    setSelectedBusiness(business); // Pass selected business to the parent
+  };
+
+  const handleChatClose = () => {
+    setSelectedBusiness(null);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -111,11 +125,20 @@ function BusinessList() {
                 {...business} 
                 selectedCategory={selectedCategory}
                 index={index}
+                onSelect={handleBusinessSelect} 
+                
               />
             ))}
           </div>
         )}
       </main>
+      {selectedBusiness && (
+        <ChatInterface 
+          businessType={selectedBusiness.category.toLowerCase() as any}
+          businessDetails={selectedBusiness}
+          onClose={handleChatClose}
+        />
+      )}
 
       <Stats />
       <Footer />
@@ -126,7 +149,7 @@ function BusinessList() {
 export default function App() {
   return (
     <SearchProvider>
-      <BusinessList />
+      <LandingPage />
     </SearchProvider>
   );
 }

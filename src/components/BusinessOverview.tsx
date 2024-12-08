@@ -3,10 +3,11 @@ import { Building2, MapPin, FileText } from 'lucide-react';
 
 interface BusinessOverviewProps {
   businessName: string;
-  branchName: string;
-  locations: number;
+  branchName: string | null;
+  locations: number | null;
   progress: number;
   selectedPlan?: string | null;
+  business:any
 }
 
 const BusinessOverview: React.FC<BusinessOverviewProps> = ({
@@ -14,7 +15,8 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
   branchName,
   locations,
   progress,
-  selectedPlan
+  selectedPlan,
+  business
 }) => {
   return (
     <div className="h-full flex flex-col">
@@ -31,7 +33,7 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
           <div className="flex items-center space-x-3">
             <Building2 className="h-5 w-5 text-purple-600" />
             <div>
-              <span className="text-sm font-medium">Restaurant</span>
+              <span className="text-sm font-medium">{business}</span>
               <p className="text-xs text-gray-600">Owned by Individuals</p>
             </div>
           </div>
@@ -62,7 +64,7 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
             </div>
 
             {/* Restaurant Menu */}
-            <div>
+            {/* <div>
               <h3 className="text-sm font-medium mb-3">Restaurant Menu</h3>
               <div className="bg-gray-50 rounded-lg p-4">
                 <div className="flex items-center justify-between">
@@ -83,7 +85,7 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         )}
 

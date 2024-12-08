@@ -10,17 +10,20 @@ import SubscriptionPlans from './SubscriptionPlans';
 import SignIn from './SignIn';
 import BusinessProfile from './BusinessProfile';
 import TaxDetails from './TaxDetails';
+import { Business } from '../types/business';
+import ZunocodeGenerator from './ZunocodeGenerator';
 
 interface ChatInterfaceProps {
   businessType: BusinessType;
+  businessDetails: Business;
   onClose: () => void;
 }
 
-const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) => {
+const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, businessDetails,onClose }) => {
   const [messages, setMessages] = useState<Message[]>([
     {
       type: 'bot',
-      content: "Let's get to know more about your business. What is the name of your business?"
+      content: `Lets get to know more about your ${businessDetails.title} business. What is Your Brand Name?`
     }
   ]);
   const [currentStep, setCurrentStep] = useState(1);
@@ -31,6 +34,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
     mainBranch: ''
   });
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+  const [showZunocode, setShowZunocode] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -145,6 +149,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
     ];
     setMessages(newMessages);
     setCurrentStep(9);
+    setShowZunocode(true);
   };
 
   const renderComponent = (component: string) => {
@@ -185,13 +190,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
         <div className="flex flex-1 overflow-hidden">
           {/* Left Section (70%) */}
           <div className="w-[70%] flex flex-col">
-            {/* Fixed Height Image Gallery */}
-            
-
-            {/* Chat Section */}
-            <div className="flex-1 flex flex-col overflow-hidden">
-              {/* Scrollable Messages */}
-              <div className="flex-1 overflow-y-auto px-6 py-4">
+            {/* Chat Section with Scrollable Content */}
+            <div className="flex-1 overflow-y-auto">
+              <div className="px-6 py-4">
+                {/* Image Gallery */}
+                <ImageGallery />
+                
+                {/* Messages */}
                 <div className="space-y-6">
                   {messages.map((message, index) => (
                     <div key={index} className="animate-fade-in">
@@ -203,18 +208,24 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
                       )}
                     </div>
                   ))}
+                  {showZunocode && (
+                    <ZunocodeGenerator 
+                      businessName={businessData.name}
+                      businessId={`${businessData.name.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}`}
+                    />
+                  )}
                   <div ref={messagesEndRef} />
                 </div>
               </div>
+            </div>
 
-              {/* Fixed Input Area */}
-              <div className="flex-none p-4 bg-white border-t">
-                <ChatInput 
-                  onSend={handleSend}
-                  disabled={currentStep === 10 || messages[messages.length - 1]?.component !== undefined}
-                  placeholder="Type your response..."
-                />
-              </div>
+            {/* Fixed Input Area */}
+            <div className="flex-none p-4 bg-white border-t">
+              <ChatInput 
+                onSend={handleSend}
+                disabled={currentStep === 10 || messages[messages.length - 1]?.component !== undefined}
+                placeholder="Type your response..."
+              />
             </div>
           </div>
 
