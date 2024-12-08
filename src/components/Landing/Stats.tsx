@@ -17,13 +17,13 @@ export default function Stats() {
         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text since the 1500s.
       </p>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 flex flex-col justify-end items-baseline">
         {stats.map((stat, index) => (
           <div
             key={index}
-            className={`p-8 rounded-lg ${
+            className={`p-8 rounded-lg flex flex-col justify-end items-start ${
               index === 1 
-                ? 'bg-purple-800 text-white md:transform md:-translate-y-8 md:h-[calc(100%+4rem)]' 
+                ? 'bg-purple-800  flex flex-col justify-end items-start text-white md:transform md:-translate-y-0 md:h-[calc(100%+4rem)]' 
                 : index === 2 
                   ? 'bg-orange-500 text-white' 
                   : 'bg-gray-100'

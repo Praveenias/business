@@ -1,15 +1,19 @@
 import React from 'react';
 import { User } from 'lucide-react';
 import SearchBar from './SearchBar';
+import logo from '../../assets/images/logo.svg';
+import MyIcon from '../../assets/images/profile.svg';
 
 export default function Header() {
   return (
     <header className="bg-purple-700 py-6">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
-          <div className="text-white text-2xl font-bold">Zuno</div>
+          <div className="text-white text-2xl font-bold">
+          <img src={logo} alt="logo" className="max-w-[80%]" />
+            </div>
           <div className="text-white">
-            <User className="w-6 h-6" />
+          <img src={MyIcon} alt="profile" className="max-w-[80%]" />
           </div>
         </div>
         
