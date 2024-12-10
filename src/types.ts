@@ -17,6 +17,8 @@ export interface BusinessDetails {
   mainBranch?: string;
   mainBranchAddress?: string;
   panOrGst?: string;
+  email?:string;
+  password?:string;
 }
 
 export interface Message {

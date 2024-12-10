@@ -147,10 +147,19 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, businessDet
         component: 'business-profile'
       }
     ];
+    console.log(email,password);
+    
     setMessages(newMessages);
     setCurrentStep(9);
-    setShowZunocode(true);
+    
   };
+
+  const submitForm = (details) => {
+    setCurrentStep(10);
+    console.log(businessData,selectedPlan,details);
+    setShowZunocode(true);
+    
+  }
 
   const renderComponent = (component: string) => {
     switch (component) {
@@ -163,7 +172,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, businessDet
       case 'sign-in':
         return <SignIn onSignIn={handleSignIn} />;
       case 'business-profile':
-        return <BusinessProfile onSubmit={() => setCurrentStep(10)} />;
+        return <BusinessProfile onSubmit={submitForm} />;
       default:
         return null;
     }
@@ -223,7 +232,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, businessDet
             <div className="flex-none p-4 bg-white border-t">
               <ChatInput 
                 onSend={handleSend}
-                disabled={currentStep === 10 || messages[messages.length - 1]?.component !== undefined}
+                disabled={currentStep === 9 || messages[messages.length - 1]?.component !== undefined}
                 placeholder="Type your response..."
               />
             </div>
@@ -236,7 +245,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, businessDet
                 businessName={businessData.name}
                 branchName={businessData.mainBranch}
                 locations={businessData.locations}
-                progress={((currentStep - 1) / 10) * 100}
+                progress={((currentStep - 1) / 9) * 100}
                 selectedPlan={selectedPlan}
               />
             </div>
