@@ -11,7 +11,7 @@ export default function CategoryTabs({ selectedCategory, onCategoryChange }: Cat
   const categories = ['All', 'Food', 'Hotel', 'Lounge'];
 
   return (
-    <div className="flex gap-4 my-6 px-4 items-center flex-wrap">
+    <div className="flex justify-center items-center mt-[5%] gap-4 my-6 px-4 items-center flex-wrap">
       <button 
         className="p-2 rounded-full bg-orange-100 text-orange-500 hover:bg-orange-200 transition-colors"
         aria-label="Grid view"

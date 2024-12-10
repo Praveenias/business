@@ -3,10 +3,13 @@ import { User } from 'lucide-react';
 import SearchBar from './SearchBar';
 import logo from '../../assets/images/logo.svg';
 import MyIcon from '../../assets/images/profile.svg';
+import HeaderBG from '../../assets/images/Header_bg.svg'
 
 export default function Header() {
   return (
-    <header className="bg-purple-700 py-6">
+     <header
+      className="bg-cover bg-center bg-purple-700 bg-blend-multiply py-6"
+      style={{ backgroundImage: `url(${HeaderBG})` }}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
           <div className="text-white text-2xl font-bold">
@@ -25,8 +28,10 @@ export default function Header() {
             LET US KNOW ABOUT YOUR BUSINESS
           </button>
         </div>
-
-        <SearchBar />
+<div className="relative w-full flex justify-center items-center">
+<SearchBar/>
+</div>
+       
       </div>
     </header>
   );
