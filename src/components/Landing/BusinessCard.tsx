@@ -24,13 +24,12 @@ export default function BusinessCard({
   
   // const [showChat, setShowChat] = useState(false);
   const isSelected = selectedCategory === 'All' || category === selectedCategory;
-  const isFirstOfCategory = index === 0;
   const config = categoryConfig[category as keyof typeof categoryConfig];
   const Icon = config?.icon;
 
   const getOpacity = () => {
     if (isHovered) return 'opacity-100';
-    if (!document.querySelector(':hover') && isSelected && isFirstOfCategory) return 'opacity-100';
+    if (!document.querySelector(':hover') && isSelected) return 'opacity-100';
     return 'opacity-30';
   };
   const handleSelect = () => {
@@ -46,7 +45,7 @@ export default function BusinessCard({
           hover:shadow-xl transform hover:-translate-y-1
           ${getOpacity()}
           ${isHovered ? 'scale-105' : ''}
-          ${!document.querySelector(':hover') && isSelected && isFirstOfCategory ? 'scale-105' : ''}
+          ${!document.querySelector(':hover') && isSelected ? 'scale-105' : ''}
         `}
         onMouseEnter={() => {
           setIsHovered(true);
