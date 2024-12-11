@@ -62,14 +62,6 @@ export default function CategoryTabs({ selectedCategory, onCategoryChange }: Cat
       })}
       </div>
     </div>
-    <div className="container mx-auto px-4 py-16">
-    <h2 className="text-center text-3xl font-medium mb-2">
-      Ready to Setup your <span className="text-orange-500">Business</span>
-    </h2>
-    <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text since the 1500s.
-    </p>
-  </div>
   </div>
   );
 }
