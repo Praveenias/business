@@ -1,6 +1,6 @@
 import React from 'react';
 import { MapPin, Map } from 'lucide-react';
-import { LocationType } from '../types';
+import { LocationType } from '../../types';
 
 interface LocationTypeSelectorProps {
   onSelect: (type: LocationType) => void;

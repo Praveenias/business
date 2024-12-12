@@ -9,7 +9,7 @@ interface BusinessOverviewProps {
   branchName: string | null;
   locations: number | null;
   progress: number;
-  selectedPlan?: string | null;
+  selectedPlan?: any;
   business:any
 }
 
@@ -106,7 +106,7 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
         )}
 
         {/* Selected Plan */}
-        {selectedPlan && (
+        {/* {selectedPlan && (
           <div className="bg-orange-50 rounded-lg p-4">
             <h3 className="text-sm font-medium mb-2">Selected Plan</h3>
             <div className="space-y-2">
@@ -121,7 +121,7 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
               <p className="text-xs text-gray-500">*GST included in this</p>
             </div>
           </div>
-        )}
+        )} */}
       </div>
 
       {/* Progress Footer */}

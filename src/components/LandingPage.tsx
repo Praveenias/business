@@ -18,63 +18,63 @@ const businesses: Business[] = [
     subtitle: 'Owned by Individuals',
     peopleCount: 23,
     category: 'Food'
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af',
-    title: 'Hotel Steps',
-    subtitle: 'Owned by Individuals',
-    peopleCount: 29,
-    category: 'Hotel'
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1559925393-8be0ec4767c8',
-    title: 'Lounge Bar',
-    subtitle: 'Owned by Corporation',
-    peopleCount: 8,
-    category: 'Lounge'
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b',
-    title: 'Fine Dining',
-    subtitle: 'Owned by Corporation',
-    peopleCount: 15,
-    category: 'Food'
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945',
-    title: 'Luxury Hotel',
-    subtitle: 'Owned by Corporation',
-    peopleCount: 45,
-    category: 'Hotel'
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4',
-    title: 'Rooftop Lounge',
-    subtitle: 'Owned by Individuals',
-    peopleCount: 12,
-    category: 'Lounge'
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4',
-    title: 'Restaurant',
-    subtitle: 'Owned by Individuals',
-    peopleCount: 23,
-    category: 'Food'
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4',
-    title: 'Restaurant',
-    subtitle: 'Owned by Individuals',
-    peopleCount: 23,
-    category: 'Food'
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4',
-    title: 'Restaurant',
-    subtitle: 'Owned by Individuals',
-    peopleCount: 23,
-    category: 'Food'
-  },
+  }
+  // {
+  //   image: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af',
+  //   title: 'Hotel Steps',
+  //   subtitle: 'Owned by Individuals',
+  //   peopleCount: 29,
+  //   category: 'Hotel'
+  // },
+  // {
+  //   image: 'https://images.unsplash.com/photo-1559925393-8be0ec4767c8',
+  //   title: 'Lounge Bar',
+  //   subtitle: 'Owned by Corporation',
+  //   peopleCount: 8,
+  //   category: 'Lounge'
+  // },
+  // {
+  //   image: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b',
+  //   title: 'Fine Dining',
+  //   subtitle: 'Owned by Corporation',
+  //   peopleCount: 15,
+  //   category: 'Food'
+  // },
+  // {
+  //   image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945',
+  //   title: 'Luxury Hotel',
+  //   subtitle: 'Owned by Corporation',
+  //   peopleCount: 45,
+  //   category: 'Hotel'
+  // },
+  // {
+  //   image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4',
+  //   title: 'Rooftop Lounge',
+  //   subtitle: 'Owned by Individuals',
+  //   peopleCount: 12,
+  //   category: 'Lounge'
+  // },
+  // {
+  //   image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4',
+  //   title: 'Restaurant',
+  //   subtitle: 'Owned by Individuals',
+  //   peopleCount: 23,
+  //   category: 'Food'
+  // },
+  // {
+  //   image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4',
+  //   title: 'Restaurant',
+  //   subtitle: 'Owned by Individuals',
+  //   peopleCount: 23,
+  //   category: 'Food'
+  // },
+  // {
+  //   image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4',
+  //   title: 'Restaurant',
+  //   subtitle: 'Owned by Individuals',
+  //   peopleCount: 23,
+  //   category: 'Food'
+  // },
 ];
 
 

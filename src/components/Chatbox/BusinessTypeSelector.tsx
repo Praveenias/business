@@ -1,6 +1,6 @@
 import React from 'react';
 import { Store, Utensils, Car, Laptop, Package } from 'lucide-react';
-import { BusinessType } from '../types';
+import { BusinessType } from '../../types';
 
 interface BusinessTypeSelectorProps {
   onSelect: (type: BusinessType) => void;

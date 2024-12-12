@@ -1,6 +1,6 @@
 import React from 'react';
 import { UserCog, Users, UserCheck, Building2 } from 'lucide-react';
-import { AdminRole } from '../types';
+import { AdminRole } from '../../types';
 
 interface AdminRoleSelectorProps {
   onSelect: (role: AdminRole) => void;

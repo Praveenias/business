@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AdminDetails } from '../types';
+import { AdminDetails } from '../../types';
 
 interface AdminDetailsFormProps {
   onSubmit: (details: Partial<AdminDetails>) => void;

@@ -1,17 +1,20 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { BusinessType, BusinessDetails, Message } from '../types';
+import { BusinessType, BusinessDetails, Message,AdminRole,AdminDetails,SubscriptionTier,LocationType,UploadMethod } from '../types';
 import { MessageSquare, X } from 'lucide-react';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
 import BusinessOverview from './BusinessOverview';
 import ImageGallery from './ImageGallery';
-import MenuUpload from './MenuUpload';
-import SubscriptionPlans from './SubscriptionPlans';
-import SignIn from './SignIn';
-import BusinessProfile from './BusinessProfile';
-import TaxDetails from './TaxDetails';
 import { Business } from '../types/business';
 import ZunocodeGenerator from './ZunocodeGenerator';
+import AdminRoleSelector from './Chatbox/AdminRoleSelector';
+import AdminDetailsForm from './Chatbox/AdminDetailsForm';
+import BusinessTypeSelector from './Chatbox/BusinessTypeSelector';
+import LocationTypeSelector from './Chatbox/LocationTypeSelector';
+import TaxDetailsForm from './Chatbox/TaxDetailsForm';
+import ProductUpload from './Chatbox/ProductUpload';
+import OAuthLogin from './Chatbox/OAuthLogin';
+import SubscriptionSelector from './Chatbox/SubscriptionSelector';
 
 interface ChatInterfaceProps {
   businessType: BusinessType;
@@ -23,8 +26,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, businessDet
   const [messages, setMessages] = useState<Message[]>([
     {
       type: 'bot',
-      content: `Lets get to know more about your ${businessDetails.title} business. What is Your Brand Name?`
-    }
+      content: "Welcome to Zuno! I'll help you set up your customer feedback system. First, what's your full name?",
+    },
   ]);
   const [currentStep, setCurrentStep] = useState(1);
   const [businessData, setBusinessData] = useState<BusinessDetails>({
@@ -33,9 +36,20 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, businessDet
     locations: 0,
     mainBranch: ''
   });
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+  const [selectedPlan, setSelectedPlan] = useState<{ tier: string; price: string } | null>(null);
   const [showZunocode, setShowZunocode] = useState(false);
+  
+
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [adminData, setAdminData] = useState<Partial<AdminDetails>>({});
+  
+  const [isComplete, setIsComplete] = useState(false);
+  const [productSource, setProductSource] = useState<{ type: string; count: number } | null>(null);
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -45,138 +59,196 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, businessDet
     scrollToBottom();
   }, [messages]);
 
+  const isInputDisabled = () => {
+    return isLoggingIn || 
+           messages[messages.length - 1]?.component !== undefined || 
+           isComplete;
+  };
+
   const handleSend = (input: string) => {
+    if (!input.trim() || isLoggingIn) return;
     const newMessages = [...messages, { type: 'user', content: input }];
+    setMessages(newMessages);
 
-    switch (currentStep) {
-      case 1:
-        setBusinessData({ ...businessData, name: input });
-        newMessages.push({
-          type: 'bot',
-          content: 'How many branches does your business operate?'
-        });
-        setCurrentStep(2);
-        break;
-
-      case 2:
+    if (currentStep === 1) {
+      setAdminData({ ...adminData, name: input });
+      newMessages.push({
+        type: 'bot',
+        content: 'What is your role in the business?',
+        component: 'admin-role',
+      });
+      setCurrentStep(2);
+    } else if (currentStep === 3) {
+      setBusinessData({ ...businessData, name: input });
+      newMessages.push({
+        type: 'bot',
+        content: 'What type of business do you operate?',
+        component: 'business-type',
+      });
+      setCurrentStep(4);
+    } else if (currentStep === 6) {
+      if (businessData.locationType === 'multi') {
         const locations = parseInt(input);
-        if (!isNaN(locations)) {
-          setBusinessData({ ...businessData, locations });
+        if (isNaN(locations)) {
           newMessages.push({
             type: 'bot',
-            content: 'Which is the main branch out of these?'
+            content: 'Please enter a valid number of locations.',
           });
-          setCurrentStep(3);
+          return;
         }
-        break;
-
-      case 3:
+        setBusinessData({ ...businessData, locations });
+      } else {
         setBusinessData({ ...businessData, mainBranch: input });
-        newMessages.push({
-          type: 'bot',
-          content: 'Enter the address of the main branch'
-        });
-        setCurrentStep(4);
-        break;
-
-      case 4:
-        setBusinessData({ ...businessData, mainBranchAddress: input });
-        newMessages.push({
-          type: 'bot',
-          content: "Let's verify your business details. Please provide your tax information.",
-          component: 'tax-details'
-        });
-        setCurrentStep(5);
-        break;
+      }
+      newMessages.push({
+        type: 'bot',
+        content: "Let's verify your business details. Please provide your tax information.",
+        component: 'tax-details',
+      });
+      setCurrentStep(7);
     }
 
+  };
+
+  const handleAdminRole = (role: AdminRole) => {
+    setAdminData({ ...adminData, role });
+    const newMessages = [
+      ...messages,
+      { type: 'user', content: `Role: ${role}` },
+      {
+        type: 'bot',
+        content: 'Please provide your contact and verification details.',
+        component: 'admin-details',
+      },
+    ];
+    setMessages(newMessages);
+    setCurrentStep(3);
+  };
+
+  const handleAdminDetails = (details: Partial<AdminDetails>) => {
+    setAdminData({ ...adminData, ...details });
+    const newMessages = [
+      ...messages,
+      { type: 'user', content: 'Admin details submitted' },
+      {
+        type: 'bot',
+        content: "Great! Now, what's your business name?",
+      },
+    ];
     setMessages(newMessages);
   };
 
-  const handleTaxDetails = (details: { panOrGst: string }) => {
-    setBusinessData({ ...businessData, panOrGst: details.panOrGst });
+  const handleBusinessTypeSelect = (type: BusinessType) => {
+    setBusinessData({ ...businessData, type });
     const newMessages = [
       ...messages,
-      { type: 'user', content: `Tax details submitted: ${details.panOrGst}` },
+      { type: 'user', content: `Business Type: ${type}` },
       {
         type: 'bot',
-        content: 'Do you want to upload your restaurant menu?',
-        component: 'menu-upload'
-      }
+        content: 'Is your business single location or multi-location?',
+        component: 'location-type',
+      },
+    ];
+    setMessages(newMessages);
+    setCurrentStep(5);
+  };
+
+  const handleLocationTypeSelect = (locationType: LocationType) => {
+    setBusinessData({ ...businessData, locationType });
+    const newMessages = [
+      ...messages,
+      { type: 'user', content: `Location Type: ${locationType}` },
+      {
+        type: 'bot',
+        content: locationType === 'multi' 
+          ? 'How many locations do you operate?' 
+          : 'Please enter your business address:',
+      },
     ];
     setMessages(newMessages);
     setCurrentStep(6);
   };
 
-  const handleFileUpload = (file: File) => {
+  const handleTaxDetails = (details: { gstNumber: string; taxIdentifier: string }) => {
+    setBusinessData({ ...businessData, ...details });
     const newMessages = [
       ...messages,
-      { type: 'user', content: file.name === 'skip' ? 'No' : `Uploaded: ${file.name}` },
+      { type: 'user', content: 'Tax details submitted' },
       {
         type: 'bot',
-        content: "Great! Now let's select a subscription plan that suits your needs.",
-        component: 'subscription'
-      }
-    ];
-    setMessages(newMessages);
-    setCurrentStep(7);
-  };
-
-  const handlePlanSelect = (plan: string) => {
-    setSelectedPlan(plan);
-    const newMessages = [
-      ...messages,
-      { type: 'user', content: `Selected plan: ${plan}` },
-      {
-        type: 'bot',
-        content: 'Please sign in to complete your subscription',
-        component: 'sign-in'
-      }
+        content: "Great! Now, let's upload your product list. You can either upload a file or share a link to your spreadsheet.",
+        component: 'product-upload',
+      },
     ];
     setMessages(newMessages);
     setCurrentStep(8);
   };
 
-  const handleSignIn = (email: string, password: string) => {
+  const handleProductUpload = (data: { method: UploadMethod; file?: File; link?: string }) => {
+    setProductSource({
+      type: data.method === 'file' ? 'File Upload' : 'Spreadsheet Link',
+      count: Math.floor(Math.random() * 500) + 100
+    });
     const newMessages = [
       ...messages,
-      { type: 'user', content: 'Signed in successfully' },
+      { type: 'user', content: `Products ${data.method === 'file' ? 'file uploaded' : 'link shared'}` },
       {
         type: 'bot',
-        content: 'Now set up your Business Profile',
-        component: 'business-profile'
-      }
+        content: "Perfect! Before we proceed with the subscription, let's get you logged in.",
+        component: 'oauth',
+      },
     ];
-    console.log(email,password);
-    
     setMessages(newMessages);
     setCurrentStep(9);
-    
   };
 
-  const submitForm = (details) => {
-    setCurrentStep(10);
-    console.log(businessData,selectedPlan,details);
+  const handleAuth = () => {
+    setIsLoggingIn(true);
+    setTimeout(() => {
+      setIsAuthenticated(true);
+      setIsLoggingIn(false);
+      const newMessages = [
+        ...messages,
+        { type: 'user', content: 'Successfully authenticated' },
+        {
+          type: 'bot',
+          content: "Great! Now let's select a plan that suits your needs.",
+          component: 'subscription',
+        },
+      ];
+      setMessages(newMessages);
+      setCurrentStep(10);
+    }, 2000);
+  };
+
+  const handleSubscriptionSelect = (tier: SubscriptionTier) => {
+    const prices = {
+      starter: '$49',
+      growth: '$149',
+      enterprise: 'Custom'
+    };
+    setSelectedPlan({ tier, price: prices[tier] });
+    const newMessages = [
+      ...messages,
+      { type: 'user', content: `Selected Plan: ${tier}` },
+      {
+        type: 'bot',
+        content: "Excellent choice! We'll now process your subscription and set up your account.",
+      },
+    ];
+    setMessages(newMessages);
     setShowZunocode(true);
-    
-  }
-
-  const renderComponent = (component: string) => {
-    switch (component) {
-      case 'tax-details':
-        return <TaxDetails onSubmit={handleTaxDetails} />;
-      case 'menu-upload':
-        return <MenuUpload onFileUpload={handleFileUpload} />;
-      case 'subscription':
-        return <SubscriptionPlans onSelect={handlePlanSelect} />;
-      case 'sign-in':
-        return <SignIn onSignIn={handleSignIn} />;
-      case 'business-profile':
-        return <BusinessProfile onSubmit={submitForm} />;
-      default:
-        return null;
-    }
+    setIsComplete(true);
   };
+
+  // const submitForm = (details) => {
+  //   setCurrentStep(10);
+  //   console.log(businessData,selectedPlan,details);
+  //   setShowZunocode(true);
+    
+  // }
+
+  
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
@@ -205,37 +277,59 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, businessDet
                 {/* Image Gallery */}
                 <ImageGallery />
                 
-                {/* Messages */}
-                <div className="space-y-6">
-                  {messages.map((message, index) => (
-                    <div key={index} className="animate-fade-in">
-                      <ChatMessage message={message} />
-                      {message.component && (
-                        <div className="mt-4">
-                          {renderComponent(message.component)}
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                  {showZunocode && (
-                    <ZunocodeGenerator 
-                      businessName={businessData.name}
-                      businessId={`${businessData.name.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}`}
-                    />
-                  )}
-                  <div ref={messagesEndRef} />
-                </div>
+                <div className="flex-1 py-8">
+            <div className="bg-white rounded-lg shadow-lg h-full flex flex-col">
+              <div 
+                ref={chatContainerRef}
+                className="flex-1 overflow-y-auto p-6 space-y-4"
+              >
+                {messages.map((message, index) => (
+                  <div key={index}>
+                    <ChatMessage message={message} />
+                    {message.component === 'admin-role' && (
+                      <AdminRoleSelector onSelect={handleAdminRole} />
+                    )}
+                    
+                    {message.component === 'admin-details' && (
+                      <AdminDetailsForm onSubmit={handleAdminDetails} />
+                    )}
+                    {message.component === 'business-type' && (
+                      <BusinessTypeSelector onSelect={handleBusinessTypeSelect} />
+                    )}
+                    {message.component === 'location-type' && (
+                      <LocationTypeSelector onSelect={handleLocationTypeSelect} />
+                    )}
+                    {message.component === 'tax-details' && (
+                      <TaxDetailsForm onSubmit={handleTaxDetails} />
+                    )}
+                    {message.component === 'product-upload' && (
+                      <ProductUpload onSubmit={handleProductUpload} />
+                    )}
+                    {message.component === 'oauth' && (
+                      <OAuthLogin onLogin={handleAuth} />
+                    )}
+                    {message.component === 'subscription' && isAuthenticated && (
+                      <SubscriptionSelector onSelect={handleSubscriptionSelect} />
+                    )}
+                    
+                  </div>
+                ))}
+                <div ref={messagesEndRef} />
+              </div>
+
+              {!isComplete && (
+                <ChatInput 
+                  onSend={handleSend}
+                  disabled={isInputDisabled()}
+                  placeholder={isInputDisabled() ? "Please complete the current step..." : "Type your response..."}
+                />
+              )}
+            </div>
+          </div>
               </div>
             </div>
 
-            {/* Fixed Input Area */}
-            <div className="flex-none p-4 bg-white border-t">
-              <ChatInput 
-                onSend={handleSend}
-                disabled={currentStep === 9 || messages[messages.length - 1]?.component !== undefined}
-                placeholder="Type your response..."
-              />
-            </div>
+            
           </div>
 
           {/* Right Panel - Overview (30%) */}
@@ -252,6 +346,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, businessDet
           </div>
         </div>
       </div>
+      {showZunocode && (
+                    <ZunocodeGenerator 
+                      businessName={businessData.name}
+                      businessId={`${businessData.name.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}`}
+                    />
+                  )}
+                  <div ref={messagesEndRef} />
     </div>
   );
 };

@@ -27,11 +27,11 @@ export default function BusinessCard({
   const config = categoryConfig[category as keyof typeof categoryConfig];
   const Icon = config?.icon;
 
-  const getOpacity = () => {
-    if (isHovered) return 'opacity-100';
-    if (!document.querySelector(':hover') && isSelected) return 'opacity-100';
-    return 'opacity-30';
-  };
+  // const getOpacity = () => {
+  //   if (isHovered) return 'opacity-100';
+  //   if (!document.querySelector(':hover') && isSelected) return 'opacity-100';
+  //   return 'opacity-30';
+  // };
   const handleSelect = () => {
     onSelect({ image, title, subtitle, peopleCount, category, ...business });
   };
@@ -43,7 +43,7 @@ export default function BusinessCard({
           rounded-lg overflow-hidden shadow-md bg-white 
           transition-all duration-300 cursor-pointer
           hover:shadow-xl transform hover:-translate-y-1
-          ${getOpacity()}
+          
           ${isHovered ? 'scale-105' : ''}
           ${!document.querySelector(':hover') && isSelected ? 'scale-105' : ''}
         `}

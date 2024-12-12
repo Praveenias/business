@@ -17,12 +17,31 @@ export interface BusinessDetails {
   mainBranch?: string;
   mainBranchAddress?: string;
   panOrGst?: string;
+  taxIdentifier?: string;
   email?:string;
   password?:string;
+}
+
+
+export interface AdminDetails {
+  name: string;
+  role: AdminRole;
+  email: string;
+  mobile: string;
+  panCard: string;
+}
+
+export interface SubscriptionPlan {
+  tier: SubscriptionTier;
+  name: string;
+  feedbacks: string;
+  products: string;
+  price: string;
+  features: string[];
 }
 
 export interface Message {
   type: 'bot' | 'user';
   content: string;
-  component?: string;
+  component?: 'subscription' | 'business-type' | 'location-type' | 'admin-role' | 'admin-details' | 'tax-details' | 'product-upload' | 'oauth' ;
 }
