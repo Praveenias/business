@@ -13,6 +13,7 @@ interface BusinessOverviewProps {
   business:any
 }
 
+
 const BusinessOverview: React.FC<BusinessOverviewProps> = ({
   businessName,
   branchName,
@@ -21,6 +22,7 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
   selectedPlan,
   business
 }) => {
+  console.log('Business Name:', businessName);
   return (
     <div className="h-full flex flex-col">
       {/* Overview Header */}
@@ -43,41 +45,89 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
         </div> */}
 
         {/* Basic Details */} 
-        {businessName && (
-          <div className="space-y-4 border border-[#D9D9D9] p-2.5 rounded-tl-none rounded-tr-[20px] rounded-br-[20px] rounded-bl-[20px] bg-white shadow-md h-[300px] shadow-md w-[90%] m-auto mt-[40%] relative">
-            <div className="w-[45%] mx-auto mt-[-45px] ml-[-11px] h-[35px] flex justify-center items-center gap-1 font-[Cirka] font-bold text-[16px] border border-b-0 border-[#D9D9D9] rounded-tl-[20px] rounded-tr-[21px] bg-white">
-            <img src={overviewicon} alt='icon' className="w-[20px] h-[20px]" />
-              Overveiw</div>
-            <div>
-              <div className="w-[90%] h-[50px] rounded-lg shadow-lg absolute -top-[15px] bg-[#E4D0F9] left-[-10px] w-[110%] border border-[#400C7A] flex">
-              <div className="w-[30%] flex justify-center items-center"> <img src={drinks} alt='drinks' className="w-[25px] h-[25px]" /></div>
-              <div className="w-[70%] flex flex-col justify-center items-start"><span className="text-sm font-medium">business</span>
-              <p className="text-xs text-gray-600">Owned by Individuals</p></div>
-              </div>
-              <div className="h-[40px] border border-[#DFDFDF] w-[97%] mt-[40%] rounded-[10px] flex">
-  {/* <div className="col-span-1 w-[40%]"><img src={brandname} alt='drinks' className="w-[25px] h-[25px]" />Brand Name</div>
-  <div className="col-span-1 w-[50%]">Adayar Anandha Bhavan</div>
-  <div className="col-span-1 w-[10%]">Column 4 (10%)</div> */}
-              </div>
-              <h3 className="text-sm font-medium mb-3">Business Details</h3>
-              <div className="flex flex-col justify-start items-start gap-[3%]">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">Brand Name</span>
-                  <span className="text-sm font-medium">{businessName}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <MapPin className="h-4 w-4 text-orange-500" />
-                    <span className="text-sm text-gray-600">Main Branch</span>
-                  </div>
-                  <span className="text-sm font-medium text-orange-500">{branchName}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">Number of Locations</span>
-                  <span className="text-sm font-medium">{locations} locations</span>
-                </div>
-              </div>
-            </div>
+        {(
+          <div className="space-y-4 border border-[#D9D9D9] p-2.5 rounded-tl-none rounded-tr-[20px] rounded-br-[20px] rounded-bl-[20px] bg-white shadow-md h-[290px] shadow-md w-[90%] m-auto mt-[40%] relative">
+<div className="w-[45%] mx-auto mt-[-45px] ml-[-11px] h-[35px] flex justify-center items-center gap-2 font-[Cirka] font-bold text-[14px] border border-b-0 border-[#D9D9D9] rounded-tl-[20px] rounded-tr-[21px] bg-white max-w-full">
+  <img src={overviewicon} alt="icon" className="w-[16px] h-[16px] sm:w-[20px] sm:h-[20px] max-w-full" />
+  <span className="text-sm sm:text-[16px] overflow-hidden whitespace-nowrap">Overview</span>
+</div>
+
+  <div>
+    {/* The div that extends beyond the parent container */}
+    <div className="absolute top-[5%] left-[-5%] w-[110%] h-[50px] rounded-lg shadow-lg bg-[#E4D0F9] border border-[#400C7A] flex">
+  <div className="w-[30%] flex justify-center items-center">
+    <img src={drinks} alt="drinks" className="w-[25px] h-[25px]" />
+  </div>
+  <div className="w-[70%] flex flex-col justify-center items-start">
+    <span className="text-sm font-medium">business</span>
+    <p className="text-xs text-gray-600">Owned by Individuals</p>
+  </div>
+</div>
+
+<div className="absolute top-[calc(5%+50px)] left-[5%] w-[90%] h-[40px] border border-[#DFDFDF] rounded-[10px] p-5 flex mt-[10%]">
+  <div className="w-[30%] flex justify-center items-center gap-1.5">
+    <img src={brandname} alt="drinks" className="w-[25px] h-[25px]" />
+    <span className="text-sm font-medium">Brand Name </span>
+  </div>
+  <div className="w-[70%] flex justify-center items-center">
+    <span className="text-sm font-medium text-center">{businessName}</span>
+  </div>
+</div>
+
+
+<div className="absolute top-[calc(5%+50px+40px+60px)] left-[5%] w-[100%]">
+  <div className="flex flex-col justify-start items-start gap-[3%]">
+    <h3 className="text-sm font-medium mb-3">Business Details</h3>
+    {/* <div className="flex items-center justify-between">
+      <span className="text-sm text-gray-600">Brand Name</span>
+      <span className="text-sm font-medium">{businessName}</span>
+    </div> */}
+  <div className="flex items-center justify-between mb-3">
+  
+  <div className="w-[20%] flex justify-center items-center">
+    <MapPin className="h-[20px] w-[20px] text-orange-500" />
+  </div>
+
+ 
+  <div className="w-[35%] flex justify-start items-center">
+    <span className="text-[12px] text-gray-600">Main Branch</span>
+  </div>
+
+  
+  <div className="w-[45%] flex justify-start items-center">
+    <span className="text-[12px] font-medium text-orange-500">{branchName}</span>
+  </div>
+</div>
+
+<div className="flex items-center justify-between">
+ 
+  <div className="w-[20%] flex justify-center items-center">
+    <MapPin className="h-[20px] w-[20px] text-orange-500" />
+  </div>
+
+
+  <div className="w-[35%] flex justify-start items-center">
+    <span className="text-[12px] text-gray-600">Main Branch</span>
+  </div>
+
+
+  <div className="w-[45%] flex justify-start items-center">
+    <span className="text-[12px] font-medium text-orange-500">{locations} locations</span>
+  </div>
+</div>
+
+
+
+
+    {/* <div className="flex items-center justify-between">
+      <span className="text-sm text-gray-600">Number of Locations</span>
+      <span className="text-sm font-medium">{locations} locations</span>
+    </div> */}
+  </div>
+</div>
+</div>
+
+
 
             {/* Restaurant Menu */}
             {/* <div>

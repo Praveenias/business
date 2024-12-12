@@ -40,7 +40,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, businessDet
   const [showZunocode, setShowZunocode] = useState(false);
   
 
-
+  console.log('Business Name:', businessData);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [adminData, setAdminData] = useState<Partial<AdminDetails>>({});
@@ -252,7 +252,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, businessDet
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="w-[90%] h-[90vh] bg-white rounded-xl shadow-2xl flex flex-col">
+      <div className="w-[100%] h-[100%] bg-white rounded-xl shadow-2xl flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 bg-[#4A0079] rounded-t-xl">
           <div className="flex items-center space-x-3">
@@ -335,6 +335,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, businessDet
           {/* Right Panel - Overview (30%) */}
           <div className="w-[30%] border-l">
             <div className="h-full overflow-y-auto">
+           
               <BusinessOverview
                 businessName={businessData.name}
                 branchName={businessData.mainBranch}
