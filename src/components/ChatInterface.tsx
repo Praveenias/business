@@ -42,8 +42,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
   const [selectedPlan, setSelectedPlan] = useState<SubscriptionPlan | null>(null);
   const [showZunocode, setShowZunocode] = useState(false);
   
-
-  console.log('Business Name:', businessData);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [adminData, setAdminData] = useState<Partial<AdminDetails>>({});
@@ -60,11 +58,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
     }, [messages]);
     const scrollToBottom = () => {
       if (scrollableDivRef.current) {
-        console.log('ScrollHeight:', scrollableDivRef.current.scrollHeight);
-        console.log('ScrollTop Before:', scrollableDivRef.current.scrollTop);
         scrollableDivRef.current.scrollTop =
           scrollableDivRef.current.scrollHeight;
-        console.log('ScrollTop After:', scrollableDivRef.current.scrollTop);
       }
     };
 
@@ -235,13 +230,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
     }, 2000);
   };
 
-  const handleSubscriptionSelect = (tier: SubscriptionTier) => {
-    console.log(tier);
+  const handleSubscriptionSelect = (tier: SubscriptionPlan) => {
     
     setSelectedPlan(tier);
     const newMessages = [
       ...messages,
-      { type: 'user', content: `Selected Plan: ${tier}` },
+      { type: 'user', content: `Selected Plan: ${tier.tier}` },
       {
         type: 'bot',
         content: "Excellent choice! We'll now process your subscription and set up your account.",
@@ -384,7 +378,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
                 businessName={businessData.name}
                 branchName={businessData.mainBranch}
                 locations={businessData.locations}
-                progress={((currentStep - 1) / 9) * 100}
+                progress={((currentStep - 1) / 10) * 100}
                 selectedPlan={selectedPlan}
               />
             </div>
