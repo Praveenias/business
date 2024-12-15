@@ -301,7 +301,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
                 <div className="bg-white h-[400px] w-full overflow-hidden border border-gray-300 rounded-[20px] m-auto ">
                 
             <div className="bg-white rounded-lg  p-[10px] shadow-lg h-full flex flex-col" >
-             <div  className="flex bg-[#400C7A] w-[90%] rounded-[20px] h-[50px] m-auto items-center">
+             <div  className="flex bg-[#400C7A] w-[98%] rounded-[15px] h-[50px] m-auto items-center">
               <div className="w-[10%] flex justify-end">
               <img src={logo} alt="Play Store" className="max-w-[80%] pr-[10px] h-[27px] " />
               </div>

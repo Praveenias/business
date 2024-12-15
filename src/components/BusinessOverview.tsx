@@ -137,11 +137,11 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
           </div>
         )}
       </div>
-      <div className="mt-auto p-4 absolute w-[25%] top-1/2 left-[73%]">
+      <div className="mx-auto mb-[15%] mt-auto p-4  w-[90%] border border-gray-300 rounded-lg shadow-md">
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <span className="text-sm text-gray-600">Steps completed</span>
-            <span className="text-sm font-medium text-purple-600">{Math.round(progress)}%</span>
+            <span className="text-[#400C7A] font-gilroy font-bold text-[12px]">Preparing your Zunocode</span>
+            <span className="text-sm font-medium text-[#7F7F7F#7F7F7F]">{Math.round(progress)}%</span>
           </div>
           <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
             <div
