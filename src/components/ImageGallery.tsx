@@ -1,31 +1,35 @@
 import React from 'react';
-
+import image1 from "../assets/images/topimage1.svg"
+import image2 from "../assets/images/topimage2.svg"
+import image3 from "../assets/images/topimage3.svg"
+import image4 from "../assets/images/topimage4.svg"
+import image5 from "../assets/images/topimage5.svg"
 const ImageGallery: React.FC = () => {
   const images = [
     {
-      url: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&auto=format&fit=crop",
-      className: "col-span-2 row-span-2"
+      url: image1,
+      className: "col-span-2 row-span-2 h-[388px]"
     },
     {
-      url: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&auto=format&fit=crop",
-      className: ""
+      url:image2,
+      className: "h-[190px]"
     },
     {
-      url: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&auto=format&fit=crop",
-      className: ""
+      url:image3,
+      className: "h-[190px]"
     },
     {
-      url: "https://images.unsplash.com/photo-1544148103-0773bf10d330?w=800&auto=format&fit=crop",
-      className: ""
+      url:image4,
+      className: "h-[190px]"
     },
     {
-      url: "https://images.unsplash.com/photo-1560624052-449f5ddf0c31?w=800&auto=format&fit=crop",
-      className: ""
+      url:image5,
+      className: "h-[190px]"
     }
   ];
 
   return (
-    <div className="grid grid-cols-4 gap-2 rounded-lg overflow-hidden mb-6">
+    <div className="grid grid-cols-4 gap-2 rounded-[20px] overflow-hidden mb-6">
       {images.map((image, index) => (
         <div key={index} className={image.className}>
           <img

@@ -15,7 +15,8 @@ import TaxDetailsForm from './Chatbox/TaxDetailsForm';
 import ProductUpload from './Chatbox/ProductUpload';
 import OAuthLogin from './Chatbox/OAuthLogin';
 import SubscriptionSelector from './Chatbox/SubscriptionSelector';
-
+import logo1 from '../assets/images/login1.svg';
+import MyIcon from '../assets/images/profile.svg';
 interface ChatInterfaceProps {
   businessType: BusinessType;
   onClose: () => void;
@@ -249,22 +250,38 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div className="w-[100%] h-[100%] bg-white rounded-xl shadow-2xl flex flex-col">
-        {/* Header */}
-        <div className="flex items-end justify-end px-6 py-4 bg-[#4A0079] rounded-t-xl">
-          {/* <div className="flex items-center space-x-3">
-            <MessageSquare className="h-6 w-6 text-white" />
-            <span className="text-lg font-medium text-white">Let's get you On-boarded</span>
-          </div> */}
+
+        {/* <div className="flex items-end justify-end px-6 py-4 bg-[#4A0079] rounded-t-xl">
+      
           <button
             onClick={onClose}
             className="p-2 hover:bg-white/10 rounded-lg transition-colors "
           >
             <X className="h-5 w-5 text-white" />
           </button>
-        </div>
+        </div> */}
+
+
+
+<div className="flex w-full  py-4 rounded-t-xl h-20 flex items-center justify-center">
+ 
+  <div className="w-[90%] ">
+  <img src={logo1} alt="Play Store" className="max-w-[80%] pl-10 h-[27px]" />
+  </div>
+
+  <div className="w-[10%]  flex justify-center items-center gap-3.5">
+  <img src={MyIcon} alt="profile" className="max-w-[60%] w-[30px]" />
+  {/* <button
+           
+            className="p-2 hover:bg-white/10 rounded-lg transition-colors "
+          > */}
+            <X  onClick={onClose} className="h-7.5 w-7.5 text-[#FF6E01]" />
+          {/* </button> */}
+  </div>
+</div>
 
         {/* Main Content */}
-        <div className="flex flex-1 overflow-hidden">
+        <div className="flex flex-1 overflow-hidden ">
           {/* Left Section (70%) */}
           <div className="w-[70%] flex flex-col">
             {/* Chat Section with Scrollable Content */}
@@ -273,8 +290,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
                 {/* Image Gallery */}
                 <ImageGallery />
                 
-                <div className="flex-1 py-8">
-            <div className="bg-white rounded-lg shadow-lg h-full flex flex-col">
+                <div className="bg-white h-[400px] w-full overflow-hidden border border-gray-300 rounded-[20px]" >
+            <div className="bg-white rounded-lg  p-[10px] shadow-lg h-full flex flex-col">
               <div 
                 ref={chatContainerRef}
                 className="flex-1 overflow-y-auto p-6 space-y-4"

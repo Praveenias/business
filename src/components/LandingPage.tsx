@@ -114,7 +114,7 @@ function LandingPage() {
         />
         <div className="font-serif text-center text-4xl mb-[1%] font-bold">
   <span className="text-black">Ready to Setup your</span>
-  <button onClick={handleBusinessSelect}><span className="text-[#FF6E01] ml-1"> Business</span></button>
+  <button onClick={handleBusinessSelect}><span className="text-[#FF6E01] ml-[5%]"> Business</span></button>
 </div>
 <div className="flex justify-center items-center mb-[2%]">
   <p className="text-center w-1/2 font-gilroy font-normal">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>

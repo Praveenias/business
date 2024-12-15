@@ -49,8 +49,8 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
 
         {/* Basic Details */} 
         {(
-        <div className={`relative border border-[#D9D9D9] p-2.5 rounded-tl-none rounded-tr-[20px] rounded-br-[20px] rounded-bl-[20px] bg-white shadow-md w-[90%] m-auto mt-[40%] transition-all duration-300`}
-        style={{ height: locations ? '290px' : '590px' }}>
+        <div className={`relative border border-[#D9D9D9] p-2.5 rounded-tl-none rounded-tr-[20px] rounded-br-[20px] rounded-bl-[20px] bg-white shadow-md w-[90%] m-auto mt-[7%] transition-all duration-300`}
+        style={{ height: locations ? '290px' : '290px' }}>
         <div className="w-[45%] mx-auto mt-[-45px] ml-[-11px] h-[35px] flex justify-center items-center gap-2 font-[Cirka] font-bold text-[14px] border border-b-0 border-[#D9D9D9] rounded-tl-[20px] rounded-tr-[21px] bg-white max-w-full">
           <img src={overviewicon} alt="icon" className="w-[16px] h-[16px] sm:w-[20px] sm:h-[20px] max-w-full" />
           <span className="text-sm sm:text-[16px] overflow-hidden whitespace-nowrap">Overview</span>
