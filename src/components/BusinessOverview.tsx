@@ -171,7 +171,7 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
       </div>
 
       {/* Progress Footer */}
-      <div className="mt-auto p-4 border-t">
+      <div className="mt-auto p-4 absolute w-[25%] top-1/2 left-[73%]">
         <div className="space-y-2">
           <div className="flex justify-between items-center">
             <span className="text-sm text-gray-600">Steps completed</span>

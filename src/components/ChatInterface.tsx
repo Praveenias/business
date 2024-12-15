@@ -16,6 +16,8 @@ import ProductUpload from './Chatbox/ProductUpload';
 import OAuthLogin from './Chatbox/OAuthLogin';
 import SubscriptionSelector from './Chatbox/SubscriptionSelector';
 import logo1 from '../assets/images/login1.svg';
+import logo from '../assets/images/logo.svg';
+import menuicon from '../assets/images/menu_icon.svg';
 import MyIcon from '../assets/images/profile.svg';
 interface ChatInterfaceProps {
   businessType: BusinessType;
@@ -36,6 +38,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
     locations: 0,
     mainBranch: ''
   });
+
   const [selectedPlan, setSelectedPlan] = useState<SubscriptionPlan | null>(null);
   const [showZunocode, setShowZunocode] = useState(false);
   
@@ -50,14 +53,20 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+    const scrollableDivRef = useRef<HTMLDivElement>(null);
+  
+    useEffect(() => {
+      scrollToBottom();
+    }, [messages]);
+    const scrollToBottom = () => {
+      if (scrollableDivRef.current) {
+        console.log('ScrollHeight:', scrollableDivRef.current.scrollHeight);
+        console.log('ScrollTop Before:', scrollableDivRef.current.scrollTop);
+        scrollableDivRef.current.scrollTop =
+          scrollableDivRef.current.scrollHeight;
+        console.log('ScrollTop After:', scrollableDivRef.current.scrollTop);
+      }
+    };
 
   const isInputDisabled = () => {
     return isLoggingIn || 
@@ -69,7 +78,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
     if (!input.trim() || isLoggingIn) return;
     const newMessages = [...messages, { type: 'user', content: input }];
     setMessages(newMessages);
-
+    scrollToBottom();
     if (currentStep === 1) {
       setAdminData({ ...adminData, name: input });
       newMessages.push({
@@ -77,6 +86,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
         content: 'What is your role in the business?',
         component: 'admin-role',
       });
+      scrollToBottom();
       setCurrentStep(2);
     } else if (currentStep === 3) {
       setBusinessData({ ...businessData, name: input });
@@ -85,6 +95,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
         content: 'What type of business do you operate?',
         component: 'business-type',
       });
+      scrollToBottom();
       setCurrentStep(4);
     } else if (currentStep === 6) {
       if (businessData.locationType === 'multi') {
@@ -96,15 +107,18 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
           });
           return;
         }
+        scrollToBottom();
         setBusinessData({ ...businessData, locations });
       } else {
         setBusinessData({ ...businessData, mainBranch: input });
+        scrollToBottom();
       }
       newMessages.push({
         type: 'bot',
         content: "Let's verify your business details. Please provide your tax information.",
         component: 'tax-details',
       });
+      scrollToBottom();
       setCurrentStep(7);
     }
 
@@ -290,12 +304,22 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
                 {/* Image Gallery */}
                 <ImageGallery />
                 
-                <div className="bg-white h-[400px] w-full overflow-hidden border border-gray-300 rounded-[20px]" >
-            <div className="bg-white rounded-lg  p-[10px] shadow-lg h-full flex flex-col">
-              <div 
-                ref={chatContainerRef}
-                className="flex-1 overflow-y-auto p-6 space-y-4"
-              >
+                <div className="bg-white h-[400px] w-full overflow-hidden border border-gray-300 rounded-[20px] m-auto ">
+                
+            <div className="bg-white rounded-lg  p-[10px] shadow-lg h-full flex flex-col" >
+             <div  className="flex bg-[#400C7A] w-[90%] rounded-[20px] h-[50px] m-auto items-center">
+              <div className="w-[10%] flex justify-end">
+              <img src={logo} alt="Play Store" className="max-w-[80%] pr-[10px] h-[27px] " />
+              </div>
+              <div className="w-[50%] border-l-2 border-l-white flex justify-start">
+                <p className="text-white font-cirka font-bold text-[12px] pl-[10px]">Let’s get you On-boarded</p>
+              </div>
+              <div className="w-[40%] flex justify-end">
+              <img src={menuicon} alt="Play Store" className="max-w-[80%] pr-[20px] h-[23px]" />
+              </div>
+             </div>
+              <div  id="scrollableDiv"
+            ref={scrollableDivRef} className="flex-1 overflow-y-auto p-6 space-y-4">
                 {messages.map((message, index) => (
                   <div key={index}>
                     <ChatMessage message={message} />
@@ -373,4 +397,4 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
   );
 };
 
-export default ChatInterface;
+export default ChatInterface ;
