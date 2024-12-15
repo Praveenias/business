@@ -32,7 +32,7 @@ const TaxDetailsForm: React.FC<TaxDetailsFormProps> = ({ onSubmit }) => {
           required
           value={formData.gstNumber}
           onChange={handleChange}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
+          className="w-full px-4 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
           placeholder="Enter GST number"
         />
       </div>
@@ -48,7 +48,7 @@ const TaxDetailsForm: React.FC<TaxDetailsFormProps> = ({ onSubmit }) => {
           required
           value={formData.taxIdentifier}
           onChange={handleChange}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
+          className="w-full px-4 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
           placeholder="Enter tax identification number"
         />
       </div>

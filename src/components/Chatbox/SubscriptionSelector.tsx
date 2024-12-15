@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Zap, Rocket, Building, Loader2, TrainFrontTunnel } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { SubscriptionTier } from '../types';
+import { SubscriptionTier,SubscriptionPlan } from '../../types';
 import { FeaturesSection } from './Subscription/FeatureSection';
 
 interface SubscriptionSelectorProps {
-  onSelect: (tier: SubscriptionTier) => void;
+  onSelect: (tier: SubscriptionPlan) => void;
 }
 
 const SubscriptionSelector: React.FC<SubscriptionSelectorProps> = ({ onSelect }) => {
-  const [selectedTier, setSelectedTier] = useState<SubscriptionTier | null>(null);
+  const [selectedTier, setSelectedTier] = useState<SubscriptionPlan | null>(null);
   const [step, setStep] = useState<'select' | 'trial' | 'setup'>('select');
   const [isProcessing, setIsProcessing] = useState(false);
 
@@ -28,7 +28,7 @@ const SubscriptionSelector: React.FC<SubscriptionSelectorProps> = ({ onSelect })
       isPopular: false,
     },
     {
-      tier: 'prefessional',
+      tier: 'professional',
       title: 'Professional Plan',
       description : 'The most Reliable for Business Enterprises',
       price: '1650.3',
@@ -58,11 +58,11 @@ const SubscriptionSelector: React.FC<SubscriptionSelectorProps> = ({ onSelect })
     }
   ];
 
-  const handlePlanSelect = async (tier: SubscriptionTier) => {
+  const handlePlanSelect = async (plan: SubscriptionPlan) => {
     if (isProcessing || selectedTier) return;
     
     setIsProcessing(true);
-    setSelectedTier(tier);
+    setSelectedTier(plan);
     
     // Activate trial
     setStep('trial');
@@ -79,7 +79,7 @@ const SubscriptionSelector: React.FC<SubscriptionSelectorProps> = ({ onSelect })
       origin: { y: 0.6 }
     });
     
-    onSelect(tier);
+    onSelect(plan);
     setIsProcessing(false);
   };
 
@@ -112,7 +112,7 @@ const SubscriptionSelector: React.FC<SubscriptionSelectorProps> = ({ onSelect })
         {selectedTier && (
           <div className="mt-4">
             <p className="text-sm text-gray-500">
-              After trial: {selectedTier === 'starter' ? '$49' : selectedTier === 'growth' ? '$149' : 'Custom'}/month
+              After trial: {selectedTier.tier === 'starter' ? '$49' : selectedTier.tier === 'growth' ? '$149' : 'Custom'}/month
             </p>
           </div>
         )}
@@ -127,7 +127,7 @@ const SubscriptionSelector: React.FC<SubscriptionSelectorProps> = ({ onSelect })
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
-        {plans.map(({ tier, title, price,isPopular }) => (
+        {plans.map(({ tier, title, price,isPopular,description,features }) => (
           <div>
           <div
             key={tier}
@@ -150,7 +150,7 @@ const SubscriptionSelector: React.FC<SubscriptionSelectorProps> = ({ onSelect })
               isPopular
                 ? 'bg-orange-500 hover:bg-orange-600 text-white'
                 : 'bg-purple-100 hover:bg-purple-200 text-purple-700'
-            }`} onClick={() => handlePlanSelect(tier as SubscriptionTier)}
+            }`} onClick={() => handlePlanSelect({ tier, title, price,isPopular,description,features })}
           >
             Subscribe Now
           </button>

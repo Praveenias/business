@@ -6,12 +6,13 @@ import drinks from '../assets/images/drinks.svg'
 import brandname from '../assets/images/brand_name.svg'
 import locationicon from '../assets/images/location_icon.svg'
 import menu from '../assets/images/menu.svg'
+import { SubscriptionPlan } from '../types';
 interface BusinessOverviewProps {
   businessName: string;
   branchName: string | null;
   locations: number | null;
   progress: number;
-  selectedPlan?: any;
+  selectedPlan?: SubscriptionPlan;
   business:any
 }
 
@@ -24,7 +25,7 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
   selectedPlan,
   business
 }) => {
-  console.log('Business Name:', businessName);
+  console.log('Business Name:', selectedPlan);
   return (
     <div className="h-full flex flex-col">
       {/* Overview Header */}
@@ -103,7 +104,7 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
             </div>
           </div>
      
-          <div className="absolute top-[calc(5%+50px+200px)] left-[5%] w-[90%] min-h-[40px] border border-[#DFDFDF] rounded-[20px] p-5 flex mt-[10%]">
+          {/* <div className="absolute top-[calc(5%+50px+200px)] left-[5%] w-[90%] min-h-[40px] border border-[#DFDFDF] rounded-[20px] p-5 flex mt-[10%]">
             <div className="w-[30%] flex justify-center items-center gap-1.5">
               <img src={menu} alt="drinks" className="w-[25px] h-[25px]" />
               <span className="text-sm font-medium">Restaurant Menu</span>
@@ -112,36 +113,8 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
               <span className="text-sm font-medium text-center">{businessName}</span>
               <img src={editicon} alt="drinks" className="w-[25px] h-[25px] absolute bottom-[75%] right-[-2%]" />
             </div>
-          </div>
+          </div> */}
       
-          <div className="absolute top-[calc(5%+50px+40px+270px)] left-[0%] w-[100%] p-5">
-            <div className="flex flex-col justify-start items-start gap-[3%] border-b border-[#DFDFDF] pb-5" >
-              <h3 className="text-sm font-medium mb-3">Business Details</h3>
-              {/* Row 1: Main Branch */}
-              <div className="flex items-center justify-between w-[100%]">
-                <div className="flex items-center gap-2 w-[50%]">
-                  <img src={locationicon} alt="drinks" className="w-[20px] h-[20px]" />
-                  <span className="text-[12px] font-gilroy font-normal underline">Main Branch</span>
-                </div>
-                <div className="flex items-center justify-end w-[50%]">
-                  <span className="text-[12px] font-medium text-orange-500">{branchName}</span>
-                </div>
-              </div>
-      
-              {/* Row 2: Number of Locations */}
-              <div className="flex items-center justify-between w-[100%] mt-[3%]">
-                <div className="flex items-center gap-2 w-[50%]">
-                  <img src={locationicon} alt="drinks" className="w-[20px] h-[20px]" />
-                  <span className="font-gilroy text-[12px] font-normal underline">Number of Locations</span>
-                </div>
-                <div className="flex items-center justify-end w-[50%]">
-                  <span className="text-[12px] font-medium text-orange-500">{locations} locations</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
     {/* <div className="flex items-center justify-between">
       <span className="text-sm text-gray-600">Number of Locations</span>
       <span className="text-sm font-medium">{locations} locations</span>
@@ -179,22 +152,22 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
         )}
 
         {/* Selected Plan */}
-        {/* {selectedPlan && (
+        {selectedPlan && (
           <div className="bg-orange-50 rounded-lg p-4">
             <h3 className="text-sm font-medium mb-2">Selected Plan</h3>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-600">Plan Type</span>
-                <span className="text-sm font-medium text-orange-500">{selectedPlan}</span>
+                <span className="text-sm font-medium text-orange-500">{selectedPlan.tier}</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-600">Total Amount</span>
-                <span className="text-sm font-medium">₹19,803.6</span>
+                <span className="text-sm font-medium">₹{selectedPlan.price}</span>
               </div>
               <p className="text-xs text-gray-500">*GST included in this</p>
             </div>
           </div>
-        )} */}
+        )}
       </div>
 
       {/* Progress Footer */}

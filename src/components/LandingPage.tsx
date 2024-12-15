@@ -81,7 +81,7 @@ const businesses: Business[] = [
 
 function LandingPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [selectedBusiness, setSelectedBusiness] = useState<Business | null>(null);
+  const [selectedBusiness, setSelectedBusiness] = useState<boolean>(false);
   const { searchQuery } = useSearch();
 
   const filteredBusinesses = useMemo(() => {
@@ -93,14 +93,14 @@ function LandingPage() {
     });
   }, [selectedCategory, searchQuery]);
 
-  const handleBusinessSelect = (business: Business) => {
-    console.log("Selected Business in App:", business);
+  const handleBusinessSelect = () => {
+    // console.log("Selected Business in App:", business);
     
-    setSelectedBusiness(business); // Pass selected business to the parent
+    setSelectedBusiness(true); // Pass selected business to the parent
   };
 
   const handleChatClose = () => {
-    setSelectedBusiness(null);
+    setSelectedBusiness(false);
   };
 
   return (
@@ -114,7 +114,7 @@ function LandingPage() {
         />
         <div className="font-serif text-center text-4xl mb-[1%] font-bold">
   <span className="text-black">Ready to Setup your</span>
-  <span className="text-[#FF6E01]"> Business</span>
+  <button onClick={handleBusinessSelect}><span className="text-[#FF6E01] ml-1"> Business</span></button>
 </div>
 <div className="flex justify-center items-center mb-[2%]">
   <p className="text-center w-1/2 font-gilroy font-normal">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
@@ -132,8 +132,6 @@ function LandingPage() {
                 {...business} 
                 selectedCategory={selectedCategory}
                 index={index}
-                onSelect={handleBusinessSelect} 
-                
               />
             ))}
           </div>
@@ -141,8 +139,7 @@ function LandingPage() {
       </main>
       {selectedBusiness && (
         <ChatInterface 
-          businessType={selectedBusiness.category.toLowerCase() as any}
-          businessDetails={selectedBusiness}
+          businessType='restaurant'
           onClose={handleChatClose}
         />
       )}

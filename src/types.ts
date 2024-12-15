@@ -1,6 +1,6 @@
 export type BusinessType = 'restaurant' | 'retail' | 'automotive' | 'electronics' | 'd2c';
 export type LocationType = 'single' | 'multi';
-export type SubscriptionTier = 'starter' | 'growth' | 'enterprise';
+export type SubscriptionTier = 'starter' | 'professional' | 'enterprise';
 export type AdminRole = 'owner' | 'director' | 'manager' | 'authorized_representative';
 export type UploadMethod = 'file' | 'link';
 
@@ -32,12 +32,13 @@ export interface AdminDetails {
 }
 
 export interface SubscriptionPlan {
-  tier: SubscriptionTier;
-  name: string;
-  feedbacks: string;
-  products: string;
+  tier: string;
+  description: string;
+  
   price: string;
   features: string[];
+  title : string;
+  isPopular:boolean
 }
 
 export interface Message {

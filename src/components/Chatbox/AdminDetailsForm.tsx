@@ -25,7 +25,7 @@ const AdminDetailsForm: React.FC<AdminDetailsFormProps> = ({ onSubmit }) => {
   return (
     <form onSubmit={handleSubmit} className="space-y-4 mt-4">
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="name" className="block text-sm font-medium text-gray-700 m-1">
           Full Name
         </label>
         <input
@@ -35,7 +35,7 @@ const AdminDetailsForm: React.FC<AdminDetailsFormProps> = ({ onSubmit }) => {
           required
           value={formData.name}
           onChange={handleChange}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
+          className="w-full px-4 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
           placeholder="Enter your full name"
         />
       </div>
@@ -51,7 +51,7 @@ const AdminDetailsForm: React.FC<AdminDetailsFormProps> = ({ onSubmit }) => {
           required
           value={formData.email}
           onChange={handleChange}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
+          className="w-full px-4 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
           placeholder="Enter your email address"
         />
       </div>
@@ -67,7 +67,7 @@ const AdminDetailsForm: React.FC<AdminDetailsFormProps> = ({ onSubmit }) => {
           required
           value={formData.mobile}
           onChange={handleChange}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
+          className="w-full px-3 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
           placeholder="Enter your mobile number"
         />
       </div>
@@ -83,7 +83,7 @@ const AdminDetailsForm: React.FC<AdminDetailsFormProps> = ({ onSubmit }) => {
           required
           value={formData.panCard}
           onChange={handleChange}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
+          className="w-full px-4 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
           placeholder="Enter PAN card number"
         />
       </div>

@@ -6,7 +6,6 @@ import type { Business } from '../../types/business';
 interface BusinessCardProps extends Business {
   selectedCategory: string;
   index: number;
-  onSelect: (business: Business) => void;
 }
 
 export default function BusinessCard({ 
@@ -17,7 +16,6 @@ export default function BusinessCard({
   category,
   selectedCategory,
   index,
-  onSelect,
   ...business
 }: BusinessCardProps) {
   const [isHovered, setIsHovered] = useState(false);
@@ -32,9 +30,7 @@ export default function BusinessCard({
   //   if (!document.querySelector(':hover') && isSelected) return 'opacity-100';
   //   return 'opacity-30';
   // };
-  const handleSelect = () => {
-    onSelect({ image, title, subtitle, peopleCount, category, ...business });
-  };
+ 
 
   return (
     <>
@@ -55,14 +51,9 @@ export default function BusinessCard({
           setIsHovered(false);
           document.body.classList.remove('card-hovered');
         }}
-        onClick={handleSelect}
-        role="button"
+        
         tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            handleSelect();
-          }
-        }}
+        
        
       >
         <div className="relative">

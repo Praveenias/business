@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { BusinessType, BusinessDetails, Message,AdminRole,AdminDetails,SubscriptionTier,LocationType,UploadMethod } from '../types';
+import { BusinessType, BusinessDetails, Message,AdminRole,AdminDetails,SubscriptionTier,LocationType,UploadMethod, SubscriptionPlan } from '../types';
 import { MessageSquare, X } from 'lucide-react';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
@@ -18,11 +18,10 @@ import SubscriptionSelector from './Chatbox/SubscriptionSelector';
 
 interface ChatInterfaceProps {
   businessType: BusinessType;
-  businessDetails: Business;
   onClose: () => void;
 }
 
-const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, businessDetails,onClose }) => {
+const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) => {
   const [messages, setMessages] = useState<Message[]>([
     {
       type: 'bot',
@@ -36,7 +35,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, businessDet
     locations: 0,
     mainBranch: ''
   });
-  const [selectedPlan, setSelectedPlan] = useState<{ tier: string; price: string } | null>(null);
+  const [selectedPlan, setSelectedPlan] = useState<SubscriptionPlan | null>(null);
   const [showZunocode, setShowZunocode] = useState(false);
   
 
@@ -222,12 +221,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, businessDet
   };
 
   const handleSubscriptionSelect = (tier: SubscriptionTier) => {
-    const prices = {
-      starter: '$49',
-      growth: '$149',
-      enterprise: 'Custom'
-    };
-    setSelectedPlan({ tier, price: prices[tier] });
+    console.log(tier);
+    
+    setSelectedPlan(tier);
     const newMessages = [
       ...messages,
       { type: 'user', content: `Selected Plan: ${tier}` },
@@ -254,14 +250,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, businessDet
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div className="w-[100%] h-[100%] bg-white rounded-xl shadow-2xl flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 bg-[#4A0079] rounded-t-xl">
-          <div className="flex items-center space-x-3">
+        <div className="flex items-end justify-end px-6 py-4 bg-[#4A0079] rounded-t-xl">
+          {/* <div className="flex items-center space-x-3">
             <MessageSquare className="h-6 w-6 text-white" />
             <span className="text-lg font-medium text-white">Let's get you On-boarded</span>
-          </div>
+          </div> */}
           <button
             onClick={onClose}
-            className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+            className="p-2 hover:bg-white/10 rounded-lg transition-colors "
           >
             <X className="h-5 w-5 text-white" />
           </button>
@@ -315,7 +311,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, businessDet
                   </div>
                 ))}
                 <div ref={messagesEndRef} />
+                {showZunocode && (
+                    <ZunocodeGenerator 
+                      businessName={businessData.name}
+                      businessId={`${businessData.name.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}`}
+                    />
+                  )}
               </div>
+              
 
               {!isComplete && (
                 <ChatInput 
@@ -347,12 +350,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, businessDet
           </div>
         </div>
       </div>
-      {showZunocode && (
-                    <ZunocodeGenerator 
-                      businessName={businessData.name}
-                      businessId={`${businessData.name.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}`}
-                    />
-                  )}
+      
                   <div ref={messagesEndRef} />
     </div>
   );
