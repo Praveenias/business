@@ -293,15 +293,22 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
           {/* Left Section (70%) */}
           <div className="w-[70%] flex flex-col">
             {/* Chat Section with Scrollable Content */}
-            <div className="flex-1 overflow-y-auto">
+            <div id="scrollableDiv"
+            ref={scrollableDivRef} className="flex-1 overflow-y-auto" >
               <div className="px-6 py-4">
                 {/* Image Gallery */}
-                <ImageGallery />
+              
                 
-                <div className="bg-white h-[400px] w-full overflow-hidden border border-gray-300 rounded-[20px] m-auto ">
+                <div className="bg-white h-auto w-full overflow-hidden border border-gray-300 rounded-[20px] m-auto ">
                 
             <div className="bg-white rounded-lg  p-[10px] shadow-lg h-full flex flex-col" >
-             <div  className="flex bg-[#400C7A] w-[98%] rounded-[15px] h-[50px] m-auto items-center">
+        
+              <div className="flex-1 overflow-y-auto p-6 space-y-4">
+
+<ImageGallery />
+
+
+<div  className="flex bg-[#400C7A] w-[98%] rounded-[15px] h-[50px] m-auto items-center">
               <div className="w-[10%] flex justify-end">
               <img src={logo} alt="Play Store" className="max-w-[80%] pr-[10px] h-[27px] " />
               </div>
@@ -312,8 +319,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
               <img src={menuicon} alt="Play Store" className="max-w-[80%] pr-[20px] h-[23px]" />
               </div>
              </div>
-              <div  id="scrollableDiv"
-            ref={scrollableDivRef} className="flex-1 overflow-y-auto p-6 space-y-4">
+
+              
                 {messages.map((message, index) => (
                   <div key={index}>
                     <ChatMessage message={message} />

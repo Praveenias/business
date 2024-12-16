@@ -21,12 +21,13 @@ export default function Header() {
         </div>
         
         <div className="text-center mb-8">
-          <h1 className="text-white text-3xl md:text-4xl font-medium mb-2">
-            Get your Business Connected with <span className="text-orange-500">Zuno</span>
-          </h1>
-          <button className="bg-purple-800 text-white px-6 py-2 rounded-full text-sm mt-4">
+        <button className="bg-[rgba(255,110,1,0.2)] border border-[rgba(255,110,1,1)] font-bold text-white px-6 py-2 rounded-full text-sm h-[45px]">
             LET US KNOW ABOUT YOUR BUSINESS
           </button>
+          <h1 className="text-white text-3xl md:text-4xl font-medium mb-2 mt-4">
+            Get your Business Connected with <span className="text-orange-500">Zuno</span>
+          </h1>
+      
         </div>
 <div className="relative w-full flex justify-center items-center">
 <SearchBar/>

@@ -18,11 +18,11 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
           </div>
         )}
         <div
-          className={`px-4 py-3 rounded-2xl max-w-[80%] ${
-            isBot ? 'bg-gray-100' : 'bg-orange-100'
+          className={`px-4 py-3 rounded-2xl max-w-[80%] flex justify-center items-center ${
+            isBot ? 'bg-gray-100 text-gray-800' : 'bg-orange-100 text-[rgba(255,110,1,1)]'
           }`}
         >
-          <p className="text-gray-800">{message.content}</p>
+          <p>{message.content}</p>
         </div>
       </div>
     </div>
