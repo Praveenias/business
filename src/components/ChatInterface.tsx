@@ -28,7 +28,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
   const [messages, setMessages] = useState<Message[]>([
     {
       type: 'bot',
-      content: "Welcome to Zuno! I'll help you set up your customer feedback system. First, what's your full name?",
+      content: "Welcome to Zuno! I'll help you set up your customer feedback system. First, what's your name?",
     },
   ]);
   const [currentStep, setCurrentStep] = useState(1);
