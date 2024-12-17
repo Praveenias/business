@@ -6,7 +6,6 @@ import ChatInput from './ChatInput';
 import BusinessOverview from './BusinessOverview';
 import ImageGallery from './ImageGallery';
 import { Business } from '../types/business';
-import ZunocodeGenerator from './ZunocodeGenerator';
 import AdminRoleSelector from './Chatbox/AdminRoleSelector';
 import AdminDetailsForm from './Chatbox/AdminDetailsForm';
 import BusinessTypeSelector from './Chatbox/BusinessTypeSelector';
@@ -293,17 +292,17 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
           {/* Left Section (70%) */}
           <div className="w-[70%] flex flex-col">
             {/* Chat Section with Scrollable Content */}
-            <div id="scrollableDiv"
-            ref={scrollableDivRef} className="flex-1 overflow-y-auto" >
+            <div  className="flex-1" >
               <div className="px-6 py-4">
                 {/* Image Gallery */}
               
                 
-                <div className="bg-white h-auto w-full overflow-hidden border border-gray-300 rounded-[20px] m-auto ">
+                <div className="bg-white h-[90vh] w-full overflow-hidden border border-gray-300 rounded-[20px] m-auto ">
                 
             <div className="bg-white rounded-lg  p-[10px] shadow-lg h-full flex flex-col" >
         
-              <div className="flex-1 overflow-y-auto p-6 space-y-4">
+              <div id="scrollableDiv"
+            ref={scrollableDivRef}  className="flex-1 overflow-y-auto p-6 space-y-4">
 
 <ImageGallery />
 
@@ -353,12 +352,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
                   </div>
                 ))}
                 <div ref={messagesEndRef} />
-                {showZunocode && (
-                    <ZunocodeGenerator 
-                      businessName={businessData.name}
-                      businessId={`${businessData.name.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}`}
-                    />
-                  )}
+                
               </div>
               
 
@@ -387,6 +381,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
                 locations={businessData.locations}
                 progress={((currentStep - 1) / 10) * 100}
                 selectedPlan={selectedPlan}
+                showZunocode={showZunocode}
               />
             </div>
           </div>

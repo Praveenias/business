@@ -6,6 +6,7 @@ import drinks from '../assets/images/drinks.svg'
 import brandname from '../assets/images/brand_name.svg'
 import locationicon from '../assets/images/location_icon.svg'
 import menu from '../assets/images/menu.svg'
+import ZunocodeGenerator from './ZunocodeGenerator';
 import { SubscriptionPlan } from '../types';
 interface BusinessOverviewProps {
   businessName: string;
@@ -13,7 +14,8 @@ interface BusinessOverviewProps {
   locations: number | null;
   progress: number;
   selectedPlan?: SubscriptionPlan;
-  business: any
+  business: any;
+showZunocode: boolean;
 }
 
 
@@ -23,8 +25,12 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
   locations,
   progress,
   selectedPlan,
+  showZunocode,
   business
 }) => {
+  
+  console.log('showZunocode')
+ 
   console.log('Business Name:', selectedPlan);
   return (
     <div className="h-full flex flex-col">
@@ -136,6 +142,18 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
             </div>
           </div>
         )}
+
+
+<div >
+{showZunocode && (
+                    <ZunocodeGenerator 
+                      businessName={businessName}
+                      businessId={`${businessName.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}`}
+                    />
+                  )}
+</div>
+                
+            
       </div>
       <div className="mx-auto mb-[15%] mt-auto p-4  w-[90%] border border-gray-300 rounded-lg shadow-md">
         <div className="space-y-2">
