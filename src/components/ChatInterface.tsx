@@ -34,7 +34,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
   const [businessData, setBusinessData] = useState<BusinessDetails>({
     name: '',
     type: businessType,
-    locations: 0,
+    locations: '',
     mainBranch: ''
   });
 

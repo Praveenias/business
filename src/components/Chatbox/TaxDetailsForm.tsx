@@ -10,13 +10,41 @@ const TaxDetailsForm: React.FC<TaxDetailsFormProps> = ({ onSubmit }) => {
     taxIdentifier: '',
   });
 
+  const [errors, setErrors] = useState({
+    gstNumber: '',
+    taxIdentifier: '',
+  });
+
+  const validateGST = (gstNumber: string): boolean =>
+    /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/.test(gstNumber);
+
+  const validateTIN = (taxIdentifier: string): boolean =>
+    /^\d{9,11}$/.test(taxIdentifier);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData);
+
+    const gstError = validateGST(formData.gstNumber)
+      ? ''
+      : 'Invalid GST Number. Ensure it matches the official format.';
+    const tinError = validateTIN(formData.taxIdentifier)
+      ? ''
+      : 'Invalid Tax Identification Number. Must be 9-11 digits.';
+
+    setErrors({
+      gstNumber: gstError,
+      taxIdentifier: tinError,
+    });
+
+    if (!gstError && !tinError) {
+      onSubmit(formData);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    setErrors({ ...errors, [name]: '' }); // Clear error when typing
   };
 
   return (
@@ -32,9 +60,12 @@ const TaxDetailsForm: React.FC<TaxDetailsFormProps> = ({ onSubmit }) => {
           required
           value={formData.gstNumber}
           onChange={handleChange}
-          className="w-full px-4 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
+          className={`w-full px-4 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 ${
+            errors.gstNumber ? 'focus:ring-red-500' : 'focus:ring-orange-500'
+          }`}
           placeholder="Enter GST number"
         />
+        {errors.gstNumber && <p className="text-red-500 text-sm mt-1">{errors.gstNumber}</p>}
       </div>
 
       <div>
@@ -48,9 +79,12 @@ const TaxDetailsForm: React.FC<TaxDetailsFormProps> = ({ onSubmit }) => {
           required
           value={formData.taxIdentifier}
           onChange={handleChange}
-          className="w-full px-4 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
+          className={`w-full px-4 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 ${
+            errors.taxIdentifier ? 'focus:ring-red-500' : 'focus:ring-orange-500'
+          }`}
           placeholder="Enter tax identification number"
         />
+        {errors.taxIdentifier && <p className="text-red-500 text-sm mt-1">{errors.taxIdentifier}</p>}
       </div>
 
       <button

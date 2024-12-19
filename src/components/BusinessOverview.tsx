@@ -45,7 +45,7 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
 
             
             {/* The div that extends beyond the parent container */}
-            <div className="absolute top-[5%] left-[-5%] w-[110%] min-h-[50px] rounded-lg shadow-lg bg-[#E4D0F9] border border-[#400C7A] flex">
+            <div className="absolute top-[10%] left-[-5%] w-[110%] min-h-[50px] rounded-lg shadow-lg bg-[#E4D0F9] border border-[#400C7A] flex">
               <div className="w-[30%] flex justify-center items-center">
                 <img src={drinks} alt="drinks" className="w-[25px] h-[25px]" />
               </div>
@@ -54,7 +54,7 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
                 <p className="text-xs text-gray-600">Owned by Individuals</p>
               </div>
             </div>
-            {adminData.name && <p>HI {adminData.name}</p>}
+            {adminData.name && <p className="text-[15px] font-normal font-glory text-[#0cb00c]">Hi {adminData.name}</p>}
             {businessData.name && <div className="absolute top-[calc(5%+50px)] left-[5%] w-[90%] min-h-[40px] border border-[#DFDFDF] rounded-[20px] p-5 flex mt-[10%]">
               <div className="w-[30%] flex justify-center items-center gap-1.5">
                 <img src={brandname} alt="drinks" className="w-[25px] h-[25px]" />
@@ -78,7 +78,6 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
                     <span className="text-[12px] font-medium text-orange-500">{businessData.mainBranch}</span>
                   </div>
                 </div>}
-
                 {/* Row 2: Number of Locations */}
                 {businessData.locations && <div className="flex items-center justify-between w-[100%] mt-[3%]">
                   <div className="flex items-center gap-2 w-[50%]">
