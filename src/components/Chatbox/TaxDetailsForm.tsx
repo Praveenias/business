@@ -24,9 +24,10 @@ const TaxDetailsForm: React.FC<TaxDetailsFormProps> = ({ onSubmit }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const gstError = validateGST(formData.gstNumber)
-      ? ''
-      : 'Invalid GST Number. Ensure it matches the official format.';
+    // const gstError = validateGST(formData.gstNumber)
+    //   ? ''
+    //   : 'Invalid GST Number. Ensure it matches the official format.';
+    const gstError = '';
     const tinError = validateTIN(formData.taxIdentifier)
       ? ''
       : 'Invalid Tax Identification Number. Must be 9-11 digits.';

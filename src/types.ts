@@ -1,4 +1,4 @@
-export type BusinessType = 'restaurant' | 'retail' | 'automotive' | 'electronics' | 'd2c';
+export type BusinessType = 'Restaurant' | 'Retail' | 'Automotive' | 'Electronics' | 'd2c';
 export type LocationType = 'single' | 'multi';
 export type SubscriptionTier = 'starter' | 'professional' | 'enterprise';
 export type AdminRole = 'owner' | 'director' | 'manager' | 'authorized_representative';
