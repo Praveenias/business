@@ -21,6 +21,9 @@ export default function Header() {
         </div>
         
         <div className="text-center mb-8">
+        {/* <button className="bg-[rgba(255,110,1,0.2)] border border-[rgba(255,110,1,1)] font-bold text-white px-6 py-2 rounded-full text-sm h-[45px]">
+            LET US KNOW ABOUT YOUR BUSINESS
+          </button> */}
           <h1 className="text-white text-3xl md:text-4xl font-cirka font-medium mb-2 mt-4">
             Get your Business Connected with <span className="text-orange-500">Zuno</span>
           </h1>

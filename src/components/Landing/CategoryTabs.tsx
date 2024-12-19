@@ -8,7 +8,7 @@ interface CategoryTabsProps {
 }
 
 export default function CategoryTabs({ selectedCategory, onCategoryChange }: CategoryTabsProps) {
-  const categories = ['All', 'Food', 'Hotel', 'Lounge'];
+  const categories = ['All', 'Food', 'Hotel',];
 
   return (
     <div>

@@ -103,10 +103,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
         }
         scrollToBottom();
         setBusinessData({ ...businessData, locations });
-      } else {
-        setBusinessData({ ...businessData, mainBranch: input });
-        scrollToBottom();
-      }
+      } 
+      setBusinessData({ ...businessData, mainBranch: input });
+      scrollToBottom();
+      
       newMessages.push({
         type: 'bot',
         content: "Let's verify your business details. Please provide your tax information.",
@@ -376,12 +376,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
             <div className="h-full overflow-y-auto">
            
               <BusinessOverview
-                businessName={businessData.name}
-                branchName={businessData.mainBranch}
-                locations={businessData.locations}
                 progress={((currentStep - 1) / 10) * 100}
                 selectedPlan={selectedPlan}
                 showZunocode={showZunocode}
+                adminData = {adminData}
+                businessData= {businessData}
               />
             </div>
           </div>
