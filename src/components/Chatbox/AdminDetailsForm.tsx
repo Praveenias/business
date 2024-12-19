@@ -24,7 +24,7 @@ const AdminDetailsForm: React.FC<AdminDetailsFormProps> = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-      <div>
+      {/* <div>
         <label htmlFor="name" className="block text-sm font-medium text-gray-700 m-1">
           Full Name
         </label>
@@ -38,7 +38,7 @@ const AdminDetailsForm: React.FC<AdminDetailsFormProps> = ({ onSubmit }) => {
           className="w-full px-4 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
           placeholder="Enter your full name"
         />
-      </div>
+      </div> */}
 
       <div>
         <label htmlFor="email" className="block text-sm font-medium text-gray-700">

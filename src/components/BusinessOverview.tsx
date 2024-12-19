@@ -7,31 +7,27 @@ import brandname from '../assets/images/brand_name.svg'
 import locationicon from '../assets/images/location_icon.svg'
 import menu from '../assets/images/menu.svg'
 import ZunocodeGenerator from './ZunocodeGenerator';
-import { SubscriptionPlan } from '../types';
+import { AdminDetails, BusinessDetails, SubscriptionPlan } from '../types';
 interface BusinessOverviewProps {
-  businessName: string;
-  branchName: string | null;
-  locations: number | null;
   progress: number;
   selectedPlan?: SubscriptionPlan;
   business: any;
-showZunocode: boolean;
+  showZunocode: boolean;
+  adminData:AdminDetails
+  businessData:BusinessDetails
 }
 
 
 const BusinessOverview: React.FC<BusinessOverviewProps> = ({
-  businessName,
-  branchName,
-  locations,
   progress,
   selectedPlan,
   showZunocode,
-  business
+  business,
+  adminData,
+  businessData
 }) => {
   
-  console.log('showZunocode')
- 
-  console.log('Business Name:', selectedPlan);
+  console.log('Business Name:', adminData,businessData);
   return (
     <div className="h-full flex flex-col">
       <div className="flex-1 p-4 space-y-6 overflow-y-auto">
@@ -39,57 +35,60 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
         {/* Basic Details */}
 
         <div className={`relative border border-[#D9D9D9] p-2.5 rounded-tl-none rounded-tr-[20px] rounded-br-[20px] rounded-bl-[20px] bg-white shadow-md w-[90%] m-auto mt-[7%] transition-all duration-300`}
-          style={{ height: locations ? '290px' : '290px' }}>
+          style={{ height: '290px'}}>
           <div className="w-[45%] mx-auto mt-[-45px] ml-[-11px] h-[35px] flex justify-center items-center gap-2 font-[Cirka] font-bold text-[14px] border border-b-0 border-[#D9D9D9] rounded-tl-[20px] rounded-tr-[21px] bg-white max-w-full">
             <img src={overviewicon} alt="icon" className="w-[16px] h-[16px] sm:w-[20px] sm:h-[20px] max-w-full" />
             <span className="text-sm sm:text-[16px] overflow-hidden whitespace-nowrap">Overview</span>
           </div>
 
           <div>
+
+            
             {/* The div that extends beyond the parent container */}
             <div className="absolute top-[5%] left-[-5%] w-[110%] min-h-[50px] rounded-lg shadow-lg bg-[#E4D0F9] border border-[#400C7A] flex">
               <div className="w-[30%] flex justify-center items-center">
                 <img src={drinks} alt="drinks" className="w-[25px] h-[25px]" />
               </div>
               <div className="w-[70%] flex flex-col justify-center items-start">
-                <span className="text-sm font-medium">business</span>
+                <span className="text-sm font-medium">{businessData.type}</span>
                 <p className="text-xs text-gray-600">Owned by Individuals</p>
               </div>
             </div>
-            <div className="absolute top-[calc(5%+50px)] left-[5%] w-[90%] min-h-[40px] border border-[#DFDFDF] rounded-[20px] p-5 flex mt-[10%]">
+            {adminData.name && <p>HI {adminData.name}</p>}
+            {businessData.name && <div className="absolute top-[calc(5%+50px)] left-[5%] w-[90%] min-h-[40px] border border-[#DFDFDF] rounded-[20px] p-5 flex mt-[10%]">
               <div className="w-[30%] flex justify-center items-center gap-1.5">
                 <img src={brandname} alt="drinks" className="w-[25px] h-[25px]" />
                 <span className="text-sm font-medium">Brand Name</span>
               </div>
               <div className="w-[70%] flex justify-center items-center">
-                <span className="text-sm font-medium text-center">{businessName}</span>
+                <span className="text-sm font-medium text-center">{businessData.name}</span>
                 <img src={editicon} alt="drinks" className="w-[25px] h-[25px] absolute bottom-[75%] right-[-2%]" />
               </div>
-            </div>
+            </div>}
             <div className="absolute top-[calc(5%+50px+40px+60px)] left-[0%] w-[100%] p-5">
               <div className="flex flex-col justify-start items-start gap-[3%] border-b border-[#DFDFDF] pb-5">
                 <h3 className="text-sm font-medium mb-3">Business Details</h3>
                 {/* Row 1: Main Branch */}
-                <div className="flex items-center justify-between w-[100%]">
+                {businessData.mainBranch && <div className="flex items-center justify-between w-[100%]">
                   <div className="flex items-center gap-2 w-[50%]">
                     <img src={locationicon} alt="drinks" className="w-[20px] h-[20px]" />
                     <span className="text-[12px] font-gilroy font-normal underline">Main Branch</span>
                   </div>
                   <div className="flex items-center justify-end w-[50%]">
-                    <span className="text-[12px] font-medium text-orange-500">{branchName}</span>
+                    <span className="text-[12px] font-medium text-orange-500">{businessData.mainBranch}</span>
                   </div>
-                </div>
+                </div>}
 
                 {/* Row 2: Number of Locations */}
-                <div className="flex items-center justify-between w-[100%] mt-[3%]">
+                {businessData.locations && <div className="flex items-center justify-between w-[100%] mt-[3%]">
                   <div className="flex items-center gap-2 w-[50%]">
                     <img src={locationicon} alt="drinks" className="w-[20px] h-[20px]" />
                     <span className="font-gilroy text-[12px] font-normal underline">Number of Locations</span>
                   </div>
                   <div className="flex items-center justify-end w-[50%]">
-                    <span className="text-[12px] font-medium text-orange-500">{locations} locations</span>
+                    <span className="text-[12px] font-medium text-orange-500">{businessData.locations} locations</span>
                   </div>
-                </div>
+                </div>}
               </div>
             </div>
 
@@ -147,8 +146,8 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
 <div >
 {showZunocode && (
                     <ZunocodeGenerator 
-                      businessName={businessName}
-                      businessId={`${businessName.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}`}
+                      businessName={businessData.name}
+                      businessId={`${businessData.name.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}`}
                     />
                   )}
 </div>
