@@ -29,7 +29,7 @@ export default function Header() {
       className="fixed w-full z-[9999] top-0 bg-cover bg-center bg-blend-multiply py-6"
       style={{ backgroundImage: `url(${HeaderBG})` }}>
       <div className="mx-auto px-4">
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex justify-between items-center">
           <div className="text-white text-2xl font-bold">
             <img src={logo} alt="logo" className="max-w-[70%] pl-8" />
           </div>

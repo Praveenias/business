@@ -107,7 +107,7 @@ function LandingPage() {
     <div className="min-h-screen bg-gray-50">
       <Header />
       
-      <main className="container mx-auto">
+      <main className="container mx-auto mt-[13%] bg-white">
         <CategoryTabs 
           selectedCategory={selectedCategory}
           onCategoryChange={setSelectedCategory}

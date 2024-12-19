@@ -255,7 +255,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
   
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 z-[99999]">
       <div className="w-[100%] h-[100%] bg-white rounded-xl shadow-2xl flex flex-col">
 
         {/* <div className="flex items-end justify-end px-6 py-4 bg-[#4A0079] rounded-t-xl">
