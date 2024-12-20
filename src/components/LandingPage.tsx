@@ -95,7 +95,7 @@ function LandingPage() {
 
   const handleBusinessSelect = () => {
     // console.log("Selected Business in App:", business);
-    
+
     setSelectedBusiness(true); // Pass selected business to the parent
   };
 
@@ -106,20 +106,20 @@ function LandingPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      
+
       <main className="container mx-auto mt-[13%] bg-white">
-        <CategoryTabs 
+        <CategoryTabs
           selectedCategory={selectedCategory}
           onCategoryChange={setSelectedCategory}
         />
         <div className="font-serif text-center text-4xl mb-[1%] font-bold">
-  <span className="text-black">Ready to Setup your</span>
-  <button onClick={handleBusinessSelect}><span className="text-[#FF6E01] ml-[5%]"> Business</span></button>
-</div>
-<div className="flex justify-center items-center mb-[2%]">
-  <p className="text-center w-1/2 font-gilroy font-normal">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
-</div>
-        
+          <span className="text-black">Ready to Setup your</span>
+          <button onClick={handleBusinessSelect}><span className="text-[#FF6E01] ml-[5%]"> Business</span></button>
+        </div>
+        <div className="flex justify-center items-center mb-[2%]">
+          <p className="text-center w-1/2 font-gilroy font-normal">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+        </div>
+
         {filteredBusinesses.length === 0 ? (
           <div className="text-center py-12 text-gray-500">
             No businesses found matching your search criteria
@@ -127,9 +127,9 @@ function LandingPage() {
         ) : (
           <div className="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
             {filteredBusinesses.map((business, index) => (
-              <BusinessCard 
-                key={index} 
-                {...business} 
+              <BusinessCard
+                key={index}
+                {...business}
                 selectedCategory={selectedCategory}
                 index={index}
               />
@@ -138,7 +138,7 @@ function LandingPage() {
         )}
       </main>
       {selectedBusiness && (
-        <ChatInterface 
+        <ChatInterface
           businessType='restaurant'
           onClose={handleChatClose}
         />

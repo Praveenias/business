@@ -24,7 +24,6 @@ export interface BusinessDetails {
 
 
 export interface AdminDetails {
-  name: string;
   role: AdminRole;
   email: string;
   mobile: string;

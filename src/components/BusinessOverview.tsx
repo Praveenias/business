@@ -27,7 +27,7 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
   businessData
 }) => {
   
-  console.log('Business Name:', adminData,businessData);
+  console.log(adminData);
   return (
     <div className="h-full flex flex-col">
       <div className="flex-1 p-4 space-y-6 overflow-y-auto">
@@ -54,7 +54,11 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
                 <p className="text-xs text-gray-600">Owned by Individuals</p>
               </div>
             </div>
-            {adminData.name && <p className="text-[20px] font-normal font-glory text-[#0cb00c]">Hi {adminData.name}</p>}
+            {adminData.name && 
+              <h1 className="text-2xl font-semibold text-purple-900">
+                Hi, {adminData.name}! 👋
+              </h1>
+            }
             {businessData.name && <div className="absolute top-[calc(5%+50px)] left-[5%] w-[90%] min-h-[40px] border border-[#DFDFDF] rounded-[20px] p-5 flex mt-[10%]">
               <div className="w-[30%] flex justify-center items-center gap-1.5">
                 <img src={brandname} alt="drinks" className="w-[25px] h-[25px]" />

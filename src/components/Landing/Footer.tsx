@@ -20,7 +20,7 @@ export default function Footer() {
   
   <div className="flex items-start gap-2 text-gray-600">
     <MapPin className="w-5 h-5 mt-1" />
-    <p>No. 32 RV Garden, Kodaperi, Tambaram, Chennai- 600045</p>
+    <p>HD-092 AT Wework Olympia Cyber Space , NO 21/22 Alandhur Road , Arulayiammanpet ,  2nd Street , Guindy, Chennai- 600032</p>
   </div>
 
 </div>

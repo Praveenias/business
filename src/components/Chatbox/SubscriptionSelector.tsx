@@ -3,6 +3,10 @@ import { Zap, Rocket, Building, Loader2, TrainFrontTunnel } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { SubscriptionTier,SubscriptionPlan } from '../../types';
 import { FeaturesSection } from './Subscription/FeatureSection';
+import selector1 from '../../assets/images/selector1.png';
+import selector2 from '../../assets/images/selector2.png';
+import selector3 from '../../assets/images/selector1.png';
+
 
 interface SubscriptionSelectorProps {
   onSelect: (tier: SubscriptionPlan) => void;
@@ -26,6 +30,7 @@ const SubscriptionSelector: React.FC<SubscriptionSelectorProps> = ({ onSelect })
         'Email support'
       ],
       isPopular: false,
+      bgimage : selector1
     },
     {
       tier: 'professional',
@@ -40,6 +45,7 @@ const SubscriptionSelector: React.FC<SubscriptionSelectorProps> = ({ onSelect })
         'Custom feedback forms'
       ],
       isPopular: true,
+      bgimage : selector2
     },
     {
       tier: 'enterprise',
@@ -55,6 +61,7 @@ const SubscriptionSelector: React.FC<SubscriptionSelectorProps> = ({ onSelect })
         'Dedicated account manager'
       ],
       isPopular: false,
+      bgimage : selector3
     }
   ];
 
@@ -127,11 +134,11 @@ const SubscriptionSelector: React.FC<SubscriptionSelectorProps> = ({ onSelect })
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
-        {plans.map(({ tier, title, price,isPopular,description,features }) => (
-          <div>
+        {plans.map(({ tier, title, price,isPopular,description,features,bgimage }) => (
+          <div  style={{ backgroundImage: `url(${bgimage})` }} className="bg-cover bg-center rounded-LayoutGrid">
           <div
             key={tier}
-            className={`flex flex-col p-6 rounded-lg border-2 border-purple-100 hover:border-purple-500 hover:bg-purple-50 transition-all duration-200 text-left ${
+            className={`flex flex-col p-6 rounded-lg border-2 border-purple-100 hover:border-purple-500 transition-all duration-200 text-left ${
               isProcessing ? 'opacity-50 cursor-not-allowed' : ''
             }`}
           >

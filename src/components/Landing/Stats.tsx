@@ -17,25 +17,26 @@ export default function Stats() {
         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text since the 1500s.
       </p>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 flex flex-col justify-end items-baseline">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-2">
         {stats.map((stat, index) => (
-          <div
-            key={index}
-            className={`p-8 rounded-lg flex flex-col justify-end items-start ${
-              index === 1 
-                ? 'bg-purple-800  flex flex-col justify-end items-start text-white md:transform md:-translate-y-0 md:h-[calc(100%+4rem)]' 
-                : index === 2 
-                  ? 'bg-orange-500 text-white' 
-                  : 'bg-gray-100'
-            }`}
-          >
-            <div className="text-3xl font-bold mb-2">{stat.value}</div>
-            <div className={index === 0 ? 'text-gray-600' : 'text-white'}>
-              {stat.label}
+          <div className="group h-[200px] relative" key={index}>
+            <div
+              className={`absolute bottom-0 w-full h-[200px] group-hover:h-[250px] transition-[height] duration-300 ease-in-out p-8 rounded-lg flex flex-col justify-start items-start ${
+                index === 1 
+                  ? 'bg-purple-800 text-white md:transform md:-translate-y-0' 
+                  : index === 2 
+                    ? 'bg-orange-500 text-white' 
+                    : 'bg-gray-100'
+              }`}
+            >
+              <div className="text-3xl font-bold mb-2">{stat.value}</div>
+              <div className={index === 0 ? 'text-gray-600' : 'text-white'}>
+                {stat.label}
+              </div>
+              <p className={`text-sm mt-2 ${index === 0 ? 'text-gray-600' : 'text-white/90'}`}>
+                Lorem Ipsum is a dummy text used to fill the space. Lorem Ipsum is a dummy text used to fill the space.
+              </p>
             </div>
-            <p className={`text-sm mt-2 ${index === 0 ? 'text-gray-600' : 'text-white/90'}`}>
-              Lorem Ipsum is a dummy text used to fill the space. Lorem Ipsum is a dummy text used to fill the space.
-            </p>
           </div>
         ))}
       </div>

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { BusinessType, BusinessDetails, Message,AdminRole,AdminDetails,SubscriptionTier,LocationType,UploadMethod, SubscriptionPlan } from '../types';
+import { BusinessType, BusinessDetails, Message, AdminRole, AdminDetails, SubscriptionTier, LocationType, UploadMethod, SubscriptionPlan } from '../types';
 import { MessageSquare, X } from 'lucide-react';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
@@ -23,7 +23,7 @@ interface ChatInterfaceProps {
   onClose: () => void;
 }
 
-const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) => {
+const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) => {
   const [messages, setMessages] = useState<Message[]>([
     {
       type: 'bot',
@@ -40,32 +40,32 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
 
   const [selectedPlan, setSelectedPlan] = useState<SubscriptionPlan | null>(null);
   const [showZunocode, setShowZunocode] = useState(false);
-  
+
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [adminData, setAdminData] = useState<Partial<AdminDetails>>({});
-  
+
   const [isComplete, setIsComplete] = useState(false);
   const [productSource, setProductSource] = useState<{ type: string; count: number } | null>(null);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
-    const scrollableDivRef = useRef<HTMLDivElement>(null);
-  
-    useEffect(() => {
-      scrollToBottom();
-    }, [messages]);
-    const scrollToBottom = () => {
-      if (scrollableDivRef.current) {
-        scrollableDivRef.current.scrollTop =
-          scrollableDivRef.current.scrollHeight;
-      }
-    };
+  const scrollableDivRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+  const scrollToBottom = () => {
+    if (scrollableDivRef.current) {
+      scrollableDivRef.current.scrollTop =
+        scrollableDivRef.current.scrollHeight;
+    }
+  };
 
   const isInputDisabled = () => {
-    return isLoggingIn || 
-           messages[messages.length - 1]?.component !== undefined || 
-           isComplete;
+    return isLoggingIn ||
+      messages[messages.length - 1]?.component !== undefined ||
+      isComplete;
   };
 
   const handleSend = (input: string) => {
@@ -103,10 +103,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
         }
         scrollToBottom();
         setBusinessData({ ...businessData, locations });
-      } 
+      }
       setBusinessData({ ...businessData, mainBranch: input });
       scrollToBottom();
-      
+
       newMessages.push({
         type: 'bot',
         content: "Let's verify your business details. Please provide your tax information.",
@@ -168,8 +168,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
       { type: 'user', content: `Location Type: ${locationType}` },
       {
         type: 'bot',
-        content: locationType === 'multi' 
-          ? 'How many locations do you operate?' 
+        content: locationType === 'multi'
+          ? 'How many locations do you operate?'
           : 'Please enter your business address:',
       },
     ];
@@ -230,7 +230,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
   };
 
   const handleSubscriptionSelect = (tier: SubscriptionPlan) => {
-    
+
     setSelectedPlan(tier);
     const newMessages = [
       ...messages,
@@ -249,10 +249,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
   //   setCurrentStep(10);
   //   console.log(businessData,selectedPlan,details);
   //   setShowZunocode(true);
-    
+
   // }
 
-  
+
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 z-[99999]">
@@ -270,126 +270,119 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType,onClose }) =
 
 
 
-<div className="flex w-full  py-4 rounded-t-xl h-20 flex items-center justify-center">
- 
-  <div className="w-[90%] ">
-  <img src={logo1} alt="Play Store" className="max-w-[80%] pl-10 h-[27px]" />
-  </div>
+        <div className="flex w-full  py-4 rounded-t-xl h-20 flex items-center justify-center">
 
-  <div className="w-[10%]  flex justify-center items-center gap-3.5">
-  <img src={MyIcon} alt="profile" className="max-w-[60%] w-[30px]" />
-  {/* <button
+          <div className="w-[90%] ">
+            <img src={logo1} alt="Play Store" className="max-w-[80%] pl-10 h-[27px]" />
+          </div>
+
+          <div className="w-[10%]  flex justify-center items-center gap-3.5">
+            <img src={MyIcon} alt="profile" className="max-w-[60%] w-[30px]" />
+            {/* <button
            
             className="p-2 hover:bg-white/10 rounded-lg transition-colors "
           > */}
-            <X  onClick={onClose} className="h-7.5 w-7.5 text-[#FF6E01]" />
-          {/* </button> */}
-  </div>
-</div>
+            <X onClick={onClose} className="h-7.5 w-7.5 text-[#FF6E01]" />
+            {/* </button> */}
+          </div>
+        </div>
 
         {/* Main Content */}
         <div className="flex flex-1 overflow-hidden ">
           {/* Left Section (70%) */}
           <div className="w-[70%] flex flex-col">
             {/* Chat Section with Scrollable Content */}
-            <div  className="flex-1" >
+            <div className="flex-1" >
               <div className="px-6 py-4">
                 {/* Image Gallery */}
-              
-                
                 <div className="bg-white h-[90vh] w-full overflow-hidden border border-gray-300 rounded-[20px] m-auto ">
-                
-            <div className="bg-white rounded-lg  p-[10px] shadow-lg h-full flex flex-col" >
-        
-              <div id="scrollableDiv"
-            ref={scrollableDivRef}  className="flex-1 overflow-y-auto p-6 space-y-4">
+                  <div className="bg-white rounded-lg  p-[10px] shadow-lg h-full flex flex-col" >
+                    <div id="scrollableDiv"
+                      ref={scrollableDivRef} className="flex-1 overflow-y-auto p-6 space-y-4">
+                       
+                      
+                       <div className="sticky top-0 z-10 mb-4">
+                      <div className="flex bg-[#400C7A] w-[98%] rounded-[15px] h-[50px] m-auto items-center">
+                        <div className="w-[10%] flex justify-end">
+                          <img src={logo} alt="Play Store" className="max-w-[80%] pr-[10px] h-[27px]" />
+                        </div>
+                        <div className="w-[50%] border-l-2 border-l-white flex justify-start">
+                          <p className="text-white font-cirka font-bold text-[12px] pl-[10px]">Let's get you On-boarded</p>
+                        </div>
+                        <div className="w-[40%] flex justify-end">
+                          <img src={menuicon} alt="Play Store" className="max-w-[80%] pr-[20px] h-[23px]" />
+                        </div>
+                      </div>
+                    </div>
+                      <ImageGallery />
+                      
+                     
+                      {messages.map((message, index) => (
+                        <div key={index}>
+                          <ChatMessage message={message} />
+                          {message.component === 'admin-role' && (
+                            <AdminRoleSelector onSelect={handleAdminRole} />
+                          )}
 
-<ImageGallery />
-
-
-<div  className="flex bg-[#400C7A] w-[98%] rounded-[15px] h-[50px] m-auto items-center">
-              <div className="w-[10%] flex justify-end">
-              <img src={logo} alt="Play Store" className="max-w-[80%] pr-[10px] h-[27px] " />
-              </div>
-              <div className="w-[50%] border-l-2 border-l-white flex justify-start">
-                <p className="text-white font-cirka font-bold text-[12px] pl-[10px]">Let’s get you On-boarded</p>
-              </div>
-              <div className="w-[40%] flex justify-end">
-              <img src={menuicon} alt="Play Store" className="max-w-[80%] pr-[20px] h-[23px]" />
-              </div>
-             </div>
-
-              
-                {messages.map((message, index) => (
-                  <div key={index}>
-                    <ChatMessage message={message} />
-                    {message.component === 'admin-role' && (
-                      <AdminRoleSelector onSelect={handleAdminRole} />
+                          {message.component === 'admin-details' && (
+                            <AdminDetailsForm onSubmit={handleAdminDetails} />
+                          )}
+                          {message.component === 'business-type' && (
+                            <BusinessTypeSelector onSelect={handleBusinessTypeSelect} />
+                          )}
+                          {message.component === 'location-type' && (
+                            <LocationTypeSelector onSelect={handleLocationTypeSelect} />
+                          )}
+                          {message.component === 'tax-details' && (
+                            <TaxDetailsForm onSubmit={handleTaxDetails} />
+                          )}
+                          {message.component === 'product-upload' && (
+                            <ProductUpload onSubmit={handleProductUpload} />
+                          )}
+                          {message.component === 'oauth' && (
+                            <OAuthLogin onLogin={handleAuth} />
+                          )}
+                          {message.component === 'subscription' && isAuthenticated && (
+                            <SubscriptionSelector onSelect={handleSubscriptionSelect} />
+                          )}
+                        </div>
+                      ))}
+                      <div ref={messagesEndRef} />
+                    </div>
+                    {!isComplete && (
+                      <ChatInput
+                        onSend={handleSend}
+                        disabled={isInputDisabled()}
+                        placeholder={isInputDisabled() ? "Please complete the current step..." : "Type your response..."}
+                      />
                     )}
-                    
-                    {message.component === 'admin-details' && (
-                      <AdminDetailsForm onSubmit={handleAdminDetails} />
-                    )}
-                    {message.component === 'business-type' && (
-                      <BusinessTypeSelector onSelect={handleBusinessTypeSelect} />
-                    )}
-                    {message.component === 'location-type' && (
-                      <LocationTypeSelector onSelect={handleLocationTypeSelect} />
-                    )}
-                    {message.component === 'tax-details' && (
-                      <TaxDetailsForm onSubmit={handleTaxDetails} />
-                    )}
-                    {message.component === 'product-upload' && (
-                      <ProductUpload onSubmit={handleProductUpload} />
-                    )}
-                    {message.component === 'oauth' && (
-                      <OAuthLogin onLogin={handleAuth} />
-                    )}
-                    {message.component === 'subscription' && isAuthenticated && (
-                      <SubscriptionSelector onSelect={handleSubscriptionSelect} />
-                    )}
-                    
                   </div>
-                ))}
-                <div ref={messagesEndRef} />
-                
-              </div>
-              
-
-              {!isComplete && (
-                <ChatInput 
-                  onSend={handleSend}
-                  disabled={isInputDisabled()}
-                  placeholder={isInputDisabled() ? "Please complete the current step..." : "Type your response..."}
-                />
-              )}
-            </div>
-          </div>
+                </div>
               </div>
             </div>
 
-            
+
           </div>
 
           {/* Right Panel - Overview (30%) */}
           <div className="w-[30%] border-l">
             <div className="h-full overflow-y-auto">
-           
+
               <BusinessOverview
                 progress={((currentStep - 1) / 10) * 100}
                 selectedPlan={selectedPlan}
                 showZunocode={showZunocode}
-                adminData = {adminData}
-                businessData= {businessData}
+                adminData={adminData}
+                businessData={businessData}
               />
             </div>
           </div>
         </div>
       </div>
-      
-                  <div ref={messagesEndRef} />
+
+      <div ref={messagesEndRef} />
     </div>
   );
 };
 
-export default ChatInterface ;
+export default ChatInterface;

@@ -22,7 +22,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex items-center space-x-4">
+    <form onSubmit={handleSubmit} className="flex items-center space-x-4 mb-4">
       <div className="flex-1 relative">
         <input
           type="text"
