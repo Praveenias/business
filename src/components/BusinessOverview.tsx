@@ -36,7 +36,7 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
 
         <div className={`relative border border-[#D9D9D9] p-2.5 rounded-tl-none rounded-tr-[20px] rounded-br-[20px] rounded-bl-[20px] bg-white shadow-md w-[90%] m-auto mt-[7%] transition-all duration-300`}
           style={{ height: '290px'}}>
-          <div className="w-[45%] mx-auto mt-[-45px] ml-[-11px] h-[35px] flex justify-center items-center gap-2 font-[Cirka] font-bold text-[14px] border border-b-0 border-[#D9D9D9] rounded-tl-[20px] rounded-tr-[21px] bg-white max-w-full">
+          <div className="w-[45%] mx-auto mt-[-45px] ml-[-11px] h-[35px] flex justify-center items-center gap-2 font-bold text-[14px] border border-b-0 border-[#D9D9D9] rounded-tl-[20px] rounded-tr-[21px] bg-white max-w-full">
             <img src={overviewicon} alt="icon" className="w-[16px] h-[16px] sm:w-[20px] sm:h-[20px] max-w-full" />
             <span className="text-sm sm:text-[16px] overflow-hidden whitespace-nowrap">Overview</span>
           </div>
@@ -76,7 +76,7 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
                 {businessData.mainBranch && <div className="flex items-center justify-between w-[100%]">
                   <div className="flex items-center gap-2 w-[50%]">
                     <img src={locationicon} alt="drinks" className="w-[20px] h-[20px]" />
-                    <span className="text-[12px] font-gilroy font-normal underline">Main Branch</span>
+                    <span className="text-[12px] font-normal underline">Main Branch</span>
                   </div>
                   <div className="flex items-center justify-end w-[50%]">
                     <span className="text-[12px] font-medium text-orange-500">{businessData.mainBranch}</span>
@@ -86,7 +86,7 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
                 {businessData.locations && <div className="flex items-center justify-between w-[100%] mt-[3%]">
                   <div className="flex items-center gap-2 w-[50%]">
                     <img src={locationicon} alt="drinks" className="w-[20px] h-[20px]" />
-                    <span className="font-gilroy text-[12px] font-normal underline">Number of Locations</span>
+                    <span className="text-[12px] font-normal underline">Number of Locations</span>
                   </div>
                   <div className="flex items-center justify-end w-[50%]">
                     <span className="text-[12px] font-medium text-orange-500">{businessData.locations} locations</span>
@@ -160,7 +160,7 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
       <div className="mx-auto mb-[15%] mt-auto p-4  w-[90%] border border-gray-300 rounded-lg shadow-md">
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <span className="text-[#400C7A] font-gilroy font-bold text-[12px]">Preparing your Zunocode</span>
+            <span className="text-[#400C7A] font-bold text-[12px]">Preparing your Zunocode</span>
             <span className="text-sm font-medium text-[#7F7F7F#7F7F7F]">{Math.round(progress)}%</span>
           </div>
           <div className="h-2 bg-gray-100 rounded-full overflow-hidden">

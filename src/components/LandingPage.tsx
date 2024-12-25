@@ -104,20 +104,19 @@ function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#EDEDED]">
       <Header />
 
-      <main className="container mx-auto mt-[13%] bg-white">
+      <main className="container mx-auto">
         <CategoryTabs
           selectedCategory={selectedCategory}
           onCategoryChange={setSelectedCategory}
         />
-        <div className="font-serif text-center text-4xl mb-[1%] font-bold">
-          <span className="text-black">Ready to Setup your</span>
-          <button onClick={handleBusinessSelect}><span className="text-[#FF6E01] ml-[5%]"> Business</span></button>
+        <div className="text-center text-4xl mb-[1%] font-bold">
+          <span className="text-black">Ready to <button onClick={handleBusinessSelect}><span className="text-[#FF6E01] border border-[#FF6E01] rounded-[30px] p-1.5">Setup </span></button> your Business</span>
         </div>
         <div className="flex justify-center items-center mb-[2%]">
-          <p className="text-center w-1/2 font-gilroy font-normal">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+          <p className="text-center w-1/2  font-normal">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
         </div>
 
         {filteredBusinesses.length === 0 ? (
@@ -125,7 +124,7 @@ function LandingPage() {
             No businesses found matching your search criteria
           </div>
         ) : (
-          <div className="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+          <div className="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
             {filteredBusinesses.map((business, index) => (
               <BusinessCard
                 key={index}

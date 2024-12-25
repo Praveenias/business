@@ -40,7 +40,7 @@ export default function Header() {
 
         {!isScrolling && (
           <div className="text-center mb-8">
-            <h1 className="text-white text-3xl md:text-4xl font-cirka font-medium mb-2 mt-4">
+            <h1 className="text-white text-3xl md:text-4xl font-medium mb-2 mt-4">
               Get your Business Connected with{' '}
               <span className="text-orange-500">Zuno</span>
             </h1>

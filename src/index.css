@@ -16,3 +16,13 @@
 .animate-fade-in {
   animation: fadeIn 0.3s ease-out forwards;
 }
+@font-face {
+  font-family: 'Outfit';
+  src: url('./assets/fonts/Outfit-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Outfit', sans-serif; /* Apply globally */
+}

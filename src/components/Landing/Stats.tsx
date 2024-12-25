@@ -12,7 +12,7 @@ export default function Stats() {
       <h2 className="text-center text-3xl font-medium mb-2">
         Grow your Business with <span className="text-orange-500">Zuno</span>
       </h2>
-      <hr className="w-24 h-1 mx-auto my-4 bg-orange-500 border-0 rounded" />
+    
       <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text since the 1500s.
       </p>
@@ -34,7 +34,7 @@ export default function Stats() {
                 {stat.label}
               </div>
               <p className={`text-sm mt-2 ${index === 0 ? 'text-gray-600' : 'text-white/90'}`}>
-                Lorem Ipsum is a dummy text used to fill the space. Lorem Ipsum is a dummy text used to fill the space.
+                Lorem Ipsum is a dummy text used to fill the space. Lorem Ipsum is a dummy text used to fill the spaces.
               </p>
             </div>
           </div>

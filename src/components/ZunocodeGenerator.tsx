@@ -24,7 +24,6 @@ const ZunocodeGenerator: React.FC<ZunocodeGeneratorProps> = ({ businessName, bus
             <title>Zunocode - ${businessName}</title>
             <style>
               body { 
-                font-family: system-ui, -apple-system, sans-serif;
                 padding: 2rem;
                 text-align: center;
               }

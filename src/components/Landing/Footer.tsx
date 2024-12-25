@@ -4,7 +4,7 @@ import playstoreImage from '../../assets/images/playstore .png';
 import logo1 from '../../assets/images/login1.svg';
 export default function Footer() {
   return (
-    <footer className="bg-white pt-16 pb-8 border-t-[1.5px] border-[#797474cf] mt-[5%]">
+    <footer className="bg-[#EDEDED] pt-16 pb-8 border-t-[1.5px] border-[#797474cf] mt-[5%] ">
       <div className="container mx-auto px-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
   <div className="w-full"> 

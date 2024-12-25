@@ -135,7 +135,7 @@ const SubscriptionSelector: React.FC<SubscriptionSelectorProps> = ({ onSelect })
     <div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
         {plans.map(({ tier, title, price,isPopular,description,features,bgimage }) => (
-          <div  style={{ backgroundImage: `url(${bgimage})` }} className="bg-cover bg-center rounded-LayoutGrid">
+          <div  style={{ backgroundImage: `url(${bgimage})` }} className="bg-cover bg-no-repeat bg-center h-full w-full">
           <div
             key={tier}
             className={`flex flex-col p-6 rounded-lg border-2 border-purple-100 hover:border-purple-500 transition-all duration-200 text-left ${

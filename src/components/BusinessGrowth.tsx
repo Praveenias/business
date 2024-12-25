@@ -31,7 +31,7 @@ const BusinessGrowth: React.FC = () => {
 
         {/* Third Card */}
         <div className="bg-orange-500 rounded-2xl p-8 text-white hover:shadow-lg hover:scale-105 transform transition duration-300 ease-in-out flex flex-col justify-center items-center">
-          <div className="text-4xl font-bold">4.93★</div>
+          <div className="text-4xl font-bold">4.93<span className='text-3xl'>★</span></div>
           <div className="text-lg font-medium mt-2">Successful Business</div>
           <p className="text-orange-100 mt-2 text-sm">
             Lorem ipsum is a dummy text used to fill the space. Lorem ipsum is a dummy text used to fill the space
