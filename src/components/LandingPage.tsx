@@ -112,10 +112,10 @@ function LandingPage() {
           selectedCategory={selectedCategory}
           onCategoryChange={setSelectedCategory}
         />
-        <div className="text-center text-4xl mb-[1%] font-bold">
+        <div className="text-center text-4xl mb-[1%] font-bold p-1">
           <span className="text-black">Ready to <button onClick={handleBusinessSelect}><span className="text-[#FF6E01] border border-[#FF6E01] rounded-[30px] p-1.5">Setup </span></button> your Business</span>
         </div>
-        <div className="flex justify-center items-center mb-[2%]">
+        <div className="flex justify-center items-center mb-[2%] pb-2">
           <p className="text-center w-1/2  font-normal">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
         </div>
 

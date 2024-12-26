@@ -13,7 +13,7 @@ export default function CategoryTabs({ selectedCategory, onCategoryChange }: Cat
   return (
     <div>
     <div className="flex justify-center items-center gap-4 my-6 px-4 items-center flex-wrap">
-      <div className="flex gap-4 border border-[#D9D9D9] rounded-[20px] p-1 mt-[15%]">
+      <div className="flex gap-4 border border-[#D9D9D9] rounded-[20px] p-2 mt-[15%]">
       <button 
         className="p-2 rounded-full bg-orange-100 text-orange-500 hover:bg-orange-200 transition-colors"
         aria-label="Grid view"
@@ -29,11 +29,11 @@ export default function CategoryTabs({ selectedCategory, onCategoryChange }: Cat
             key={category}
             onClick={() => onCategoryChange(category)}
             className={`
-              flex items-center gap-2 px-4 py-2 rounded-full border transition-all
+              flex items-center gap-2 px-4 py-2 rounded-md border transition-all
               hover:shadow-md active:scale-95 transform
               ${selectedCategory === category 
                 ? 'bg-orange-500 border-orange-500 text-white' 
-                : 'bg-white border-gray-200 text-gray-600 hover:border-orange-200'
+                : 'border-gray-200 text-gray-600 hover:border-orange-200'
               }
             `}
           >

@@ -36,7 +36,7 @@ export default function BusinessCard({
     <>
       <div 
         className={`
-          rounded-[20px] p-[4px] overflow-hidden shadow-md bg-white 
+          rounded-[20px] p-[5px] overflow-hidden shadow-md bg-white 
           transition-all duration-300 cursor-pointer
           hover:shadow-xl transform hover:-translate-y-1
           
