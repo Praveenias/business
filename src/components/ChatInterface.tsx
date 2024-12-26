@@ -297,11 +297,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
                 {/* Image Gallery */}
                 <div className="bg-white h-[90vh] w-full overflow-hidden border border-gray-300 rounded-[20px] m-auto ">
                   <div className="bg-white rounded-lg  p-[10px] shadow-lg h-full flex flex-col" >
-                    <div id="scrollableDiv"
-                      ref={scrollableDivRef} className="flex-1 overflow-y-auto p-6 pt-[10px] space-y-4">
-                       
-                      
-                       <div className="sticky top-0 z-10 mb-4">
+                  <div className="sticky top-0 z-10 mb-4">
                       <div className="flex bg-[#400C7A] w-[98%] rounded-[15px] h-[50px] m-auto items-center">
                         <div className="w-[10%] flex justify-end">
                           <img src={logo} alt="Play Store" className="max-w-[80%] pr-[10px] h-[27px]" />
@@ -314,6 +310,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
                         </div>
                       </div>
                     </div>
+                    <div id="scrollableDiv"
+                      ref={scrollableDivRef} className="flex-1 overflow-y-auto p-6 pt-[10px] space-y-4">
+                       
+                      
+                      
                       <ImageGallery />
                       
                      
