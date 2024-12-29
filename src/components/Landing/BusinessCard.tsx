@@ -69,12 +69,12 @@ export default function BusinessCard({
               </div>
           <div className='w-[80%]'>
           <div className="flex justify-between items-center">
-            <h3 className="font-medium text-lg">{title}</h3>
+            <h3 className="font-medium text-lg text-[#403F3F]">{title}</h3>
             {/* <span className="text-orange-500">
               <ArrowRight className="w-5 h-5" />
             </span> */}
           </div>
-          <p className="text-gray-500 text-sm">{subtitle}</p>
+          <p className="text-[#898989] font-light text-sm">{subtitle}</p>
           {/* <div className="mt-3">
             <span className={`
               inline-block px-3 py-1 rounded-full text-xs flex items-center gap-1

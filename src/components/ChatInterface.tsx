@@ -290,13 +290,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
         {/* Main Content */}
         <div className="flex flex-1 overflow-hidden ">
           {/* Left Section (70%) */}
-          <div className="w-[70%] flex flex-col">
+          <div className="w-[70%] flex flex-col pt-[15px]">
             {/* Chat Section with Scrollable Content */}
             <div className="flex-1" >
-              <div className="px-6 py-4">
+              <div className="px-6">
                 {/* Image Gallery */}
                 <div className="bg-white h-[90vh] w-full overflow-hidden border border-gray-300 rounded-[20px] m-auto ">
-                  <div className="bg-white rounded-lg  p-[10px] shadow-lg h-full flex flex-col" >
+                  <div className="bg-white rounded-lg pt-[20px] p-[10px] shadow-lg h-full flex flex-col" >
                   <div className="sticky top-0 z-10 mb-4">
                       <div className="flex bg-[#400C7A] w-[98%] rounded-[15px] h-[50px] m-auto items-center">
                         <div className="w-[10%] flex justify-end">
@@ -366,7 +366,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
           </div>
 
           {/* Right Panel - Overview (30%) */}
-          <div className="w-[30%] border-l">
+          <div className="w-[30%]">
             <div className="h-full overflow-y-auto">
 
               <BusinessOverview

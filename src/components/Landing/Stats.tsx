@@ -9,11 +9,11 @@ const stats = [
 export default function Stats() {
   return (
     <div className="container mx-auto px-4 py-16">
-      <h2 className="text-center text-3xl font-medium mb-2">
+      <h2 className="text-center text-[#403F3F] font-medium text-35px mb-2">
         Grow your Business with <span className="text-orange-500">Zuno</span>
       </h2>
     
-      <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+      <p className="text-center text-[#403F3F] mb-12 max-w-2xl mx-auto">
         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text since the 1500s.
       </p>
       
@@ -30,10 +30,10 @@ export default function Stats() {
               }`}
             >
               <div className="text-3xl font-bold mb-2">{stat.value}</div>
-              <div className={index === 0 ? 'text-gray-600' : 'text-white'}>
+              <div className={index === 0 ? 'text-[#403F3F]' : 'text-white'}>
                 {stat.label}
               </div>
-              <p className={`text-sm mt-2 ${index === 0 ? 'text-gray-600' : 'text-white/90'}`}>
+              <p className={`text-sm mt-2 ${index === 0 ? 'text-[#403F3F]' : 'text-white/90'}`}>
                 Lorem Ipsum is a dummy text used to fill the space. Lorem Ipsum is a dummy text used to fill the spaces.
               </p>
             </div>
