@@ -46,7 +46,7 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
 
             
             {/* The div that extends beyond the parent container */}
-            {adminData.role && 
+            {adminData.name && 
             <div className="absolute top-[2%] left-[-5%] w-[110%] min-h-[50px] rounded-[20px] shadow-lg bg-[#400C7A] border border-[#400C7A] flex">
               <div className="w-[20%] flex justify-center items-center">
                 <img src={usericon} alt="drinks" className="w-[25px] h-[25px]" />

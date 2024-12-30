@@ -7,7 +7,6 @@ interface AdminDetailsFormProps {
 
 const AdminDetailsForm: React.FC<AdminDetailsFormProps> = ({ onSubmit }) => {
   const [formData, setFormData] = useState<Partial<AdminDetails>>({
-    name: '',
     email: '',
     mobile: '',
     panCard: '',

@@ -220,11 +220,15 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
         { type: 'user', content: 'Successfully authenticated' },
         {
           type: 'bot',
-          content: "Great! Now let's select a plan that suits your needs.",
-          component: 'subscription',
+          content: "Account Setuped Successfully",
+          // content: "Great! Now let's select a plan that suits your needs.",
+          // component: 'subscription',
         },
       ];
       setMessages(newMessages);
+      setShowZunocode(true);
+      setIsComplete(true);
+      // setMessages(newMessages);
       setCurrentStep(10);
     }, 2000);
   };
@@ -343,9 +347,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
                           {message.component === 'oauth' && (
                             <OAuthLogin onLogin={handleAuth} />
                           )}
-                          {message.component === 'subscription' && isAuthenticated && (
+                          {/* {message.component === 'subscription' && isAuthenticated && (
                             <SubscriptionSelector onSelect={handleSubscriptionSelect} />
-                          )}
+                          )} */}
                         </div>
                       ))}
                       <div ref={messagesEndRef} />
@@ -370,7 +374,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
             <div className="h-full overflow-y-auto">
 
               <BusinessOverview
-                progress={((currentStep - 1) / 10) * 100}
+                progress={((currentStep - 1) / 9) * 100}
                 selectedPlan={selectedPlan}
                 showZunocode={showZunocode}
                 adminData={adminData}
