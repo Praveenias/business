@@ -315,7 +315,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
                       </div>
                     </div>
                     <div id="scrollableDiv"
-                      ref={scrollableDivRef} className="flex-1 overflow-y-auto p-6 pt-[10px] space-y-4">
+                      ref={scrollableDivRef} className="flex-1 overflow-y-auto p-6 pt-[10px] space-y-4 pb-24">
 
 
 
@@ -323,7 +323,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
 
 
                       {messages.map((message, index) => (
-                        <div key={index}>
+                        <div key={index} className='mb-8'>
                           <ChatMessage message={message} />
                           {message.component === 'admin-role' && (
                             <AdminRoleSelector onSelect={handleAdminRole} />

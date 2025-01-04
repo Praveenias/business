@@ -28,6 +28,7 @@ export interface AdminDetails {
   email: string;
   mobile: string;
   panCard: string;
+  name: string;
 }
 
 export interface SubscriptionPlan {

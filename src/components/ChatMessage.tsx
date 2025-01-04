@@ -11,7 +11,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
   const isBot = message.type === 'bot';
 
   return (
-    <div className={`flex ${isBot ? 'justify-start' : 'justify-end'}`}>
+    <div className={`flex ${isBot ? 'justify-start' : 'justify-end'} mb-6`}>
       <div className={`flex items-start space-x-3 ${isBot ? 'flex-row' : 'flex-row-reverse'}`}>
         {isBot && (
           <div className="w-9 h-9 rounded-full bg-[#400C7A] flex items-center justify-center">

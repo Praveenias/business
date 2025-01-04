@@ -8,6 +8,9 @@ import locationicon from '../assets/images/location_icon.svg'
 import menu from '../assets/images/menu.svg'
 import ZunocodeGenerator from './ZunocodeGenerator';
 import { AdminDetails, BusinessDetails, SubscriptionPlan } from '../types';
+import { AdminCard } from './Overview/AdminCard';
+import { BrandCard } from './Overview/BrandCard';
+import { BusinessDetails as BusinessDetailsComponent } from './Overview/BusinessDetails';
 interface BusinessOverviewProps {
   progress: number;
   selectedPlan?: SubscriptionPlan;
@@ -43,80 +46,17 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
           </div>
 
           <div>
-
-
-            {/* The div that extends beyond the parent container */}
-            {adminData.name &&
-              <div className="absolute top-[2%] left-[-5%] w-[110%] min-h-[50px] rounded-[20px] shadow-lg bg-[#400C7A] border border-[#400C7A] flex">
-                <div className="w-[20%] flex justify-center items-center">
-                  <img src={usericon} alt="drinks" className="w-[25px] h-[25px]" />
-                </div>
-                <div className="w-[80%] flex flex-col justify-center items-start">
-                  <span className="text-white font-bold text-[15px]"> Hi, {adminData.name}</span>
-                  <p className="text-white font-bold text-[13px]">{adminData.role}</p>
-                </div>
-              </div>
-            }
-            {businessData.name && <div className="absolute top-[calc(5%+50px)] left-[5%] w-[90%] min-h-[40px] border border-[#DFDFDF] rounded-[20px] p-5 flex mt-[10%]">
-              <div className="w-[30%] flex justify-center items-center gap-1.5">
-                <img src={brandname} alt="drinks" className="w-[25px] h-[25px]" />
-                <span className="text-sm font-medium">Brand Name</span>
-              </div>
-              <div className="w-[70%] flex justify-center items-center">
-                <span className="text-sm font-bold text-center text-[#400C7A]">{businessData.name}</span>
-                <img src={editicon} alt="drinks" className="w-[25px] h-[25px] absolute bottom-[75%] right-[-2%]" />
-              </div>
-            </div>}
-            <div className="absolute top-[calc(5%+50px+40px+60px)] left-[0%] w-[100%] p-5">
-              <div className="flex flex-col justify-start items-start gap-[3%]  pb-5">
-
-                {/* Row 1: Main Branch */}
-                {businessData.mainBranch && <div className="flex items-center justify-between w-[100%] border-b border-[#DFDFDF]">
-                  <h3 className="text-sm font-bold mb-3">Business Details</h3>
-                  <div className="flex items-center gap-2 w-[50%]">
-                    <img src={locationicon} alt="drinks" className="w-[20px] h-[20px]" />
-                    <span className="text-[12px] font-normal underline">Main Branch</span>
-                  </div>
-                  <div className="flex items-center justify-end w-[50%]">
-                    <span className="text-[12px] font-bold text-[#400C7A]">{businessData.mainBranch}</span>
-                  </div>
-                </div>}
-                {/* Row 2: Number of Locations */}
-                {businessData.locations && <div className="flex items-center justify-between w-[100%] mt-[3%] border-b border-[#DFDFDF]">
-                  <div className="flex items-center gap-2 w-[50%]">
-                    <img src={locationicon} alt="drinks" className="w-[20px] h-[20px]" />
-                    <span className="text-[12px] font-normal underline">Number of Locations</span>
-                  </div>
-                  <div className="flex items-center justify-end w-[50%]">
-                    <span className="text-[12px] font-bold text-[#400C7A]">{businessData.locations} locations</span>
-                  </div>
-                </div>}
-              </div>
-            </div>
+            <AdminCard adminData={adminData} />
+            <BrandCard name={businessData.name} />
+            <BusinessDetailsComponent businessData={businessData} />
+            
 
           </div>
 
-
-
-
-
-          {/* Restaurant Menu */}
-
-          {businessData.name && <div className="absolute top-[calc(5%+220px)] left-[5%] w-[90%] min-h-[40px] border border-[#DFDFDF] rounded-[20px] p-5 flex mt-[10%]">
-            <div className="w-[30%] flex justify-center items-center gap-1.5">
-              <img src={brandname} alt="drinks" className="w-[25px] h-[25px]" />
-              <span className="text-sm font-bold">Restaurant</span>
-            </div>
-            <div className="w-[70%] flex justify-center items-center">
-              <span className="text-sm font-bold text-center text-[#400C7A]">saktji</span>
-              <img src={editicon} alt="drinks" className="w-[25px] h-[25px] absolute bottom-[75%] right-[-2%]" />
-            </div>
-          </div>}
-
-          <div className="absolute top-[calc(5%+220px+40px+60px)] left-[0%] w-[100%] p-5">
+          {/* <div className="absolute top-[calc(5%+220px+40px+60px)] left-[0%] w-[100%] p-5">
             <div className="flex flex-col justify-start items-start gap-[3%]  pb-5">
               <h3 className="text-sm font-bold mb-3">Restaurant menu</h3>
-              {/* Row 1: Main Branch */}
+             
               <div className="flex items-center justify-between w-[100%]">
                 <div className="flex items-center gap-2 w-[50%]">
                   <img src={locationicon} alt="drinks" className="w-[20px] h-[20px]" />
@@ -126,7 +66,7 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
                   <span className="text-[12px] font-bold text-[#400C7A]">240 items</span>
                 </div>
               </div>
-              {/* Row 2: Number of Locations */}
+              
               <div className="flex items-center justify-between w-[100%] mt-[3%]">
                 <div className="flex items-center gap-2 w-[50%]">
                   <img src={locationicon} alt="drinks" className="w-[20px] h-[20px]" />
@@ -137,7 +77,7 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
 
 
