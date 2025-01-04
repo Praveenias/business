@@ -19,9 +19,9 @@ export default function Stats() {
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-2">
         {stats.map((stat, index) => (
-          <div className="group h-[200px] relative" key={index}>
+          <div className="h-[200px] relative" key={index}>
             <div
-              className={`absolute bottom-0 w-full h-[200px] group-hover:h-[250px] transition-[height] duration-300 ease-in-out p-8 rounded-lg flex flex-col justify-start items-start ${
+              className={`absolute bottom-0 w-full h-[200px] hover:h-[250px]  transition-all duration-300 ease-in-out p-8 rounded-lg flex flex-col justify-end ${
                 index === 1 
                   ? 'bg-purple-800 text-white md:transform md:-translate-y-0' 
                   : index === 2 

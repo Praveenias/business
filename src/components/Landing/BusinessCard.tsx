@@ -37,11 +37,11 @@ export default function BusinessCard({
       <div 
         className={`
           rounded-[20px] p-[5px] overflow-hidden shadow-md bg-white 
-          transition-all duration-300 cursor-pointer
+          transition-all duration-300 
           hover:shadow-xl transform hover:-translate-y-1
           
           ${isHovered ? 'scale-105' : ''}
-          ${!document.querySelector(':hover') && isSelected ? 'scale-105' : ''}
+          ${!document.querySelector(':hover')}
         `}
         onMouseEnter={() => {
           setIsHovered(true);

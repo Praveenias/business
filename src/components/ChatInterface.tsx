@@ -281,7 +281,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
           </div>
 
           <div className="w-[10%]  flex justify-center items-center gap-3.5">
-            <img src={MyIcon} alt="profile" className="max-w-[60%] w-[30px]" />
+            {/* <img src={MyIcon} alt="profile" className="max-w-[60%] w-[30px]" /> */}
             {/* <button
            
             className="p-2 hover:bg-white/10 rounded-lg transition-colors "
@@ -301,7 +301,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
                 {/* Image Gallery */}
                 <div className="bg-white h-[90vh] w-full overflow-hidden border border-gray-300 rounded-[20px] m-auto ">
                   <div className="bg-white rounded-lg pt-[3.5%] p-[10px] shadow-lg h-full flex flex-col" >
-                  <div className="sticky top-0 z-10 mb-4">
+                    <div className="sticky top-0 z-10 mb-4">
                       <div className="flex bg-[#400C7A] w-[98%] rounded-[15px] h-[50px] m-auto items-center">
                         <div className="w-[10%] flex justify-end">
                           <img src={logo} alt="Play Store" className="max-w-[80%] pr-[10px] h-[27px]" />
@@ -316,12 +316,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
                     </div>
                     <div id="scrollableDiv"
                       ref={scrollableDivRef} className="flex-1 overflow-y-auto p-6 pt-[10px] space-y-4">
-                       
-                      
-                      
+
+
+
                       <ImageGallery />
-                      
-                     
+
+
                       {messages.map((message, index) => (
                         <div key={index}>
                           <ChatMessage message={message} />

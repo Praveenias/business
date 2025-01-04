@@ -22,25 +22,27 @@ const ChatInput: React.FC<ChatInputProps> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex items-center space-x-4 mb-4">
-      <div className="flex-1 relative">
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder={placeholder}
-          disabled={disabled}
-          className="w-full px-4 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
-        />
-      </div>
-      <button
-        type="submit"
-        disabled={disabled || !input.trim()}
-        className="p-3 rounded-lg bg-orange-500 text-white hover:bg-orange-600 transition-colors disabled:opacity-50"
-      >
-        <Send className="h-5 w-5" />
-      </button>
-    </form>
+    <div className='mt-3'>
+      <form onSubmit={handleSubmit} className="flex items-center space-x-4 mb-4">
+        <div className="flex-1 relative">
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder={placeholder}
+            disabled={disabled}
+            className="w-full px-4 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
+          />
+        </div>
+        <button
+          type="submit"
+          disabled={disabled || !input.trim()}
+          className="p-3 rounded-lg bg-orange-500 text-white hover:bg-orange-600 transition-colors disabled:opacity-50"
+        >
+          <Send className="h-5 w-5" />
+        </button>
+      </form>
+    </div>
   );
 };
 
