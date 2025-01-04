@@ -3,7 +3,6 @@ import { User } from 'lucide-react';
 import SearchBar from './SearchBar';
 import logo from '../../assets/images/logo.svg';
 import MyIcon from '../../assets/images/profile.svg';
-import HeaderBG from '../../assets/images/Header_bg.svg';
 
 export default function Header() {
   const [isScrolling, setIsScrolling] = useState(false);
@@ -26,8 +25,8 @@ export default function Header() {
 
   return (
     <header
-      className="fixed w-full z-[9999] top-0 bg-cover bg-center bg-blend-multiply py-6"
-      style={{ backgroundImage: `url(${HeaderBG})` }}>
+      className="fixed w-full z-[9999] top-0 bg-cover bg-center bg-blend-multiply py-6 bg-gradient-to-t from-[#400C7A] to-[#7616E0]"
+      >
       <div className="mx-auto px-4">
         <div className="flex justify-between items-center">
           <div className="text-white text-2xl font-bold">
