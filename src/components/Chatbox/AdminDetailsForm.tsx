@@ -109,13 +109,14 @@ const AdminDetailsForm: React.FC<AdminDetailsFormProps> = ({ onSubmit }) => {
         />
         {errors.panCard && <p className="text-red-500 text-sm mt-1">{errors.panCard}</p>}
       </div>
-
+      <div className='flex flex-col items-center space-y-4 w-full max-w-md mx-auto mt-4'>
       <button
         type="submit"
-        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#400C7A] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+        className="w-full h-[45px] flex justify-center p-[10px] border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#400C7A] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
       >
         Continue
       </button>
+      </div>
     </form>
   );
 };

@@ -25,7 +25,7 @@ export default function Header() {
 
   return (
     <header
-      className="fixed w-full z-[9999] top-0 bg-cover bg-center bg-blend-multiply py-6 bg-gradient-to-t from-[#400C7A] to-[#7616E0]"
+      className="sticky w-full z-[9999] top-0 bg-cover bg-center bg-blend-multiply py-6 bg-gradient-to-t from-[#400C7A] to-[#7616E0]"
       >
       <div className="mx-auto px-4">
         <div className="flex justify-between items-center">
@@ -37,7 +37,7 @@ export default function Header() {
           </div> */}
         </div>
 
-        <div className={`overflow-hidden transition-all duration-200 ease-in-out ${isScrolling ? 'h-0 opacity-0' : 'h-[100px] opacity-100'}`}>
+        <div className={`overflow-hidden transition-all duration-200 ease-in-out ${isScrolling ? 'h-0 opacity-0' : 'h-[125px] opacity-100'}`}>
           <div className="text-center mb-8 h-[100px]">
             <h1 className="text-white text-3xl md:text-4xl font-medium mb-2 mt-4">
               Get your Business Connected with{' '}

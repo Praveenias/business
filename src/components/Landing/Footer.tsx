@@ -5,7 +5,7 @@ import playstoreImage from '../../assets/images/playstore .png';
 import logo1 from '../../assets/images/login1.svg';
 export default function Footer() {
   return (
-    <footer className="pt-16 pb-8 border-t border-t-[1px] border-t-[#CECECE] mt-[5%]">
+    <footer className="pt-16 pb-8 border-t border-t-[1px] border-t-[#CECECE]">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           <div className="w-full">
@@ -15,7 +15,7 @@ export default function Footer() {
             </p>
           </div>
           <div className="w-full flex flex-col items-end">
-            <div>
+            <div className="ml-[35%]" >
               <h3 className="text-xl text-[#403F3F] font-bold mb-2">Office Location</h3>
 
               <div className="flex items-start gap-2 text-[#403F3F]">
@@ -31,7 +31,7 @@ export default function Footer() {
             <img src={logo1} alt="Play Store" className="max-w-[85%]" />
           </div>
 
-          <div className="flex gap-6">
+          <div className="flex justify-end gap-6">
             <img src={playstoreImage} alt="Play Store" className="max-w-[85%]" />
           </div>
         </div>

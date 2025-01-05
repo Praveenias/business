@@ -12,8 +12,8 @@ export default function CategoryTabs({ selectedCategory, onCategoryChange }: Cat
 
   return (
     <div>
-    <div className="flex justify-center items-center gap-4 my-6 px-4 items-center flex-wrap">
-      <div className="flex gap-4 border border-[#D9D9D9] rounded-[20px] p-2 mt-[20%]">
+    <div className="flex justify-center items-center gap-4 my-0 pt-[1.5%] px-4 items-center flex-wrap">
+      <div className="flex gap-4 border border-[#D9D9D9] rounded-[20px] p-2 mt-[40px]">
       <button 
         className="p-2 rounded-full bg-orange-100 text-orange-500 hover:bg-orange-200 transition-colors"
         aria-label="Grid view"
