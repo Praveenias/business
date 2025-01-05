@@ -14,6 +14,7 @@ const TaxDetailsForm: React.FC<TaxDetailsFormProps> = ({ onSubmit }) => {
     gstNumber: '',
     taxIdentifier: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validateGST = (gstNumber: string): boolean =>
     /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/.test(gstNumber);
@@ -38,6 +39,7 @@ const TaxDetailsForm: React.FC<TaxDetailsFormProps> = ({ onSubmit }) => {
     });
 
     if (!gstError && !tinError) {
+      setIsSubmitting(true)
       onSubmit(formData);
     }
   };
@@ -60,6 +62,7 @@ const TaxDetailsForm: React.FC<TaxDetailsFormProps> = ({ onSubmit }) => {
           name="gstNumber"
           required
           value={formData.gstNumber}
+          disabled={isSubmitting}
           onChange={handleChange}
           className={`w-full px-4 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 ${
             errors.gstNumber ? 'focus:ring-red-500' : 'focus:ring-orange-500'
@@ -79,6 +82,7 @@ const TaxDetailsForm: React.FC<TaxDetailsFormProps> = ({ onSubmit }) => {
           name="taxIdentifier"
           required
           value={formData.taxIdentifier}
+          disabled={isSubmitting}
           onChange={handleChange}
           className={`w-full px-4 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 ${
             errors.taxIdentifier ? 'focus:ring-red-500' : 'focus:ring-orange-500'
@@ -90,7 +94,12 @@ const TaxDetailsForm: React.FC<TaxDetailsFormProps> = ({ onSubmit }) => {
       <div className='flex flex-col items-center space-y-4 w-full max-w-md mx-auto mt-4'>
       <button
         type="submit"
-        className="w-full h-[45px] flex justify-center p-[10px] border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#400C7A] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+        disabled={isSubmitting}
+        className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
+          isSubmitting 
+            ? 'bg-gray-400 cursor-not-allowed' 
+            : 'bg-[#400C7A] hover:bg-[#2f0a5c] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500'
+        }`}
       >
         Continue
       </button>

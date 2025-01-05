@@ -18,6 +18,8 @@ const AdminDetailsForm: React.FC<AdminDetailsFormProps> = ({ onSubmit }) => {
     panCard: '',
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const validateEmail = (email: string): boolean =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
@@ -41,6 +43,7 @@ const AdminDetailsForm: React.FC<AdminDetailsFormProps> = ({ onSubmit }) => {
     });
 
     if (!emailError && !mobileError && !panCardError) {
+      setIsSubmitting(true)
       onSubmit(formData);
     }
   };
@@ -63,6 +66,7 @@ const AdminDetailsForm: React.FC<AdminDetailsFormProps> = ({ onSubmit }) => {
           name="email"
           required
           value={formData.email}
+          disabled={isSubmitting}
           onChange={handleChange}
           className={`w-full px-4 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 ${
             errors.email ? 'focus:ring-red-500' : 'focus:ring-orange-500'
@@ -82,6 +86,7 @@ const AdminDetailsForm: React.FC<AdminDetailsFormProps> = ({ onSubmit }) => {
           name="mobile"
           required
           value={formData.mobile}
+          disabled={isSubmitting}
           onChange={handleChange}
           className={`w-full px-3 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 ${
             errors.mobile ? 'focus:ring-red-500' : 'focus:ring-orange-500'
@@ -106,13 +111,19 @@ const AdminDetailsForm: React.FC<AdminDetailsFormProps> = ({ onSubmit }) => {
             errors.panCard ? 'focus:ring-red-500' : 'focus:ring-orange-500'
           }`}
           placeholder="Enter PAN card number"
+          disabled={isSubmitting}
         />
         {errors.panCard && <p className="text-red-500 text-sm mt-1">{errors.panCard}</p>}
       </div>
       <div className='flex flex-col items-center space-y-4 w-full max-w-md mx-auto mt-4'>
       <button
         type="submit"
-        className="w-full h-[45px] flex justify-center p-[10px] border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#400C7A] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+        disabled={isSubmitting}
+        className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
+          isSubmitting 
+            ? 'bg-gray-400 cursor-not-allowed' 
+            : 'bg-[#400C7A] hover:bg-[#2f0a5c] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500'
+        }`}
       >
         Continue
       </button>
