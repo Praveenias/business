@@ -9,19 +9,19 @@ const stats = [
 export default function Stats() {
   return (
     <div className="container mx-auto px-4 py-16">
-      <h2 className="text-center text-[#403F3F] font-medium text-35px mb-2">
+      <h2 className="text-center text-[#403F3F] font-medium text-35px mb-3 ">
         Grow your Business with <span className="text-orange-500">Zuno</span>
       </h2>
     
-      <p className="text-center text-[#403F3F] mb-12 max-w-2xl mx-auto">
+      <p className="text-center text-[#403F3F] mb-12 max-w-xl mx-auto">
         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text since the 1500s.
       </p>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-2">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-7xl mx-auto px-2">
         {stats.map((stat, index) => (
           <div className="h-[200px] relative" key={index}>
             <div
-              className={`absolute bottom-0 w-full h-[200px] hover:h-[250px]  transition-all duration-300 ease-in-out p-8 rounded-lg flex flex-col justify-end ${
+              className={`absolute bottom-0 w-full h-[200px] hover:h-[250px] transition-all duration-300 ease-in-out p-6 rounded-lg flex flex-col justify-end ${
                 index === 1 
                   ? 'bg-purple-800 text-white md:transform md:-translate-y-0' 
                   : index === 2 

@@ -10,11 +10,11 @@ const BusinessTypeSelector: React.FC<BusinessTypeSelectorProps> = ({ onSelect })
   const [selectedType, setSelectedType] = useState<BusinessType | null>(null);
 
   const businessTypes = [
-    { type: 'restaurant', icon: Utensils, label: 'Restaurant' },
-    { type: 'retail', icon: Store, label: 'Retail Store' },
-    { type: 'automotive', icon: Car, label: 'Automotive' },
-    { type: 'electronics', icon: Laptop, label: 'Electronics' },
-    { type: 'd2c', icon: Package, label: 'D2C Brand' },
+    { type: 'Restaurant', icon: Utensils, label: 'Restaurant' },
+    { type: 'Retail Store', icon: Store, label: 'Retail Store' },
+    { type: 'Automotive', icon: Car, label: 'Automotive' },
+    { type: 'Electronics', icon: Laptop, label: 'Electronics' },
+    { type: 'D2C Brand', icon: Package, label: 'D2C Brand' },
   ];
 
   const handleSelect = (type: BusinessType) => {

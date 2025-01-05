@@ -1,7 +1,7 @@
 export type BusinessType = 'Restaurant' | 'Retail' | 'Automotive' | 'Electronics' | 'd2c';
 export type LocationType = 'single' | 'multi';
 export type SubscriptionTier = 'starter' | 'professional' | 'enterprise';
-export type AdminRole = 'owner' | 'director' | 'manager' | 'authorized_representative';
+export type AdminRole = 'Business Owner' | 'Director' | 'Manager' | 'Authorized Representative';
 export type UploadMethod = 'file' | 'link';
 
 export interface PersonalDetails {

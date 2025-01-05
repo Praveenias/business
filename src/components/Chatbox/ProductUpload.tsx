@@ -11,6 +11,7 @@ const ProductUpload: React.FC<ProductUploadProps> = ({ onSubmit }) => {
   const [file, setFile] = useState<File | null>(null);
   const [link, setLink] = useState('');
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -27,54 +28,63 @@ const ProductUpload: React.FC<ProductUploadProps> = ({ onSubmit }) => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (method === 'file' && file) {
-      onSubmit({ method, file });
-    } else if (method === 'link' && link) {
-      onSubmit({ method, link });
+    if (isSubmitting) return;
+    
+    setIsSubmitting(true);
+    try {
+      if (method === 'file' && file) {
+        await onSubmit({ method, file });
+      } else if (method === 'link' && link) {
+        await onSubmit({ method, link });
+      }
+    } finally {
+      setIsSubmitting(true);
     }
   };
 
+  const isDisabled = isSubmitting || !((method === 'file' && file) || (method === 'link' && link));
+
   return (
-    <div className="mt-4 space-y-6">
-      <div className="flex space-x-4">
+    <div className="mt-3 max-w-2xl mx-auto">
+      <div className="flex space-x-3">
         <button
           type="button"
           onClick={() => setMethod('file')}
-          className={`flex-1 p-4 rounded-lg border-2 ${
-            method === 'file' ? 'border-purple-500 bg-purple-50' : 'border-gray-200'
-          } transition-all duration-200`}
+          className={`flex-1 p-3 rounded-lg border ${
+            method === 'file' ? 'border-[#400C7A] bg-purple-50' : 'border-gray-200'
+          } transition-all duration-200 hover:border-[#400C7A]`}
         >
-          <File className="h-6 w-6 text-purple-600 mx-auto mb-2" />
-          <p className="text-sm font-medium text-center">Upload File</p>
-          <p className="text-xs text-gray-500 text-center mt-1">PDF or Excel</p>
+          <File className="h-5 w-5 text-[#400C7A] mx-auto mb-1" />
+          <p className="text-sm font-medium">Upload File</p>
+          <p className="text-xs text-gray-500">PDF or Excel</p>
         </button>
         
         <button
           type="button"
           onClick={() => setMethod('link')}
-          className={`flex-1 p-4 rounded-lg border-2 ${
-            method === 'link' ? 'border-purple-500 bg-purple-50' : 'border-gray-200'
-          } transition-all duration-200`}
+          className={`flex-1 p-3 rounded-lg border ${
+            method === 'link' ? 'border-[#400C7A] bg-purple-50' : 'border-gray-200'
+          } transition-all duration-200 hover:border-[#400C7A]`}
         >
-          <Link className="h-6 w-6 text-purple-600 mx-auto mb-2" />
-          <p className="text-sm font-medium text-center">Share Link</p>
-          <p className="text-xs text-gray-500 text-center mt-1">Google Sheets or Excel Online</p>
+          <Link className="h-5 w-5 text-[#400C7A] mx-auto mb-1" />
+          <p className="text-sm font-medium">Share Link</p>
+          <p className="text-xs text-gray-500">Sheets or Excel</p>
         </button>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="mt-4">
         {method === 'file' ? (
-          <div className="space-y-2">
+          <div>
             <label
               htmlFor="file-upload"
-              className="relative cursor-pointer rounded-md font-medium text-purple-600 hover:text-purple-500"
+              className="block cursor-pointer"
             >
-              <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-dashed border-gray-300 rounded-lg hover:border-purple-500 transition-colors duration-200">
-                <div className="space-y-1 text-center">
-                  <Upload className="mx-auto h-12 w-12 text-gray-400" />
-                  <div className="flex text-sm text-gray-600">
+              <div className="px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg hover:border-[#400C7A] transition-colors duration-200">
+                <div className="text-center">
+                  <Upload className="mx-auto h-8 w-8 text-gray-400 mb-1" />
+                  <div className="text-sm text-gray-600">
                     <span>Upload your product list</span>
                     <input
                       id="file-upload"
@@ -85,47 +95,42 @@ const ProductUpload: React.FC<ProductUploadProps> = ({ onSubmit }) => {
                       onChange={handleFileChange}
                     />
                   </div>
-                  <p className="text-xs text-gray-500">PDF or Excel up to 10MB</p>
+                  <p className="text-xs text-gray-500 mt-1">PDF or Excel up to 10MB</p>
                 </div>
               </div>
             </label>
             {file && (
-              <p className="text-sm text-green-600">
-                Selected file: {file.name}
+              <p className="text-sm text-green-600 mt-2">
+                Selected: {file.name}
               </p>
             )}
             {error && (
-              <p className="text-sm text-red-600">
+              <p className="text-sm text-red-600 mt-2">
                 {error}
               </p>
             )}
           </div>
         ) : (
           <div>
-            <label htmlFor="sheet-link" className="block text-sm font-medium text-gray-700">
-              Spreadsheet Link
-            </label>
             <input
               type="url"
-              id="sheet-link"
               value={link}
               onChange={(e) => setLink(e.target.value)}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
-              placeholder="Paste your Google Sheets or Excel Online link"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-[#400C7A] focus:ring-1 focus:ring-[#400C7A] text-sm"
+              placeholder="Paste your spreadsheet link here"
             />
           </div>
         )}
-<div className='flex flex-col items-center space-y-4 w-full max-w-md mx-auto mt-4'>
-<button
-          type="submit"
-          disabled={!((method === 'file' && file) || (method === 'link' && link))}
-          className="w-full h-[45px] flex justify-center p-[10px] border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#400C7A] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:bg-gray-300 disabled:cursor-not-allowed"
-        >
-          Continue
-        </button>
 
-</div>
-
+        <div className="flex justify-center mt-4">
+          <button
+            type="submit"
+            disabled={isDisabled}
+            className="w-[300px] h-[35px] flex justify-center items-center rounded-lg text-sm font-medium text-white bg-[#400C7A] hover:bg-[#4d0e94] transition-colors duration-200 disabled:bg-gray-300 disabled:cursor-not-allowed"
+          >
+            Continue
+          </button>
+        </div>
       </form>
     </div>
   );

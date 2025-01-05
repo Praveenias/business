@@ -10,10 +10,10 @@ const AdminRoleSelector: React.FC<AdminRoleSelectorProps> = ({ onSelect }) => {
   const [selectedRole, setSelectedRole] = useState<AdminRole | null>(null);
 
   const roles = [
-    { type: 'owner', icon: Building2, label: 'Business Owner' },
-    { type: 'director', icon: Users, label: 'Director' },
-    { type: 'manager', icon: UserCog, label: 'Manager' },
-    { type: 'authorized_representative', icon: UserCheck, label: 'Authorized Representative' },
+    { type: 'Business Owner', icon: Building2, label: 'Business Owner' },
+    { type: 'Director', icon: Users, label: 'Director' },
+    { type: 'Manager', icon: UserCog, label: 'Manager' },
+    { type: 'Authorized Representative', icon: UserCheck, label: 'Authorized Representative' },
   ];
 
   const handleSelect = (role: AdminRole) => {

@@ -274,10 +274,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
 
 
 
-        <div className="flex w-full  py-4 rounded-t-xl h-20 flex items-center justify-center">
+        <div className="flex w-full  py-3 rounded-t-xl h-14 flex items-center justify-center">
 
           <div className="w-[90%] ">
-            <img src={logo1} alt="Play Store" className="max-w-[80%] pl-10 h-[27px]" />
+            <img src={logo1} alt="Play Store" className="max-w-[80%] pl-10 h-[27px]" onClick={onClose}/>
           </div>
 
           <div className="w-[10%]  flex justify-center items-center gap-3.5">
@@ -286,7 +286,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
            
             className="p-2 hover:bg-white/10 rounded-lg transition-colors "
           > */}
-            <X onClick={onClose} className="h-7.5 w-7.5 text-[#FF6E01]" />
+            {/* <X onClick={onClose} className="h-7.5 w-7.5 text-[#FF6E01]" /> */}
             {/* </button> */}
           </div>
         </div>
