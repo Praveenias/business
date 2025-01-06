@@ -7,7 +7,7 @@ import logo1 from '../../assets/images/login1.svg';
 export default function Footer() {
   return (
     <footer className="pt-12 pb-6 border-t border-t-[1px] border-t-[#CECECE]">
-      <div className="container mx-auto px-4 max-w-7xl">
+      <div className="container mx-auto px-4 mx-auto px-4 w-[90%]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <div className="w-full">
             <h3 className="text-xl text-[#403F3F] font-bold mb-3">About us</h3>
@@ -30,7 +30,7 @@ export default function Footer() {
 
         <div className="flex flex-col md:flex-row justify-between pb-4 items-center">
           <div className="mb-4 md:mb-0">
-            <img src={logo1} alt="Logo" className="h-12" />
+            <img src={logo1} alt="Logo" className="h-[30px]" />
           </div>
           <div>
             <img src={playstoreImage} alt="Play Store" className="h-12" />

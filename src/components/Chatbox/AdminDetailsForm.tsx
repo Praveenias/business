@@ -119,7 +119,7 @@ const AdminDetailsForm: React.FC<AdminDetailsFormProps> = ({ onSubmit }) => {
       <button
         type="submit"
         disabled={isSubmitting}
-        className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
+        className={`w-[50%] flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
           isSubmitting 
             ? 'bg-gray-400 cursor-not-allowed' 
             : 'bg-[#400C7A] hover:bg-[#2f0a5c] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500'

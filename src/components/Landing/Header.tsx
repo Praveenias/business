@@ -37,7 +37,7 @@ export default function Header() {
           className={`flex transition-all duration-500 ease-in-out
             ${isScrolling ? 'justify-center' : 'justify-between'} items-center`}
         >
-            <img src={logo} alt="logo" className="max-w-[70%] pl-8" />
+            <img src={logo} alt="logo" className="max-w-[70%] pl-8 pt-[5%]" />
           </div>
         </div>
 

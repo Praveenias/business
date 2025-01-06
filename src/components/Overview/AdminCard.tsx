@@ -20,12 +20,18 @@ export const AdminCard: React.FC<AdminCardProps> = ({ adminData }) => {
             <span className="text-white font-bold text-[15px]">Hi, {adminData.name}</span>
           )}
           <div className="flex items-center gap-2">
+            <div className='w-[50%] flex items-center justify-start'>
             <p className="text-white/90 font-medium text-[13px]">{adminData.role}</p>
+            </div>
+            <div className='w-[50%] flex items-center justify-end'>
+       
             {adminData.panCard && (
-              <span className="text-white/90 font-medium text-[13px]">
+              <p className="text-white/90 font-medium text-[13px]">
                 • Profile Updated ✓
-              </span>
+              </p>
             )}
+</div>
+     
           </div>
         </div>
       </div>
