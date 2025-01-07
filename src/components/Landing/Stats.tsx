@@ -8,7 +8,7 @@ const stats = [
 
 export default function Stats() {
   return (
-    <div className="container mx-auto px-4 py-16">
+    <div className="container mx-auto px-4 py-16 max-w-7xl">
       <h2 className="text-center text-[#403F3F] font-medium text-35px mb-3 ">
         Grow your Business with <span className="text-orange-500">Zuno</span>
       </h2>
@@ -17,7 +17,7 @@ export default function Stats() {
         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text since the 1500s.
       </p>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-[90%] mx-auto px-2">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 px-2">
         {stats.map((stat, index) => (
           <div className="h-[200px] relative" key={index}>
             <div
