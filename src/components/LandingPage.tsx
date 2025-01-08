@@ -60,14 +60,14 @@ const businesses: Business[] = [
     subtitle: 'Owned by Individuals',
     peopleCount: 23,
     category: 'Food'
-  }
-  // {
-  //   image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4',
-  //   title: 'Restaurant',
-  //   subtitle: 'Owned by Individuals',
-  //   peopleCount: 23,
-  //   category: 'Food'
-  // },
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4',
+    title: 'Restaurant',
+    subtitle: 'Owned by Individuals',
+    peopleCount: 23,
+    category: 'Food'
+  },
   // {
   //   image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4',
   //   title: 'Restaurant',
