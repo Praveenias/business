@@ -15,7 +15,7 @@ const AdminDetailsForm: React.FC<AdminDetailsFormProps> = ({ onSubmit }) => {
   const [errors, setErrors] = useState({
     email: '',
     mobile: '',
-    panCard: '',
+    // panCard: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -34,15 +34,15 @@ const AdminDetailsForm: React.FC<AdminDetailsFormProps> = ({ onSubmit }) => {
 
     const emailError = validateEmail(formData.email || '') ? '' : 'Invalid email address';
     const mobileError = validateMobile(formData.mobile || '') ? '' : 'Invalid mobile number';
-    const panCardError = validatePanCard(formData.panCard || '') ? '' : 'Invalid PAN card number';
+    // const panCardError = validatePanCard(formData.panCard || '') ? '' : 'Invalid PAN card number';
 
     setErrors({
       email: emailError,
       mobile: mobileError,
-      panCard: panCardError,
+      // panCard: panCardError,
     });
 
-    if (!emailError && !mobileError && !panCardError) {
+    if (!emailError && !mobileError) {
       setIsSubmitting(true)
       onSubmit(formData);
     }
@@ -96,7 +96,7 @@ const AdminDetailsForm: React.FC<AdminDetailsFormProps> = ({ onSubmit }) => {
         {errors.mobile && <p className="text-red-500 text-sm mt-1">{errors.mobile}</p>}
       </div>
 
-      <div>
+      {/* <div>
         <label htmlFor="panCard" className="block text-sm font-medium text-gray-700">
           PAN Card Number
         </label>
@@ -114,7 +114,7 @@ const AdminDetailsForm: React.FC<AdminDetailsFormProps> = ({ onSubmit }) => {
           disabled={isSubmitting}
         />
         {errors.panCard && <p className="text-red-500 text-sm mt-1">{errors.panCard}</p>}
-      </div>
+      </div> */}
       <div className='flex flex-col items-center space-y-4 w-full max-w-md mx-auto mt-4'>
       <button
         type="submit"

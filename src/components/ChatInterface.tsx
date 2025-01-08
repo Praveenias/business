@@ -18,6 +18,7 @@ import logo1 from '../assets/images/login1.svg';
 import logo from '../assets/images/logo.svg';
 import menuicon from '../assets/images/menu_icon.svg';
 import MyIcon from '../assets/images/profile.svg';
+
 interface ChatInterfaceProps {
   businessType: BusinessType;
   onClose: () => void;
@@ -55,10 +56,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
   const scrollToBottom = () => {
     if (scrollableDivRef.current) {
-      scrollableDivRef.current.scrollTop =
-        scrollableDivRef.current.scrollHeight;
+      scrollableDivRef.current.scrollTop = scrollableDivRef.current.scrollHeight;
     }
   };
 
@@ -73,6 +74,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
     const newMessages = [...messages, { type: 'user', content: input }];
     setMessages(newMessages);
     scrollToBottom();
+    
     if (currentStep === 1) {
       setAdminData({ ...adminData, name: input });
       newMessages.push({
@@ -101,21 +103,32 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
           });
           return;
         }
-        scrollToBottom();
         setBusinessData({ ...businessData, locations });
+        newMessages.push({
+          type: 'bot',
+          content: 'What is your current location/branch address?',
+        });
+        setCurrentStep(6.5);
+      } else {
+        setBusinessData({ ...businessData, mainBranch: input });
+        newMessages.push({
+          type: 'bot',
+          content: "Let's verify your business details. Please provide your tax information.",
+          component: 'tax-details',
+        });
+        setCurrentStep(7);
       }
-      setBusinessData({ ...businessData, mainBranch: input });
       scrollToBottom();
-
+    } else if (currentStep === 6.5) {
+      setBusinessData({ ...businessData, mainBranch: input });
       newMessages.push({
         type: 'bot',
         content: "Let's verify your business details. Please provide your tax information.",
         component: 'tax-details',
       });
-      scrollToBottom();
       setCurrentStep(7);
+      scrollToBottom();
     }
-
   };
 
   const handleAdminRole = (role: AdminRole) => {
@@ -125,7 +138,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
       { type: 'user', content: `Role: ${role}` },
       {
         type: 'bot',
-        content: 'Please provide your contact and verification details.',
+        content: 'Please provide your Company Email and Contact details.',
         component: 'admin-details',
       },
     ];
@@ -140,7 +153,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
       { type: 'user', content: 'Admin details submitted' },
       {
         type: 'bot',
-        content: "Great! Now, what's your business name?",
+        content: "Great! Now, what's your Business/Brand name?",
       },
     ];
     setMessages(newMessages);
@@ -170,11 +183,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
         type: 'bot',
         content: locationType === 'multi'
           ? 'How many locations do you operate?'
-          : 'Please enter your business address:',
+          : 'Please enter your Company address:',
       },
     ];
     setMessages(newMessages);
     setCurrentStep(6);
+    if (locationType === 'multi') {
+      setCurrentStep(6);
+    }
   };
 
   const handleTaxDetails = (details: { gstNumber: string; taxIdentifier: string }) => {
@@ -202,12 +218,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
       { type: 'user', content: `Products ${data.method === 'file' ? 'file uploaded' : 'link shared'}` },
       {
         type: 'bot',
-        content: "Perfect! Before we proceed with the subscription, let's get you logged in.",
-        component: 'oauth',
+        content: "Perfect! Account Setuped Successfully.",
+      //  component: 'oauth',
       },
     ];
     setMessages(newMessages);
-    setCurrentStep(9);
+    setShowZunocode(true);
+    setIsComplete(true);
+    setCurrentStep(10);
   };
 
   const handleAuth = () => {
@@ -221,20 +239,16 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
         {
           type: 'bot',
           content: "Account Setuped Successfully",
-          // content: "Great! Now let's select a plan that suits your needs.",
-          // component: 'subscription',
         },
       ];
       setMessages(newMessages);
       setShowZunocode(true);
       setIsComplete(true);
-      // setMessages(newMessages);
       setCurrentStep(10);
     }, 2000);
   };
 
   const handleSubscriptionSelect = (tier: SubscriptionPlan) => {
-
     setSelectedPlan(tier);
     const newMessages = [
       ...messages,
@@ -249,56 +263,21 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
     setIsComplete(true);
   };
 
-  // const submitForm = (details) => {
-  //   setCurrentStep(10);
-  //   console.log(businessData,selectedPlan,details);
-  //   setShowZunocode(true);
-
-  // }
-
-
-
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 z-[99999]">
       <div className="w-[100%] h-[100%] bg-white rounded-xl shadow-2xl flex flex-col">
-
-        {/* <div className="flex items-end justify-end px-6 py-4 bg-[#4A0079] rounded-t-xl">
-      
-          <button
-            onClick={onClose}
-            className="p-2 hover:bg-white/10 rounded-lg transition-colors "
-          >
-            <X className="h-5 w-5 text-white" />
-          </button>
-        </div> */}
-
-
-
         <div className="flex w-full  py-3 rounded-t-xl h-14 flex items-center justify-center">
-
           <div className="w-[90%] ">
             <img src={logo1} alt="Play Store" className="max-w-[80%] pl-10 h-[27px]" onClick={onClose}/>
           </div>
-
           <div className="w-[10%]  flex justify-center items-center gap-3.5">
-            {/* <img src={MyIcon} alt="profile" className="max-w-[60%] w-[30px]" /> */}
-            {/* <button
-           
-            className="p-2 hover:bg-white/10 rounded-lg transition-colors "
-          > */}
-            {/* <X onClick={onClose} className="h-7.5 w-7.5 text-[#FF6E01]" /> */}
-            {/* </button> */}
           </div>
         </div>
 
-        {/* Main Content */}
         <div className="flex flex-1 overflow-hidden ">
-          {/* Left Section (70%) */}
           <div className="w-[70%] flex flex-col pt-[15px]">
-            {/* Chat Section with Scrollable Content */}
             <div className="flex-1" >
               <div className="px-6">
-                {/* Image Gallery */}
                 <div className="bg-white h-[90vh] w-full overflow-hidden border border-gray-300 rounded-[20px] m-auto ">
                   <div className="bg-white rounded-lg pt-[3.5%] p-[10px] shadow-lg h-full flex flex-col" >
                     <div className="sticky top-0 z-10 mb-4">
@@ -314,13 +293,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
                         </div>
                       </div>
                     </div>
-                    <div id="scrollableDiv"
-                      ref={scrollableDivRef} className="flex-1 overflow-y-auto p-6 pt-[10px] space-y-4 pb-24">
-
-
-
+                    <div 
+                      id="scrollableDiv"
+                      ref={scrollableDivRef} 
+                      className="flex-1 overflow-y-auto p-6 pt-[10px] space-y-4 pb-24"
+                    >
                       <ImageGallery />
-
 
                       {messages.map((message, index) => (
                         <div key={index} className='mb-8'>
@@ -328,7 +306,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
                           {message.component === 'admin-role' && (
                             <AdminRoleSelector onSelect={handleAdminRole} />
                           )}
-
                           {message.component === 'admin-details' && (
                             <AdminDetailsForm onSubmit={handleAdminDetails} />
                           )}
@@ -347,9 +324,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
                           {message.component === 'oauth' && (
                             <OAuthLogin onLogin={handleAuth} />
                           )}
-                          {/* {message.component === 'subscription' && isAuthenticated && (
-                            <SubscriptionSelector onSelect={handleSubscriptionSelect} />
-                          )} */}
                         </div>
                       ))}
                       <div ref={messagesEndRef} />
@@ -365,14 +339,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
                 </div>
               </div>
             </div>
-
-
           </div>
 
-          {/* Right Panel - Overview (30%) */}
           <div className="w-[30%]">
             <div className="h-full overflow-y-auto">
-
               <BusinessOverview
                 progress={((currentStep - 1) / 9) * 100}
                 selectedPlan={selectedPlan}
@@ -384,7 +354,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
           </div>
         </div>
       </div>
-
       <div ref={messagesEndRef} />
     </div>
   );

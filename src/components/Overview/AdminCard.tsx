@@ -25,7 +25,7 @@ export const AdminCard: React.FC<AdminCardProps> = ({ adminData }) => {
             </div>
             <div className='w-[50%] flex items-center justify-end'>
        
-            {adminData.panCard && (
+            {adminData.email && (
               <p className="text-white/90 font-medium text-[13px]">
                 • Profile Updated ✓
               </p>

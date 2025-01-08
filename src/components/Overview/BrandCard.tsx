@@ -26,12 +26,12 @@ export const BrandCard: React.FC<BrandCardProps> = ({
           alt={label}
           className="w-6 h-6 object-contain"
         />
-        <span className="text-[16px] font-medium text-gray-700">{label}</span>
+        <span className="text-[15px] font-medium text-gray-700">{label}</span>
       </div>
 
       {/* Content Section */}
       <div className="flex-1 flex justify-center items-center">
-        <span className="text-sm font-bold text-[#400C7A] truncate max-w-[80%]">
+        <span className="text font-bold text-[#400C7A] truncate max-w-[80%]">
           {name}
         </span>
       </div>
