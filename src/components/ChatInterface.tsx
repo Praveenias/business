@@ -47,7 +47,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
   const [adminData, setAdminData] = useState<Partial<AdminDetails>>({});
 
   const [isComplete, setIsComplete] = useState(false);
-  const [productSource, setProductSource] = useState<{ type: string; count: number } | null>(null);
+  const [productSource, setProductSource] = useState<{ fileName: string|any; count: number }>({ fileName: '', count: 0 });
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -209,8 +209,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
   };
 
   const handleProductUpload = (data: { method: UploadMethod; file?: File; link?: string }) => {
+    const fileName = data.file ? data.file.name : 'No file selected';
     setProductSource({
-      type: data.method === 'file' ? 'File Upload' : 'Spreadsheet Link',
+      //type: data.method === 'file' ? 'File Upload' : 'Spreadsheet Link',
+      fileName:fileName,
       count: Math.floor(Math.random() * 500) + 100
     });
     const newMessages = [
@@ -349,6 +351,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
                 showZunocode={showZunocode}
                 adminData={adminData}
                 businessData={businessData}
+                productSource={productSource}
               />
             </div>
           </div>

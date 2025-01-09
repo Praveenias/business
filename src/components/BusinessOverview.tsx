@@ -1,20 +1,17 @@
 import React from 'react';
-import { Building2, MapPin, FileText } from 'lucide-react';
-import editicon from '../assets/images/edit.svg';
+
 import overviewicon from '../assets/images/overviewicon.svg'
-import usericon from '../assets/images/user_icon.svg'
-import brandname from '../assets/images/brand_name.svg'
-import locationicon from '../assets/images/location_icon.svg'
-import menu from '../assets/images/menu.svg'
+
 import ZunocodeGenerator from './ZunocodeGenerator';
 import { AdminDetails, BusinessDetails, SubscriptionPlan } from '../types';
 import { AdminCard } from './Overview/AdminCard';
 import { BrandCard } from './Overview/BrandCard';
 import { BusinessDetails as BusinessDetailsComponent } from './Overview/BusinessDetails';
+import { DetailRow } from './Overview/DetailRow';
 interface BusinessOverviewProps {
   progress: number;
   selectedPlan?: SubscriptionPlan;
-  business: any;
+  productSource: any;
   showZunocode: boolean;
   adminData: AdminDetails
   businessData: BusinessDetails
@@ -25,12 +22,17 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
   progress,
   selectedPlan,
   showZunocode,
-  business,
+  productSource,
   adminData,
   businessData
 }) => {
-
-  console.log(adminData);
+  const getContentHeight = () => {
+    let height = 290; // Base height
+    if (businessData.name) height += 80;
+    if (adminData) height += 80;
+    if (productSource?.fileName) height += 100;
+    return `${height}px`;
+  };
   return (
     <div className="h-full flex flex-col">
       <div className="flex-1 px-4 py-4 space-y-6 overflow-y-auto">
@@ -39,84 +41,42 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
 
         <div
           className={`relative border border-[#D9D9D9] p-2.5 rounded-tl-none rounded-tr-[20px] rounded-br-[20px] rounded-bl-[20px] bg-white shadow-md w-[90%] m-auto mt-[7%] transition-all duration-300`}
-          style={{ height: businessData.name ? '460px' : '290px' }}>
+          style={{ minHeight: '290px', height: getContentHeight() }}>
           <div className="w-[45%] mx-auto mt-[-45px] ml-[-11px] h-[35px] flex justify-center items-center gap-2 font-bold text-[14px] border border-b-0 border-[#D9D9D9] rounded-tl-[20px] rounded-tr-[21px] bg-white max-w-full">
             <img src={overviewicon} alt="icon" className="w-[16px] h-[16px] sm:w-[20px] sm:h-[20px] max-w-full" />
             <span className="text-sm sm:text-[16px] overflow-hidden whitespace-nowrap">Overview</span>
           </div>
 
-          <div>
-            <AdminCard adminData={adminData} />
-            <BrandCard name={businessData.name} />
-            <BusinessDetailsComponent businessData={businessData} />
+          <div className="flex flex-col gap-2 p-2">
+            {adminData && (
+              <div className="w-full">
+                <AdminCard adminData={adminData} />
+              </div>
+            )}
             
-
+            {businessData?.name && (
+              <div className="w-full transform transition-all duration-300 ease-in-out">
+                <BrandCard name={businessData.name} />
+              </div>
+            )}
+            
+            {businessData && (
+              <div className="w-full transform transition-all duration-300 ease-in-out">
+                <BusinessDetailsComponent businessData={businessData} />
+              </div>
+            )}
+            
+            {productSource?.fileName && (
+              <div>
+                <div className="w-full transform transition-all duration-300 ease-in-out">
+                  <BrandCard name={productSource.fileName} label='Restaurant' />
+                </div>
+                <DetailRow label="Items Count" value={productSource.count} />
+              </div>
+            )}
+           
           </div>
-
-          {/* <div className="absolute top-[calc(5%+220px+40px+60px)] left-[0%] w-[100%] p-5">
-            <div className="flex flex-col justify-start items-start gap-[3%]  pb-5">
-              <h3 className="text-sm font-bold mb-3">Restaurant menu</h3>
-             
-              <div className="flex items-center justify-between w-[100%]">
-                <div className="flex items-center gap-2 w-[50%]">
-                  <img src={locationicon} alt="drinks" className="w-[20px] h-[20px]" />
-                  <span className="text-[12px] font-normal underline">Total Items</span>
-                </div>
-                <div className="flex items-center justify-end w-[50%]">
-                  <span className="text-[12px] font-bold text-[#400C7A]">240 items</span>
-                </div>
-              </div>
-              
-              <div className="flex items-center justify-between w-[100%] mt-[3%]">
-                <div className="flex items-center gap-2 w-[50%]">
-                  <img src={locationicon} alt="drinks" className="w-[20px] h-[20px]" />
-                  <span className="text-[12px] font-normal underline">Categories</span>
-                </div>
-                <div className="flex items-center justify-end w-[50%]">
-                  <span className="text-[12px] font-bold text-[#400C7A]">categories</span>
-                </div>
-              </div>
-            </div>
-          </div> */}
-
-
-
-
-          {/* <div className="bg-gray-50 rounded-lg p-4">
-                <div className="mt-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-600">Total Items</span>
-                    <span className="font-medium">240 items</span>
-                  </div>
-                  <div className="flex items-center justify-between text-sm mt-1">
-                    <span className="text-gray-600">Categories</span>
-                    <span className="font-medium">5 categories</span>
-                  </div>
-                </div>
-              </div> */}
-
         </div>
-
-
-        {/* Selected Plan */}
-        {selectedPlan && (
-          <div className="bg-orange-50 rounded-lg p-4">
-            <h3 className="text-sm font-medium mb-2">Selected Plan</h3>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">Plan Type</span>
-                <span className="text-sm font-medium text-orange-500">{selectedPlan.tier}</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">Total Amount</span>
-                <span className="text-sm font-medium">₹{selectedPlan.price}</span>
-              </div>
-              <p className="text-xs text-gray-500">*GST included in this</p>
-            </div>
-          </div>
-        )}
-
-
         <div >
           {showZunocode && (
             <ZunocodeGenerator

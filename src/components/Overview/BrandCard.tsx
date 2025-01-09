@@ -18,7 +18,7 @@ export const BrandCard: React.FC<BrandCardProps> = ({
   if (!name) return null;
 
   return (
-    <div className={`relative flex items-center p-3 mt-24 rounded-[20px] border border-[#DFDFDF] shadow-md hover:shadow-md transition-shadow duration-200 ${className}`}>
+    <div className={`relative flex items-center p-3 mt-20 rounded-[20px] border border-[#DFDFDF] shadow-md hover:shadow-md transition-shadow duration-200 ${className}`}>
       {/* Label Section */}
       <div className="flex items-center gap-3 w-1/3">
         <img 

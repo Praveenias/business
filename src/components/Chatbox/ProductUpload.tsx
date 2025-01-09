@@ -171,7 +171,9 @@ const ProductUpload: React.FC<ProductUploadProps> = ({ onSubmit }) => {
           id="fileInput"
         />
         <div className="space-y-4">
-          <Upload/>
+        <div className="flex justify-center">
+              <Upload className="w-18 h-18 text-[#400C7A]" strokeWidth={2.2} />
+            </div>
           <p className="text-lg">Drag and drop your file or browse files</p>
           <p className="text-sm text-gray-500">Supported formats: PDF, Excel</p>
            <div className="flex justify-center space-x-8">
@@ -198,7 +200,7 @@ const ProductUpload: React.FC<ProductUploadProps> = ({ onSubmit }) => {
                 accept=".pdf,.xls,.xlsx,.png"
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
               />
-              <div className="px-6 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 inline-block rounded-md">
+              <div className="px-5 py-1 bg-[#400C7A] text-white rounded-md hover:bg-purple-700 inline-block rounded-md">
                 Browse Files
               </div>
             </div>
