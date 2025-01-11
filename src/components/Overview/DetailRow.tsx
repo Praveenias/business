@@ -14,11 +14,16 @@ export const DetailRow: React.FC<DetailRowProps> = ({
   value,
   underlineLabel = true
 }) => {
+  // Determine the border class based on the label value
+  const borderBottomClass = label === "Main Branch" ? "border-b border-[#DFDFDF]" : "";
+
   return (
-    <div className="flex items-center justify-between w-full py-3 border-b border-[#DFDFDF] group hover:bg-gray-50 transition-colors duration-200">
+    <div
+      className={`flex items-center justify-between w-full py-3 ${borderBottomClass} group hover:bg-gray-50 transition-colors duration-200`}
+    >
       <div className="flex items-center gap-2 w-1/2">
         <img src={icon} alt="" className="w-5 h-5 opacity-75 group-hover:opacity-100" />
-        <span className={`text-[13px] font-medium text-gray-600 ${underlineLabel ? 'underline' : ''}`}>
+        <span className={`text-[13px] font-medium text-gray-600 ${underlineLabel ? "underline" : ""}`}>
           {label}
         </span>
       </div>

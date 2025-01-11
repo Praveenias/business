@@ -61,7 +61,7 @@ const ZunocodeGenerator: React.FC<ZunocodeGeneratorProps> = ({ businessName, bus
       {!showQR ? (
         <button
           onClick={handleGenerate}
-          className="px-6 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors"
+          className="px-6 py-3 bg-[#400C7A] text-white rounded-lg font-medium hover:bg-[#400C7A] transition-colors"
         >
           Generate Zunocode!!
         </button>
@@ -79,7 +79,7 @@ const ZunocodeGenerator: React.FC<ZunocodeGeneratorProps> = ({ businessName, bus
           <div>
             <button
               onClick={handlePrint}
-              className="flex items-center justify-center space-x-2 mx-auto px-6 py-3 bg-orange-500 text-white rounded-lg font-medium hover:bg-orange-600 transition-colors"
+              className="flex items-center justify-center space-x-2 mx-auto px-6 py-3 bg-[#400C7A] text-white rounded-lg font-medium hover:bg-[#400C7A] transition-colors"
             >
               <Printer className="w-5 h-5" />
               <span>Print Zunocode</span>

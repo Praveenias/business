@@ -41,13 +41,13 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
 
         <div
           className={`relative border border-[#D9D9D9] p-2.5 rounded-tl-none rounded-tr-[20px] rounded-br-[20px] rounded-bl-[20px] bg-white shadow-md w-[90%] m-auto mt-[7%] transition-all duration-300`}
-          style={{ minHeight: '290px', height: getContentHeight() }}>
+          style={{ minHeight: '290px', height:'fit-content' }}>
           <div className="w-[45%] mx-auto mt-[-45px] ml-[-11px] h-[35px] flex justify-center items-center gap-2 font-bold text-[14px] border border-b-0 border-[#D9D9D9] rounded-tl-[20px] rounded-tr-[21px] bg-white max-w-full">
             <img src={overviewicon} alt="icon" className="w-[16px] h-[16px] sm:w-[20px] sm:h-[20px] max-w-full" />
             <span className="text-sm sm:text-[16px] overflow-hidden whitespace-nowrap">Overview</span>
           </div>
 
-          <div className="flex flex-col gap-2 p-2">
+          <div className="flex flex-col gap-2 p-2 pt-0">
             {adminData && (
               <div className="w-full">
                 <AdminCard adminData={adminData} />
@@ -88,7 +88,7 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
 
 
       </div>
-      <div className="mx-auto mb-[15%] mt-auto p-4  w-[90%] border border-gray-300 rounded-lg shadow-md">
+      <div className="mx-auto mb-[10%] mt-auto p-4  w-[90%] border border-gray-300 rounded-lg shadow-md">
         <div className="space-y-2">
           <div className="flex justify-between items-center">
             <span className="text-[#400C7A] font-bold text-[12px]">Preparing your Zunocode</span>

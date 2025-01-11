@@ -13,8 +13,8 @@ export const BusinessDetails: React.FC<BusinessDetailsProps> = ({ businessData }
 
   return (
     <div className="w-full">
-      <div className="mx-4 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200">
-        <div className="p-5 space-y-1">
+      <div className="mx-2">
+        <div className="p-3 space-y-1">
           <h3 className="text-sm font-bold text-gray-800 mb-4">Business Details</h3>
 
           {type && (
@@ -23,7 +23,12 @@ export const BusinessDetails: React.FC<BusinessDetailsProps> = ({ businessData }
               value={type}
             />
           )}
-          
+               {locations && (
+            <DetailRow
+              label="Number of Locations"
+              value={`${locations} locations`}
+            />
+          )}
           {mainBranch && (
             <DetailRow
               label="Main Branch"
@@ -31,12 +36,7 @@ export const BusinessDetails: React.FC<BusinessDetailsProps> = ({ businessData }
             />
           )}
           
-          {locations && (
-            <DetailRow
-              label="Number of Locations"
-              value={`${locations} locations`}
-            />
-          )}
+     
         </div>
       </div>
     </div>

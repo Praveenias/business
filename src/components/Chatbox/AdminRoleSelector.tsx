@@ -28,7 +28,7 @@ const AdminRoleSelector: React.FC<AdminRoleSelectorProps> = ({ onSelect }) => {
           key={type}
           onClick={() => handleSelect(type as AdminRole)}
           disabled={selectedRole !== null && selectedRole !== type} // Disable if another role is selected
-          className={`flex flex-col items-center p-4 rounded-lg border-2 transition-all duration-200 ${
+          className={`flex flex-col items-center p-4 rounded-[15px] border-2 transition-all duration-200 ${
             selectedRole === type
               ? 'border-[#400C7A] bg-purple-50' // Highlight the selected button
               : 'border-purple-100 hover:border-[#400C7A] hover:bg-purple-50'

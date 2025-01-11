@@ -19,26 +19,26 @@ const LocationTypeSelector: React.FC<LocationTypeSelectorProps> = ({ onSelect })
       <button
         onClick={() => handleSelect('single')}
         disabled={selectedType !== null && selectedType !== 'single'}
-        className={`flex flex-col items-center p-6 rounded-lg border-2 transition-all duration-200 ${
+        className={`flex flex-col items-center p-6 rounded-[15px] border-2 transition-all duration-200 ${
           selectedType === 'single'
-            ? 'border-purple-500 bg-purple-50' // Highlight selected button
-            : 'border-purple-100 hover:border-purple-500 hover:bg-purple-50'
+            ? 'border-[#400C7A] bg-purple-50' // Highlight selected button
+            : 'border-purple-100 hover:border-[#400C7A] hover:bg-purple-50'
         } ${selectedType !== null && selectedType !== 'single' ? 'opacity-50 cursor-not-allowed' : ''}`} // Style disabled button
       >
-        <MapPin className={`h-8 w-8 mb-2 ${selectedType === 'single' ? 'text-purple-600' : 'text-gray-500'}`} />
+        <MapPin className={`h-8 w-8 mb-2 ${selectedType === 'single' ? 'text-[#400C7A]' : 'text-gray-500'}`} />
         <span className="text-sm font-medium text-gray-700">Single Location</span>
       </button>
 
       <button
         onClick={() => handleSelect('multi')}
         disabled={selectedType !== null && selectedType !== 'multi'}
-        className={`flex flex-col items-center p-6 rounded-lg border-2 transition-all duration-200 ${
+        className={`flex flex-col items-center p-6 rounded-[15px] border-2 transition-all duration-200 ${
           selectedType === 'multi'
-            ? 'border-purple-500 bg-purple-50' // Highlight selected button
-            : 'border-purple-100 hover:border-purple-500 hover:bg-purple-50'
+            ? 'border-[#400C7A] bg-purple-50' // Highlight selected button
+            : 'border-purple-100 hover:border-[#400C7A] hover:bg-purple-50'
         } ${selectedType !== null && selectedType !== 'multi' ? 'opacity-50 cursor-not-allowed' : ''}`} // Style disabled button
       >
-        <Map className={`h-8 w-8 mb-2 ${selectedType === 'multi' ? 'text-purple-600' : 'text-gray-500'}`} />
+        <Map className={`h-8 w-8 mb-2 ${selectedType === 'multi' ? 'text-[#400C7A]' : 'text-gray-500'}`} />
         <span className="text-sm font-medium text-gray-700">Multi Location</span>
       </button>
     </div>

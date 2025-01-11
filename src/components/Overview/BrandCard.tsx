@@ -1,6 +1,7 @@
 import React from 'react';
 import brandname from '../../assets/images/brand_name.svg';
 import editicon from '../../assets/images/edit.svg';
+import menu from '../../assets/images/menu.svg';
 
 interface BrandCardProps {
   name: string;
@@ -13,16 +14,24 @@ export const BrandCard: React.FC<BrandCardProps> = ({
   name,
   label = "Brand Name",
   className = "",
-  onEdit
+  onEdit,
 }) => {
   if (!name) return null;
 
+  // Determine the margin-top class based on the label value
+  const marginTopClass = label === "Brand Name" ? "mt-20" : "mt-0";
+
+  // Determine the image source based on the label value
+  const imageSrc = label === "Brand Name" ? brandname : menu;
+
   return (
-    <div className={`relative flex items-center p-3 mt-20 rounded-[20px] border border-[#DFDFDF] shadow-md hover:shadow-md transition-shadow duration-200 ${className}`}>
+    <div
+      className={`relative flex items-center p-3 ${marginTopClass} rounded-[20px] border border-[#DFDFDF] shadow-md hover:shadow-md transition-shadow duration-200 ${className}`}
+    >
       {/* Label Section */}
       <div className="flex items-center gap-3 w-1/3">
         <img 
-          src={brandname} 
+          src={imageSrc} 
           alt={label}
           className="w-6 h-6 object-contain"
         />

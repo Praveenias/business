@@ -29,13 +29,13 @@ const BusinessTypeSelector: React.FC<BusinessTypeSelectorProps> = ({ onSelect })
           key={type}
           onClick={() => handleSelect(type as BusinessType)}
           disabled={selectedType !== null && selectedType !== type} // Disable other buttons if a type is selected
-          className={`flex flex-col items-center p-4 rounded-lg border-2 transition-all duration-200 ${
+          className={`flex flex-col items-center p-4 rounded-[15px] border-2 transition-all duration-200 ${
             selectedType === type
               ? 'border-[#400C7A] bg-purple-50' // Highlight selected button
-              : 'border-purple-100 hover:border-purple-500 hover:bg-purple-50'
+              : 'border-[#400C7A] hover:border-[#400C7A] hover:bg-purple-50'
           } ${selectedType !== null && selectedType !== type ? 'opacity-50 cursor-not-allowed' : ''}`} // Style disabled buttons
         >
-          <Icon className={`h-8 w-8 mb-2 ${selectedType === type ? 'text-purple-600' : 'text-gray-500'}`} />
+          <Icon className={`h-8 w-8 mb-2 ${selectedType === type ? 'text-[#400C7A]' : 'text-gray-500'}`} />
           <span className="text-sm font-medium text-gray-700 text-center">{label}</span>
         </button>
       ))}
