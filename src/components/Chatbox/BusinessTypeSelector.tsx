@@ -31,7 +31,7 @@ const BusinessTypeSelector: React.FC<BusinessTypeSelectorProps> = ({ onSelect })
           disabled={selectedType !== null && selectedType !== type} // Disable other buttons if a type is selected
           className={`flex flex-col items-center p-4 rounded-lg border-2 transition-all duration-200 ${
             selectedType === type
-              ? 'border-purple-500 bg-purple-50' // Highlight selected button
+              ? 'border-[#400C7A] bg-purple-50' // Highlight selected button
               : 'border-purple-100 hover:border-purple-500 hover:bg-purple-50'
           } ${selectedType !== null && selectedType !== type ? 'opacity-50 cursor-not-allowed' : ''}`} // Style disabled buttons
         >

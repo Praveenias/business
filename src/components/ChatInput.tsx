@@ -34,7 +34,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
           onChange={(e) => setInput(e.target.value)}
           placeholder={placeholder}
           disabled={disabled}
-          className="w-full px-12 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500 disabled:opacity-50"
+          className="w-full px-12 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#400C7A] disabled:opacity-50"
         />
         <button
           type="submit"

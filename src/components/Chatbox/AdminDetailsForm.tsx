@@ -69,7 +69,7 @@ const AdminDetailsForm: React.FC<AdminDetailsFormProps> = ({ onSubmit }) => {
           disabled={isSubmitting}
           onChange={handleChange}
           className={`w-full px-4 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 ${
-            errors.email ? 'focus:ring-red-500' : 'focus:ring-orange-500'
+            errors.email ? 'focus:ring-red-500' : 'focus:ring-[#400C7A]'
           }`}
           placeholder="Enter your email address"
         />
@@ -89,7 +89,7 @@ const AdminDetailsForm: React.FC<AdminDetailsFormProps> = ({ onSubmit }) => {
           disabled={isSubmitting}
           onChange={handleChange}
           className={`w-full px-3 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 ${
-            errors.mobile ? 'focus:ring-red-500' : 'focus:ring-orange-500'
+            errors.mobile ? 'focus:ring-red-500' : 'focus:ring-[#400C7A]'
           }`}
           placeholder="Enter your mobile number"
         />

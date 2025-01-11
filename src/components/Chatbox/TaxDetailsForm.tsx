@@ -65,7 +65,7 @@ const TaxDetailsForm: React.FC<TaxDetailsFormProps> = ({ onSubmit }) => {
           disabled={isSubmitting}
           onChange={handleChange}
           className={`w-full px-4 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 ${
-            errors.gstNumber ? 'focus:ring-red-500' : 'focus:ring-orange-500'
+            errors.gstNumber ? 'focus:ring-red-500' : 'focus:ring-[#400C7A]'
           }`}
           placeholder="Enter GST number"
         />
@@ -85,7 +85,7 @@ const TaxDetailsForm: React.FC<TaxDetailsFormProps> = ({ onSubmit }) => {
           disabled={isSubmitting}
           onChange={handleChange}
           className={`w-full px-4 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 ${
-            errors.taxIdentifier ? 'focus:ring-red-500' : 'focus:ring-orange-500'
+            errors.taxIdentifier ? 'focus:ring-red-500' : 'focus:ring-[#400C7A]'
           }`}
           placeholder="Enter tax identification number"
         />

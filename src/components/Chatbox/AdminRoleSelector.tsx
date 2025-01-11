@@ -30,11 +30,11 @@ const AdminRoleSelector: React.FC<AdminRoleSelectorProps> = ({ onSelect }) => {
           disabled={selectedRole !== null && selectedRole !== type} // Disable if another role is selected
           className={`flex flex-col items-center p-4 rounded-lg border-2 transition-all duration-200 ${
             selectedRole === type
-              ? 'border-purple-500 bg-purple-50' // Highlight the selected button
-              : 'border-purple-100 hover:border-purple-500 hover:bg-purple-50'
+              ? 'border-[#400C7A] bg-purple-50' // Highlight the selected button
+              : 'border-purple-100 hover:border-[#400C7A] hover:bg-purple-50'
           } ${selectedRole !== null && selectedRole !== type ? 'opacity-50 cursor-not-allowed' : ''}`} // Style disabled buttons
         >
-          <Icon className={`h-8 w-8 mb-2 ${selectedRole === type ? 'text-purple-600' : 'text-gray-500'}`} />
+          <Icon className={`h-8 w-8 mb-2 ${selectedRole === type ? 'text-[#400C7A]' : 'text-gray-500'}`} />
           <span className="text-sm font-medium text-center">
             {label}
           </span>
