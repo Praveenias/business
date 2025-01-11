@@ -71,7 +71,16 @@ const BusinessOverview: React.FC<BusinessOverviewProps> = ({
                 <div className="w-full transform transition-all duration-300 ease-in-out">
                   <BrandCard name={productSource.fileName} label='Restaurant' />
                 </div>
-                <DetailRow label="Items Count" value={productSource.count} />
+                <div className="w-full">
+                <div className="mx-2">
+                  <div className="p-3 space-y-1">
+                    <h3 className="text-sm font-bold text-gray-800 mb-4">Restaurent Menu</h3>
+                    <DetailRow label="Items Count" value={productSource.count} />
+                  </div>
+                  
+                </div>
+                </div>
+                
               </div>
             )}
            
