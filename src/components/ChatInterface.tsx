@@ -12,7 +12,7 @@ import BusinessTypeSelector from './Chatbox/BusinessTypeSelector';
 import LocationTypeSelector from './Chatbox/LocationTypeSelector';
 import TaxDetailsForm from './Chatbox/TaxDetailsForm';
 import ProductUpload from './Chatbox/ProductUpload';
-import OAuthLogin from './Chatbox/OAuthLogin';
+import FoodItems from './Chatbox/FoodItems';
 import SubscriptionSelector from './Chatbox/SubscriptionSelector';
 import logo1 from '../assets/images/login1.svg';
 import logo from '../assets/images/logo.svg';
@@ -41,6 +41,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
 
   const [selectedPlan, setSelectedPlan] = useState<SubscriptionPlan | null>(null);
   const [showZunocode, setShowZunocode] = useState(false);
+  const [otpSent, setOtpSent] = useState(false);
+  const [otpVerified, setOtpVerified] = useState(false);
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
@@ -128,6 +130,24 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
       });
       setCurrentStep(7);
       scrollToBottom();
+    } else if (currentStep === 9) {
+      const otp = input.trim();
+      if (otp.length === 6 && /^\d+$/.test(otp)) {
+        setOtpVerified(true);
+        newMessages.push({
+          type: 'bot',
+          content: "OTP verified successfully! Your account is now ready to use.",
+        });
+        setIsComplete(true);
+        setShowZunocode(true);
+      } else {
+        newMessages.push({
+          type: 'bot',
+          content: "Invalid OTP. Please enter a valid 6-digit OTP.",
+        });
+      }
+      setMessages(newMessages);
+      scrollToBottom();
     }
   };
 
@@ -211,8 +231,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
   const handleProductUpload = (data: { method: UploadMethod; file?: File; link?: string }) => {
     const fileName = data.file ? data.file.name : 'No file selected';
     setProductSource({
-      //type: data.method === 'file' ? 'File Upload' : 'Spreadsheet Link',
-      fileName:fileName,
+      fileName: fileName.substring(0, 10) + "...",
       count: Math.floor(Math.random() * 500) + 100
     });
     const newMessages = [
@@ -220,14 +239,26 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
       { type: 'user', content: `Products ${data.method === 'file' ? 'file uploaded' : 'link shared'}` },
       {
         type: 'bot',
-        content: "Perfect! Account Setuped Successfully.",
-      //  component: 'oauth',
+        content: "Here are your menu items",
+        component: 'item-selection',
       },
     ];
     setMessages(newMessages);
-    setShowZunocode(true);
-    setIsComplete(true);
-    setCurrentStep(10);
+    setCurrentStep(9);
+  };
+
+  const handleFoodItemsComplete = () => {
+    const newMessages = [
+      ...messages,
+      { type: 'user', content: 'Menu items verified' },
+      {
+        type: 'bot',
+        content: "To complete the setup, we've sent a verification code to your registered mobile number. Please enter the 6-digit OTP.",
+      },
+    ];
+    setMessages(newMessages);
+    setOtpSent(true);
+    scrollToBottom();
   };
 
   const handleAuth = () => {
@@ -240,7 +271,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
         { type: 'user', content: 'Successfully authenticated' },
         {
           type: 'bot',
-          content: "Account Setuped Successfully",
+          content: "Account Setup Successfully",
         },
       ];
       setMessages(newMessages);
@@ -323,8 +354,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
                           {message.component === 'product-upload' && (
                             <ProductUpload onSubmit={handleProductUpload} />
                           )}
-                          {message.component === 'oauth' && (
-                            <OAuthLogin onLogin={handleAuth} />
+                          {message.component === 'item-selection' && (
+                            <FoodItems onComplete={handleFoodItemsComplete} />
                           )}
                         </div>
                       ))}
@@ -334,7 +365,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
                       <ChatInput
                         onSend={handleSend}
                         disabled={isInputDisabled()}
-                        placeholder={isInputDisabled() ? "Please complete the current step..." : "Type your response..."}
+                        placeholder={
+                          currentStep === 9 && otpSent
+                            ? "Enter 6-digit OTP..."
+                            : isInputDisabled()
+                            ? "Please complete the current step..."
+                            : "Type your response..."
+                        }
                       />
                     )}
                   </div>
