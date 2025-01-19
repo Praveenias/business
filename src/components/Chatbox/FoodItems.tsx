@@ -87,7 +87,7 @@ function FoodItems({ onComplete }: FoodItemsProps) {
   
 
   return (
-    <div className=" bg-[#FFF8F6] p-6 md:p-2">
+    <div className="p-6 md:p-2">
       <div className="max-w-7xl mx-auto">
         <header className="mb-8">
           <h1 className="text-xl text-gray-600 mb-6">
@@ -99,10 +99,10 @@ function FoodItems({ onComplete }: FoodItemsProps) {
           {categories.map((category) => (
             <div
               key={category.id}
-              className="bg-orange-50/70 rounded-2xl shadow-[0_2px_8px_rgba(0,0,0,0.03)] overflow-hidden"
+              className="bg-[#F6F6F6] rounded-[10px] overflow-hidden"
             >
               <div className="p-5">
-                <h2 className="text-gray-900 font-medium text-sm pb-2 mb-3 border-b-2 border-orange-300">
+                <h2 className="text-gray-900 font-medium text-sm pb-2 mb-3 border-b-2 border-orange-300 text-center">
                   {category.title}
                 </h2>
                 <ul className="space-y-2">
@@ -112,13 +112,26 @@ function FoodItems({ onComplete }: FoodItemsProps) {
                       className="bg-white rounded-lg cursor-pointer group"
                     >
                       <div className="flex items-center gap-3 px-3 py-2">
-                        <div className="flex gap-[2px]">
+                        <div className="w-[20%] grid justify-center content-center">
+                        <div className="flex gap-[2px] mt-[2px]">
                           <div className="w-1 h-1 rounded-full bg-gray-300"></div>
                           <div className="w-1 h-1 rounded-full bg-gray-300"></div>
                         </div>
-                        <span className="text-gray-600 text-[13px] group-hover:text-gray-900 transition-colors">
+                        <div className="flex gap-[2px] mt-[2px]">
+                          <div className="w-1 h-1 rounded-full bg-gray-300"></div>
+                          <div className="w-1 h-1 rounded-full bg-gray-300"></div>
+                        </div>
+                        <div className="flex gap-[2px] mt-[2px]">
+                          <div className="w-1 h-1 rounded-full bg-gray-300"></div>
+                          <div className="w-1 h-1 rounded-full bg-gray-300"></div>
+                        </div>
+                        </div>
+                        <div className="flex items-center w-[80%]">
+                        <span className="text-gray-600 text-center text-[13px] group-hover:text-gray-900 transition-colors">
                           {item.name}
                         </span>
+                        </div>
+                        
                       </div>
                     </li>
                   ))}
