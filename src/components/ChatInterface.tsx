@@ -18,6 +18,7 @@ import logo1 from '../assets/images/login1.svg';
 import logo from '../assets/images/logo.svg';
 import menuicon from '../assets/images/menu_icon.svg';
 import MyIcon from '../assets/images/profile.svg';
+import EmailVerification from './Chatbox/EmailVerification';
 
 interface ChatInterfaceProps {
   businessType: BusinessType;
@@ -250,50 +251,32 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
   const handleFoodItemsComplete = () => {
     const newMessages = [
       ...messages,
-      { type: 'user', content: 'Menu items verified' },
+      { type: 'user', content: 'Menu items uploaded' },
       {
         type: 'bot',
-        content: "To complete the setup, we've sent a verification code to your registered mobile number. Please enter the 6-digit OTP.",
-      },
+        content: "Generate the OTP with your business Mail ID",
+        component: 'email-verification'
+      }
     ];
     setMessages(newMessages);
-    setOtpSent(true);
     scrollToBottom();
   };
 
-  const handleAuth = () => {
-    setIsLoggingIn(true);
-    setTimeout(() => {
-      setIsAuthenticated(true);
-      setIsLoggingIn(false);
-      const newMessages = [
-        ...messages,
-        { type: 'user', content: 'Successfully authenticated' },
-        {
-          type: 'bot',
-          content: "Account Setup Successfully",
-        },
-      ];
-      setMessages(newMessages);
-      setShowZunocode(true);
-      setIsComplete(true);
-      setCurrentStep(10);
-    }, 2000);
-  };
 
-  const handleSubscriptionSelect = (tier: SubscriptionPlan) => {
-    setSelectedPlan(tier);
-    const newMessages = [
-      ...messages,
-      { type: 'user', content: `Selected Plan: ${tier.tier}` },
-      {
-        type: 'bot',
-        content: "Excellent choice! We'll now process your subscription and set up your account.",
-      },
-    ];
-    setMessages(newMessages);
-    setShowZunocode(true);
+  const handleVerificationComplete = (email: string) => {
+    // setAdminData({ ...adminData, email });
+    // const newMessages = [
+    //   ...messages,
+    //   { type: 'user', content: `Email verified: ${email}` },
+    //   {
+    //     type: 'bot',
+    //     content: "Excellent! Your account setup is complete. You can now start using Zuno!",
+    //   },
+    // ];
+    // setMessages(newMessages);
     setIsComplete(true);
+    setShowZunocode(true);
+    scrollToBottom();
   };
 
   return (
@@ -357,6 +340,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
                           {message.component === 'item-selection' && (
                             <FoodItems onComplete={handleFoodItemsComplete} />
                           )}
+                          {message.component === 'email-verification' && (
+                            <EmailVerification onVerificationComplete={handleVerificationComplete} />
+                          )}
                         </div>
                       ))}
                       <div ref={messagesEndRef} />
@@ -365,13 +351,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
                       <ChatInput
                         onSend={handleSend}
                         disabled={isInputDisabled()}
-                        placeholder={
-                          currentStep === 9 && otpSent
-                            ? "Enter 6-digit OTP..."
-                            : isInputDisabled()
-                            ? "Please complete the current step..."
-                            : "Type your response..."
-                        }
+                        placeholder={isInputDisabled() ? "Please complete the current step..." : "Type your response..."}
                       />
                     )}
                   </div>

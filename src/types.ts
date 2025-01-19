@@ -44,5 +44,5 @@ export interface SubscriptionPlan {
 export interface Message {
   type: 'bot' | 'user';
   content: string;
-  component?: 'subscription' | 'business-type' | 'location-type' | 'admin-role' | 'admin-details' | 'tax-details' | 'product-upload' | 'item-selection' ;
+  component?: 'subscription' | 'business-type' | 'location-type' | 'admin-role' | 'admin-details' | 'tax-details' | 'product-upload' | 'item-selection' |'email-verification';
 }
