@@ -43,10 +43,13 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onVerificationCom
       setIsVerified(true);
       setIsLoading(false);
     }
+    onVerificationComplete(email);
   };
 
   const handleLaunchZuno = () => {
-    onVerificationComplete(email);
+    window.location.href = "https://admin.playzuno.com/";
+    
+    
   };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {

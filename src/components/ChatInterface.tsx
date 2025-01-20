@@ -264,6 +264,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
 
 
   const handleVerificationComplete = (email: string) => {
+
+    
     // setAdminData({ ...adminData, email });
     // const newMessages = [
     //   ...messages,
