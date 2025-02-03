@@ -1,11 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { BusinessType, BusinessDetails, Message, AdminRole, AdminDetails, SubscriptionTier, LocationType, UploadMethod, SubscriptionPlan } from '../types';
-import { MessageSquare, X } from 'lucide-react';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
 import BusinessOverview from './BusinessOverview';
 import ImageGallery from './ImageGallery';
-import { Business } from '../types/business';
 import AdminRoleSelector from './Chatbox/AdminRoleSelector';
 import AdminDetailsForm from './Chatbox/AdminDetailsForm';
 import BusinessTypeSelector from './Chatbox/BusinessTypeSelector';
@@ -13,12 +11,12 @@ import LocationTypeSelector from './Chatbox/LocationTypeSelector';
 import TaxDetailsForm from './Chatbox/TaxDetailsForm';
 import ProductUpload from './Chatbox/ProductUpload';
 import FoodItems from './Chatbox/FoodItems';
-import SubscriptionSelector from './Chatbox/SubscriptionSelector';
 import logo1 from '../assets/images/login1.svg';
 import logo from '../assets/images/logo.svg';
 import menuicon from '../assets/images/menu_icon.svg';
-import MyIcon from '../assets/images/profile.svg';
 import EmailVerification from './Chatbox/EmailVerification';
+
+import { createOrganization, uploadProductFile } from '../services/api';
 
 interface ChatInterfaceProps {
   businessType: BusinessType;
@@ -42,7 +40,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
 
   const [selectedPlan, setSelectedPlan] = useState<SubscriptionPlan | null>(null);
   const [showZunocode, setShowZunocode] = useState(false);
-  const [otpSent, setOtpSent] = useState(false);
   const [otpVerified, setOtpVerified] = useState(false);
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -229,15 +226,47 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
     setCurrentStep(8);
   };
 
-  const handleProductUpload = (data: { method: UploadMethod; file?: File; link?: string }) => {
-    const fileName = data.file ? data.file.name : 'No file selected';
-    setProductSource({
-      fileName: fileName.substring(0, 10) + "...",
-      count: Math.floor(Math.random() * 500) + 100
-    });
+  const handleProductUpload =async (data: { method: UploadMethod; file?: File; link?: string }) => {
+    // try {
+    //   if (data.file) {
+    //     const products = await uploadProductFile(data.file);
+    //     console.log(products);
+        
+        
+    //     const fileName = data.file.name;
+    //     setProductSource({
+    //       fileName: fileName.length > 10 ? fileName.substring(0, 10) + "..." : fileName,
+    //       count: products.length || 0
+    //     });
+
+    //     const newMessages = [
+    //       ...messages,
+    //       { type: 'user', content: 'Products file uploaded successfully' },
+    //       {
+    //         type: 'bot',
+    //         content: "Here are your menu items",
+    //         component: 'item-selection',
+    //       },
+    //     ];
+    //     setMessages(newMessages);
+    //     setCurrentStep(9);
+    //   }
+    // } catch (error: any) {
+    //   const errorMessage = error.message || 'Failed to upload products. Please try again.';
+    //   const newMessages = [
+    //     ...messages,
+    //     { type: 'user', content: 'Product upload attempted' },
+    //     {
+    //       type: 'bot',
+    //       content: errorMessage,
+    //       component: 'product-upload',
+    //     },
+    //   ];
+    //   setMessages(newMessages);
+    // }
     const newMessages = [
       ...messages,
-      { type: 'user', content: `Products ${data.method === 'file' ? 'file uploaded' : 'link shared'}` },
+      { type: 'user', content: 'Products file uploaded successfully' },
       {
         type: 'bot',
         content: "Here are your menu items",
@@ -263,22 +292,36 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
   };
 
 
-  const handleVerificationComplete = (email: string) => {
-
-    
-    // setAdminData({ ...adminData, email });
-    // const newMessages = [
-    //   ...messages,
-    //   { type: 'user', content: `Email verified: ${email}` },
-    //   {
-    //     type: 'bot',
-    //     content: "Excellent! Your account setup is complete. You can now start using Zuno!",
-    //   },
-    // ];
-    // setMessages(newMessages);
-    setIsComplete(true);
-    setShowZunocode(true);
-    scrollToBottom();
+  const handleVerificationComplete =async (email: string) => {
+    const tempdata = {
+       "name":adminData.name,
+       "userRole":adminData.role,
+       "email":email,
+       "mobileNumber":adminData.mobile,
+       "orgName":businessData.name,
+       "businessType":businessData.type,
+       "singleBranch":businessData.locationType,
+       "noOfLocations":businessData.locations,
+       "branchAddress":businessData.mainBranch,
+       "gstNo":businessData.panOrGst
+    }
+    console.log(tempdata,businessData);
+    try {
+      await createOrganization(tempdata);
+      setIsComplete(true);
+      setShowZunocode(true);
+      scrollToBottom();
+    } catch (error: any) {
+      console.log(error);
+      const newMessages = [
+        ...messages,
+        {
+          type: 'bot',
+          content: "Failed to create organization. Please try again.",
+        },
+      ];
+      setMessages(newMessages);
+    }    
   };
 
   return (
@@ -343,7 +386,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ businessType, onClose }) 
                             <FoodItems onComplete={handleFoodItemsComplete} />
                           )}
                           {message.component === 'email-verification' && (
-                            <EmailVerification onVerificationComplete={handleVerificationComplete} />
+                            <EmailVerification onVerificationComplete={handleVerificationComplete} adminData={adminData} businessData={businessData}/>
                           )}
                         </div>
                       ))}
